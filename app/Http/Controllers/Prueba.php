@@ -20,7 +20,10 @@ class Prueba extends Controller
     }
 
     public function reporte(){
-    	$report = Reporte::where([['fuente', 20], ['organismo', 230]])->get();
-    	return view('reporte_fuenteorg', compact('report'));
+	   // $report = Preventivo::selectRaw('fuente, organismo, id_objeto, count(*) as cant, sum(importe) as total')
+       // ->groupByRaw('fuente, organismo, id_objeto')
+       // ->get();
+        return view('layout');
+        return view('reporte_fuenteorg', compact('report'));
     }
 }

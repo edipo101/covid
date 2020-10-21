@@ -21,7 +21,7 @@
 			<tr>
 				<td>{{$row->fuente}}</td>
 				<td>{{$row->organismo}}</td>
-				<td>{{$row->partida}}</td>
+				<td>{{$row->id_objeto}}</td>
 				<td>{{$row->cant}}</td>
 				<td>{{number_format($row->total, 2)}}</td>
 			</tr>
