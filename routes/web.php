@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/', function(){
 	return 'okey makey';
 });
-Route::get('/show', 'Prueba@show');
+Route::get('/preventivos', 'PreventivoController@show_all')->name('preventivos.all');
+Route::get('/preventivos/detalle/{id}', 'PreventivoController@details')->name('preventivos.details');
+Route::post('/preventivos/busqueda', 'PreventivoController@search')->name('preventivos.search');
+
 Route::get('/compras_men', 'Prueba@compras_men');
-Route::get('/reporte', 'Prueba@reporte');
+Route::get('/reporte', 'PreventivoController@reporte');

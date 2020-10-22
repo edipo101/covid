@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>@yield('title')</title>
-  <!-- Tell the browser to be responsive to screen width -->
+
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="{{config('app.url')}}/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -47,13 +47,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <!-- @yield('content-header')       -->
+      @yield('content-header')      
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
 
-      <!-- @yield('content') -->
+      @yield('content')
 
     </section>
     <!-- /.content -->
@@ -136,6 +136,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
   </aside>
   <!-- /.control-sidebar -->
+
   <!-- Add the sidebar's background. This div must be placed
   immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
@@ -151,8 +152,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="{{config('app.url')}}/dist/js/adminlte.min.js"></script>
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
 </body>
 </html>
