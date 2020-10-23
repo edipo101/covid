@@ -22,4 +22,4 @@ Route::post('/preventivos/detalle', 'PreventivoController@view')->name('preventi
 Route::post('/preventivos/busqueda', 'PreventivoController@search')->name('preventivos.search');
 
 Route::get('/compras_men', 'Prueba@compras_men');
-Route::get('/reporte', 'PreventivoController@reporte')->name('reporte');
+Route::get('/ejec_presup', 'PreventivoController@rep_ejec_presup')->name('ejec_presup');

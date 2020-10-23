@@ -20,6 +20,7 @@ class PreventivoController extends Controller
     	return view('prueba', compact('preven'));
     }
 
+    // Vista detalle preventivo
     public function view(Request $request){
         if ($request->ajax()){
             $id = $request->input('id');
@@ -28,8 +29,8 @@ class PreventivoController extends Controller
         }
     }
 
-    public function search($id){
-        // {{ $request }};
-        echo $id;
+    public function rep_ejec_presup(){
+        $tabla1 = Reporte::where([['fuente', 20], ['organismo', 230]])->get();
+        return view('reporte_fuenteorg', compact('tabla1'));
     }
 }

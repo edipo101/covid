@@ -31,7 +31,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">PREVENTIVOS</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class=""><a href="{{route('reporte')}}"><i class="fa fa-link"></i> <span>Ejecucion Presupuestaria</span></a></li>
+        <li class="{{!Route::is('ejec_presup') ?: 'active'}}"><a href="{{route('ejec_presup')}}"><i class="fa fa-link"></i> <span>Ejecucion Presupuestaria</span></a></li>
         <li class="treeview {{!Route::is('preventivos.all') ?: 'menu-open'}}">
           <a href="#"><i class="fa fa-link"></i> <span>Listar preventivos</span>
             <span class="pull-right-container">
