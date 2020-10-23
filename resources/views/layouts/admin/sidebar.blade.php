@@ -31,16 +31,15 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">PREVENTIVOS</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Ejecucion Presupuestaria</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-        <li class="treeview">
+        <li class=""><a href="{{route('reporte')}}"><i class="fa fa-link"></i> <span>Ejecucion Presupuestaria</span></a></li>
+        <li class="treeview {{!Route::is('preventivos.all') ?: 'menu-open'}}">
           <a href="#"><i class="fa fa-link"></i> <span>Listar preventivos</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="{{route('preventivos.all')}}">Por Fuente y Organismo</a></li>
+          <ul class="treeview-menu" style="{{!Route::is('preventivos.all') ?: 'display: block;'}}">
+            <li class="{{!Route::is('preventivos.all') ?: 'active'}}"><a href="{{route('preventivos.all')}}">Por Fuente y Organismo</a></li>
             <li><a href="#">Por Secretarias</a></li>
           </ul>
         </li>

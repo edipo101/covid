@@ -21,4 +21,4 @@ Route::get('/preventivos/detalle/{id}', 'PreventivoController@details')->name('p
 Route::post('/preventivos/busqueda', 'PreventivoController@search')->name('preventivos.search');
 
 Route::get('/compras_men', 'Prueba@compras_men');
-Route::get('/reporte', 'PreventivoController@reporte');
+Route::get('/reporte', 'PreventivoController@reporte')->name('reporte');
