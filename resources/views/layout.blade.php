@@ -6,6 +6,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>@yield('title')</title>
 
@@ -151,6 +152,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{config('app.url')}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{config('app.url')}}/dist/js/adminlte.min.js"></script>
+@yield('scripts')
 
 </body>
 </html>

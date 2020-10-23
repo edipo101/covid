@@ -9,12 +9,9 @@ use Illuminate\Http\Request;
 
 class PreventivoController extends Controller
 {
+    // Listar preventivos
     public function show_all(Request $request){
-        // dd($request->get('search'));
     	$preven = Preventivo::Preven($request->get('search'))->paginate(15);
-        // $preven = Preventivo::where('id_preventivo', $request->get('search'))->paginate(15);
-
-        // return $preven;
     	return view('preventivos', compact('preven'));
     }
 
@@ -23,9 +20,12 @@ class PreventivoController extends Controller
     	return view('prueba', compact('preven'));
     }
 
-    public function details($id_preventivo){
-        $preven = Preventivo::where('id_preventivo', $id_preventivo)->limit(1)->paginate(15);
-        return view('preventivos', compact('preven'));
+    public function view(Request $request){
+        if ($request->ajax()){
+            $id = $request->input('id');
+            $preventivo = Preventivo::where('id_preventivo', $id)->limit(1)->get();
+            echo json_encode($preventivo);
+        }
     }
 
     public function search($id){
