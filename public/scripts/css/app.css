@@ -1,0 +1,8 @@
+.table>tbody>tr>td {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.modal-body>.table>tbody>tr>th {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}

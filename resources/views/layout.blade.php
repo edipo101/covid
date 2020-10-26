@@ -18,10 +18,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{config('app.url')}}/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{config('app.url')}}/dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-        page. However, you can choose any other skin. Make sure you
-        apply the skin class to the body tag so the changes take effect. -->
   <link rel="stylesheet" href="{{config('app.url')}}/dist/css/skins/skin-blue.min.css">
+
+  {{-- Own style --}}
+  <link rel="stylesheet" href="{{config('app.url')}}/scripts/css/app.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      @yield('content-header')      
+      @yield('content-header')
     </section>
 
     <!-- Main content -->
@@ -152,7 +152,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{config('app.url')}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{config('app.url')}}/dist/js/adminlte.min.js"></script>
-@yield('scripts')
+<!-- ChartJS -->
+<script src="{{config('app.url')}}/bower_components/chart.js/Chart.js"></script>
+
+@yield('script_preventivos')
+
+@isset($tabla1)
+@yield('script_barras')
+@endisset
 
 </body>
 </html>

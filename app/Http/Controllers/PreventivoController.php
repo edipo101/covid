@@ -30,7 +30,13 @@ class PreventivoController extends Controller
     }
 
     public function rep_ejec_presup(){
-        $tabla1 = Reporte::where([['fuente', 20], ['organismo', 230]])->get();
-        return view('reporte_fuenteorg', compact('tabla1'));
+        $tabla1 = Reporte::whereRaw('fuente = 20 and organismo = 210')
+        ->orderBy('id_objeto', 'asc')
+        ->get();
+
+        $tabla2 = Reporte::whereRaw('fuente = 20 and organismo = 230')
+        ->orderBy('id_objeto', 'asc')
+        ->get();
+        return view('reporte_fuenteorg', compact('tabla1', 'tabla2'));
     }
 }
