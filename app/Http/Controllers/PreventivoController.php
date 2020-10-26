@@ -24,7 +24,7 @@ class PreventivoController extends Controller
     public function view(Request $request){
         if ($request->ajax()){
             $id = $request->input('id');
-            $preventivo = Preventivo::where('id_preventivo', $id)->limit(1)->get();
+            $preventivo = Preventivo::where('id_preventivo', $id)->first();
             echo json_encode($preventivo);
         }
     }
@@ -38,5 +38,25 @@ class PreventivoController extends Controller
         ->orderBy('id_objeto', 'asc')
         ->get();
         return view('reporte_fuenteorg', compact('tabla1', 'tabla2'));
+    }
+
+    public function edit($id){
+        $row = Preventivo::where('id_preventivo', $id)->first();
+        return view('form', compact('row'));
+    }
+
+    public function update(Request $request, $id){
+        $preven = Preventivo::findOrFail($id);
+        $validatedData = $request->validate([
+            'nro_preven' => 'required',
+            'detalle' => 'required'
+        ]);
+        $preven->preventivo = request('nro_preven');
+        $preven->glosa = request('detalle');
+        $preven->importe = request('importe');
+        // return $preven;
+        $preven->save();
+
+        return redirect()->route('preventivos.all');
     }
 }

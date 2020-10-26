@@ -128,7 +128,7 @@
                <td>{{$row->ubicacion}}</td>
                <td>
                  <a href="#" class="btn btn-primary btn-xs btn-view" data-toggle="modal" data-target="#modal-default"><i class="fa fa-folder"></i> Ver </a>
-                 <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>
+                 <a href="{{route('preventivos.edit', $row->id_preventivo)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>
                  <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Borrar </a>
                </td>
               </tr>
@@ -154,18 +154,16 @@
       var url = "{{route('preventivos.view')}}";
       var type = "json";
       $.post(url, data, function(data){
-        $('#id_preventivo').html(data[0].id_preventivo);
-        $('#preventivo').html(data[0].preventivo);
-        $('#importe').html(data[0].importe);
-        $('#detalle').html(data[0].glosa);
-        $('#fecha_elab').html(data[0].fecha_elab);
-
-        $('#fuente').html(data[0].fuente);
-        $('#organismo').html(data[0].organismo);
-        $('#id_objeto').html(data[0].id_objeto);
-        $('#ubicacion').html(data[0].ubicacion);
-        $('#estado').html(data[0].estado);
-        // console.log(data[0].glosa);
+        $('#id_preventivo').html(data.id_preventivo);
+        $('#preventivo').html(data.preventivo);
+        $('#importe').html(data.importe);
+        $('#detalle').html(data.glosa);
+        $('#fecha_elab').html(data.fecha_elab);
+        $('#fuente').html(data.fuente);
+        $('#organismo').html(data.organismo);
+        $('#id_objeto').html(data.id_objeto);
+        $('#ubicacion').html(data.ubicacion);
+        $('#estado').html(data.estado);
       }, type);
     });
   });
