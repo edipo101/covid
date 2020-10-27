@@ -80,6 +80,9 @@
 
   <div class="row">
     <div class="col-xs-12">
+      <div class="btn-add">  
+          <a href="{{route('preventivos.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo </a>
+      </div>
       <div class="box">
         <div class="box-header">
           Mostrando <span>{{$preven->count()}} de {{$preven->total()}}</span> Artículos
@@ -91,6 +94,7 @@
                   <input type="text" name="search" class="form-control" placeholder="Buscar preventivo" value="{{request('search')}}">
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
+                    {{-- <a href="{{route('preventivos.edit', 23)}}" class="btn btn-info btn-flat"><i class="fa fa-pencil"></i> Nuevo </a> --}}
                   </span>
                 </div>
               </form>
@@ -112,15 +116,14 @@
                <th>Organismo</th>
                <th>Partida</th>
                <th>Ubicacion</th>
-               <th style="width: 21%;">Operaciones</th>
+               <th style="width: 175px;">Operaciones</th>
               </tr>
               @foreach($preven as $row)
               <tr data-id="{{$row->id_preventivo}}">
                <td>{{$row->id_preventivo}}</td>
                <td>{{$row->preventivo}}</td>
                <td>{{number_format($row->importe, 2)}}</td>
-               {{-- <td>{{substr($row->glosa, 0, 100)}}</td> --}}
-               <td>{{$row->detalle}}</td>
+               <td>{{$row->glosa}}</td>
                <td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
                <td>{{$row->fuente}}</td>
                <td>{{$row->organismo}}</td>

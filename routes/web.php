@@ -19,6 +19,8 @@ Route::get('/', function(){
 Route::get('/preventivos', 'PreventivoController@show_all')->name('preventivos.all');
 Route::post('/preventivos/detalle', 'PreventivoController@view')->name('preventivos.view');
 Route::post('/preventivos/busqueda', 'PreventivoController@search')->name('preventivos.search');
+Route::get('/preventivos/create', 'PreventivoController@create')->name('preventivos.create');
+Route::post('/preventivos', 'PreventivoController@store')->name('preventivos.store');
 Route::get('/preventivos/edit/{id}', 'PreventivoController@edit')->name('preventivos.edit');
 Route::patch('/preventivos/{id}', 'PreventivoController@update')->name('preventivos.update');
 

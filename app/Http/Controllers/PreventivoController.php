@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class PreventivoController extends Controller
 {
+    // private $ubicaciones = ["UNID_SOLIC", "COMPRAS", "CONTABILIDAD", "DIR_FINANCIERA", "JURIDICA", "RPC",
+    //         "TESORERIA", "SMAF", "ALMACEN"];
+    private $ubicaciones = ["1. UNID_SOLIC", "2. COMPRAS", "3. CONTABILIDAD", "4. DIR_FINANCIERA", 
+        "5. ALMACEN", "6. TESORERIA", "7. SMAF"];
+
     // Listar preventivos
     public function show_all(Request $request){
     	$preven = Preventivo::Preven($request->get('search'))->paginate(15);
@@ -40,13 +45,34 @@ class PreventivoController extends Controller
         return view('reporte_fuenteorg', compact('tabla1', 'tabla2'));
     }
 
+    public function create(){
+        $row = new Preventivo;
+        $estados = Preventivo::groupBy('estado')->havingRaw('not isnull(estado)')->pluck('estado');
+        $ubicaciones = $this->ubicaciones;
+        
+        return view('preventivos.create', compact('row', 'estados', 'ubicaciones'));
+    }
+
+    public function store(Request $request){
+        $validatedData = $request->validate([
+            'nro_preven' => 'required',
+            'detalle' => 'required'
+        ]);
+        $preven = new Preventivo;
+        $preven->preventivo = request('nro_preven');
+        $preven->importe = request('importe');
+        // $preven->save();
+
+        return $preven;
+        return redirect()->route('preventivos.all');
+    }
+
     public function edit($id){
         $row = Preventivo::where('id_preventivo', $id)->first();
         $estados = Preventivo::groupBy('estado')->havingRaw('not isnull(estado)')->pluck('estado');
-        $ubicaciones = ["UNID_SOLIC", "COMPRAS", "CONTABILIDAD", "DIR_FINANCIERA", "JURIDICA", "RPC",
-            "TESORERIA", "SMAF", "ALMACEN"];
-        // return $ubicaciones;
-        return view('form', compact('row', 'estados', 'ubicaciones'));
+        $ubicaciones = $this->ubicaciones;
+        
+        return view('preventivos.edit', compact('row', 'estados', 'ubicaciones'));
     }
 
     public function update(Request $request, $id){
