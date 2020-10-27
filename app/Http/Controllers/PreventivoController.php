@@ -42,10 +42,15 @@ class PreventivoController extends Controller
 
     public function edit($id){
         $row = Preventivo::where('id_preventivo', $id)->first();
-        return view('form', compact('row'));
+        $estados = Preventivo::groupBy('estado')->havingRaw('not isnull(estado)')->pluck('estado');
+        $ubicaciones = ["UNID_SOLIC", "COMPRAS", "CONTABILIDAD", "DIR_FINANCIERA", "JURIDICA", "RPC",
+            "TESORERIA", "SMAF", "ALMACEN"];
+        // return $ubicaciones;
+        return view('form', compact('row', 'estados', 'ubicaciones'));
     }
 
     public function update(Request $request, $id){
+        // return $request;
         $preven = Preventivo::findOrFail($id);
         $validatedData = $request->validate([
             'nro_preven' => 'required',
@@ -54,7 +59,10 @@ class PreventivoController extends Controller
         $preven->preventivo = request('nro_preven');
         $preven->glosa = request('detalle');
         $preven->importe = request('importe');
-        // return $preven;
+        $var = request('fecha_elab');
+        $date = str_replace('/', '-', $var);
+        $fecha = date("Y-m-d", strtotime($date));
+        return $fecha;
         $preven->save();
 
         return redirect()->route('preventivos.all');
