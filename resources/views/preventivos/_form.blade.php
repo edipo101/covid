@@ -20,8 +20,15 @@
           <div class="form-group">
             <label class="col-sm-3 control-label" for="fecha_elab">Fecha elaboracion</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" id="fecha_elab" name="fecha_elab" placeholder="" value="{{old('fecha_elab', date("d/m/Y", strtotime($row->fecha_elab)))}}">
+              {{-- <input type="text" class="form-control" id="fecha_elab" name="fecha_elab" placeholder="" value="{{old('fecha_elab', date("d/m/Y", strtotime($row->fecha_elab)))}}"> --}}
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input id="fecha_elab" name="fecha_elab" type="text" class="datemask form-control" value="{{old('fecha_elab', date("d/m/Y", strtotime($row->fecha_elab)))}}">
+              </div>
             </div>
+
           </div>
           <div class="form-group">
             <label for="" class="col-sm-3 control-label">Fuente</label>

@@ -16,7 +16,7 @@
 @section('content')
   {{-- Modal window --}}
   <div class="modal fade" id="modal-default" style="display: none;">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 750px;">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -39,7 +39,15 @@
                 <td id="importe"></td>
               </tr>
               <tr>
-                <th>Detalle:</th>
+                <th>Secretaria:</th>
+                <td id="secretaria"></td>
+              </tr>
+              <tr>
+                <th>Unidad:</th>
+                <td id="unidad"></td>
+              </tr>
+              <tr>
+                <th>Detalle (Glosa):</th>
                 <td id="detalle"></td>
               </tr>
               <tr>
@@ -60,12 +68,31 @@
                 <td id="id_objeto"></td>
               </tr>
               <tr>
+                <th>Tipo preventivo:</th>
+                <td id="tipo">
+                  {{-- <span class="label label-success">Approved</span> --}}
+                </td>
+              </tr>
+              <tr>
                 <th>Ubicación:</th>
                 <td id="ubicacion"></td>
               </tr>
               <tr>
+                <th>Progreso</th>
+                <td id="progreso" style="display: none;">
+                  <div class="progress progress-xs" style="display: inline-block; width: 85%">
+                    <div id="porcent_barra" class="progress-bar" style="width: 55%"></div>
+                  </div>
+                  <span id="porcent_data" class="badge bg-red" style="margin-left: 10px;">55%</span>
+                </td>
+              </tr>
+              <tr>
                 <th>Estado:</th>
                 <td id="estado"></td>
+              </tr>
+              <tr>
+                <th>Observaciones:</th>
+                <td id="obs"></td>
               </tr>
             </tbody>
           </table>
@@ -108,14 +135,15 @@
             <tbody>
               <tr>
                <th>Item</th>
-               <th>Preventivo</th>
-               <th>Importe</th>
-               <th style="width: 40%;">Detalle</th>
+               <th>Nro Prev</th>
+               <th>Importe (Bs)</th>
+               <th style="width: 40%;">Detalle (Resumen)</th>
                <th>Fecha elab</th>
-               <th>Fuente</th>
-               <th>Organismo</th>
+               <th>Fte-Org</th>
+               {{-- <th>Organismo</th> --}}
                <th>Partida</th>
-               <th>Ubicacion</th>
+               <th>Progreso</th>
+               <th>(%)</th>
                <th style="width: 175px;">Operaciones</th>
               </tr>
               @foreach($preven as $row)
@@ -123,12 +151,26 @@
                <td>{{$row->id_preventivo}}</td>
                <td>{{$row->preventivo}}</td>
                <td>{{number_format($row->importe, 2)}}</td>
-               <td>{{$row->glosa}}</td>
+               <td>{{$row->detalle}}</td>
                <td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
-               <td>{{$row->fuente}}</td>
-               <td>{{$row->organismo}}</td>
+               <td>{{$row->fuente}}-{{$row->organismo}}</td>
                <td>{{$row->id_objeto}}</td>
-               <td>{{$row->ubicacion}}</td>
+               <td>
+                <div class="progress progress-xs">
+                  @php
+                  $label = 'green';
+                  if ($row->porcent <= 25) $label = 'red';
+                  if ($row->porcent > 26 && $row->porcent <= 50) $label = 'yellow';
+                  if ($row->porcent > 51 && $row->porcent <= 75) $label = 'aqua';
+                  @endphp
+                  <div class="progress-bar progress-bar-{{$label}}" style="width: {{$row->porcent}}%"></div>
+                </div>
+                <td>
+                  @if (!is_null($row->porcent))
+                  <span class="badge bg-{{$label}}">{{$row->porcent}}%</span>
+                  @endif
+                </td>
+              </td>
                <td>
                  <a href="#" class="btn btn-primary btn-xs btn-view" data-toggle="modal" data-target="#modal-default"><i class="fa fa-folder"></i> Ver </a>
                  <a href="{{route('preventivos.edit', $row->id_preventivo)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>
@@ -160,13 +202,54 @@
         $('#id_preventivo').html(data.id_preventivo);
         $('#preventivo').html(data.preventivo);
         $('#importe').html(data.importe);
+        $('#secretaria').html(data.secretaria);
+        $('#unidad').html(data.unidad);
         $('#detalle').html(data.glosa);
         $('#fecha_elab').html(data.fecha_elab);
         $('#fuente').html(data.fuente);
         $('#organismo').html(data.organismo);
         $('#id_objeto').html(data.id_objeto);
-        $('#ubicacion').html(data.ubicacion);
+        var tipo;
+        if (data.tipo){
+          switch(data.tipo){
+            case 'CM':
+              tipo = 'COMPRAS MENORES' 
+              break; 
+            case 'CD':
+              tipo = 'COMPRAS DIRECTAS O MAYORES' 
+              break; 
+            case 'C':
+              tipo = 'CONSULTORIA' 
+              break; 
+            case 'RD':
+              tipo = 'RETENCION O DISMINUCION' 
+              break; 
+          }
+          $('#tipo').html(tipo);
+        }
+        
+        if (data.porcent){       
+          if (data.id_ubimen) 
+            $('#ubicacion').html(data.ubimen);
+          else 
+            $('#ubicacion').html(data.ubidir);
+          var color = 'green';
+          if (data.porcent <= 25) color = 'red';
+          if (data.porcent > 26 && data.porcent <= 50) color = 'yellow';
+          if (data.porcent > 51 && data.porcent <= 75) color = 'aqua';
+          $('#porcent_barra').removeClass();
+          $('#porcent_barra').addClass('progress-bar progress-bar-'+color);
+          $('#porcent_barra').width(data.porcent+'%');          
+          $('#porcent_data').removeClass();
+          $('#porcent_data').addClass('badge bg-'+color);
+          $('#porcent_data').html(data.porcent+'%');
+          $('#progreso').show();
+        }
+        else{
+         $('#progreso').hide();
+        }
         $('#estado').html(data.estado);
+        $('#obs').html(data.observaciones);
       }, type);
     });
   });

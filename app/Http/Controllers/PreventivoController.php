@@ -16,7 +16,8 @@ class PreventivoController extends Controller
 
     // Listar preventivos
     public function show_all(Request $request){
-    	$preven = Preventivo::Preven($request->get('search'))->paginate(15);
+    	$preven = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+        ->Preven($request->get('search'))->paginate(25);
     	return view('preventivos', compact('preven'));
     }
 
@@ -29,7 +30,13 @@ class PreventivoController extends Controller
     public function view(Request $request){
         if ($request->ajax()){
             $id = $request->input('id');
-            $preventivo = Preventivo::where('id_preventivo', $id)->first();
+            $preventivo = Preventivo::selectRaw('*, ubicacion_men.ubicacion as ubimen, ubicacion_dir.ubicacion as ubidir,
+                if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+            ->leftJoin('ubicacion_men', 'id_ubimen', '=', 'ubicacion_men.id_ubicacion')
+            ->leftJoin('ubicacion_dir', 'id_ubidir', '=', 'ubicacion_dir.id_ubicacion')
+            ->where('id_preventivo', $id)->first();
+            $preventivo->importe = number_format($preventivo->importe, 2);
+            $preventivo->fecha_elab = date('d/m/Y', strtotime($preventivo->fecha_elab));
             echo json_encode($preventivo);
         }
     }
@@ -49,8 +56,11 @@ class PreventivoController extends Controller
         $row = new Preventivo;
         $estados = Preventivo::groupBy('estado')->havingRaw('not isnull(estado)')->pluck('estado');
         $ubicaciones = $this->ubicaciones;
+        $tipos = array(
+            'CM' => 'Compra menor'
+        );
         
-        return view('preventivos.create', compact('row', 'estados', 'ubicaciones'));
+        return view('preventivos.create', compact('row', 'estados', 'ubicaciones', 'tipos'));
     }
 
     public function store(Request $request){

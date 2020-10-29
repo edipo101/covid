@@ -154,12 +154,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{config('app.url')}}/dist/js/adminlte.min.js"></script>
 <!-- ChartJS -->
 <script src="{{config('app.url')}}/bower_components/chart.js/Chart.js"></script>
+{{-- InputMask --}}
+<script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
 @yield('script_preventivos')
 
 @isset($tabla1)
+{{-- Grafico de barras --}}
 @yield('script_barras')
 @endisset
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+  });  
+</script>
 
 </body>
 </html>
