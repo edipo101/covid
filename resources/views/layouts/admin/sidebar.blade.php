@@ -31,16 +31,33 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">PREVENTIVOS</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="{{!Route::is('ejec_presup') ?: 'active'}}"><a href="{{route('ejec_presup')}}"><i class="fa fa-link"></i> <span>Ejecucion Presupuestaria</span></a></li>
-        <li class="treeview {{!Route::is('preventivos.all') ?: 'menu-open'}}">
-          <a href="#"><i class="fa fa-link"></i> <span>Listar preventivos</span>
+        <li class="{{!Route::is('ejec_presup') ?: 'active'}}"><a href="{{route('ejec_presup')}}"><i class="fa fa-pie-chart"></i> <span>Ejecucion Presupuestaria</span></a></li>
+        @php
+        $ruta = Route::currentRouteName();
+        switch ($ruta) {
+          case 'preventivos.all':
+          case 'preventivos.men':
+          case 'preventivos.dir':
+            $menu = 'menu-open';
+            $view = 'display: block;'; 
+            break;          
+          default:
+            $menu = '';
+            $view = 'display: none;';
+            break;
+        }
+        @endphp
+        <li class="treeview {{$menu}}">
+          <a href="#"><i class="fa fa-table"></i> <span>Listar preventivos</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu" style="{{!Route::is('preventivos.all') ?: 'display: block;'}}">
-            <li class="{{!Route::is('preventivos.all') ?: 'active'}}"><a href="{{route('preventivos.all')}}">Por Fuente y Organismo</a></li>
-            <li><a href="#">Por Secretarias</a></li>
+          <ul class="treeview-menu" style="{{$view}}">
+            <li class="{{!Route::is('preventivos.all') ?: 'active'}}"><a href="{{route('preventivos.all')}}"><i class="fa fa-circle-o"></i> Por Fuente y Organismo</a></li>
+            <li class="{{!Route::is('preventivos.men') ?: 'active'}}"><a href="{{route('preventivos.men')}}"><i class="fa fa-circle-o"></i> Compras menores</a></li>
+            <li class="{{!Route::is('preventivos.dir') ?: 'active'}}"><a href="{{route('preventivos.dir')}}"><i class="fa fa-circle-o"></i> Compras mayores o directas</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Por Secretarias</a></li>
           </ul>
         </li>
       </ul>

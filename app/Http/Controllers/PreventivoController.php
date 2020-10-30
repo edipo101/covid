@@ -14,11 +14,27 @@ class PreventivoController extends Controller
     private $ubicaciones = ["1. UNID_SOLIC", "2. COMPRAS", "3. CONTABILIDAD", "4. DIR_FINANCIERA", 
         "5. ALMACEN", "6. TESORERIA", "7. SMAF"];
 
-    // Listar preventivos
+    // Listar todos preventivos
     public function show_all(Request $request){
     	$preven = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
         ->Preven($request->get('search'))->paginate(25);
     	return view('preventivos', compact('preven'));
+    }
+
+    // Listar compras menores
+    public function show_menores(Request $request){
+        $preven = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+        ->Preven($request->get('search'))
+        ->where('tipo', 'CM')->paginate(25);
+        return view('preventivos', compact('preven'));
+    }
+
+    // Listar compras mayores o directas
+    public function show_mayores(Request $request){
+        $preven = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+        ->Preven($request->get('search'))
+        ->where('tipo', 'CD')->paginate(25);
+        return view('preventivos', compact('preven'));
     }
 
     public function compras_men(){

@@ -112,7 +112,7 @@
       </div>
       <div class="box">
         <div class="box-header">
-          Mostrando <span>{{$preven->count()}} de {{$preven->total()}}</span> Artículos
+          Mostrando <span>{{$preven->count()}} de {{$preven->total()}}</span> registros
           <div class="box-tools">
             {{-- Filtro de busqueda --}}
             <div class="input-group input-group-sm hidden-xs" style="width: 300px;">
