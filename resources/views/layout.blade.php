@@ -161,6 +161,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 @yield('script_preventivos')
 
+{{-- Mostrar grafico de barras si corresponde --}}
 @isset($tabla1)
 {{-- Grafico de barras --}}
 @yield('script_barras')
@@ -172,5 +173,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
   });  
 </script>
 
-</body>
-</html>
+@isset($preven)
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $('input[name=tipo]').change(function(){
+      var tipo = $(this).val();
+      $('#ubicacion').empty();
+      
+      if (tipo == 1){
+        $.ajax({
+            url: "{{route('ubicaciones_men')}}",
+            type: 'get',
+            dataType: 'json',
+            data: {"id": tipo},
+            success: function (response) {
+                $('#ubicacion').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
+                $.each(response.data, function (index, value) {
+                    $('#ubicacion').append("<option value='" + value.id_ubicacion + "'>" + value.ubicacion + "</option>");
+                });
+            }
+        });
+      } 
+
+      if (tipo == 2){
+        // alert('tipo2');
+        $.ajax({
+            url: "{{route('ubicaciones_dir')}}",
+            type: 'get',
+            dataType: 'json',
+            data: {"id": tipo},
+            success: function (response) {
+                $('#ubicacion').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
+                $.each(response.data, function (index, value) {
+                    $('#ubicacion').append("<option value='" + value.id_ubicacion + "'>" + value.ubicacion + "</option>");
+                });
+            }
+        });
+      } 
+
+    });
+  });  
+</script>
+@endisset
+
+</body> </html>

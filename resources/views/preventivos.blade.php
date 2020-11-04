@@ -112,7 +112,7 @@
       </div>
       <div class="box">
         <div class="box-header">
-          Mostrando <span>{{$preven->count()}} de {{$preven->total()}}</span> registros
+          Mostrando <span>{{$reg->count()}} de {{$reg->total()}}</span> registros
           <div class="box-tools">
             {{-- Filtro de busqueda --}}
             <div class="input-group input-group-sm hidden-xs" style="width: 300px;">
@@ -146,12 +146,12 @@
                <th>(%)</th>
                <th style="width: 175px;">Operaciones</th>
               </tr>
-              @foreach($preven as $row)
+              @foreach($reg as $row)
               <tr data-id="{{$row->id_preventivo}}">
                <td>{{$row->id_preventivo}}</td>
                <td>{{$row->preventivo}}</td>
                <td>{{number_format($row->importe, 2)}}</td>
-               <td>{{$row->detalle}}</td>
+               <td>{{$row->glosa}}</td>
                <td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
                <td>{{$row->fuente}}-{{$row->organismo}}</td>
                <td>{{$row->id_objeto}}</td>
@@ -180,7 +180,7 @@
               @endforeach
             </tbody>
           </table>
-          <span class="text-center">{{$preven}}</span>
+          <span class="text-center">{{$reg}}</span>
         </div>
         <!-- /.box-body -->
       </div>

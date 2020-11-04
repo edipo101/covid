@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Preven_men;
 use App\Preventivo;
 use App\Reporte;
+use App\Tipo;
 use Illuminate\Http\Request;
 
 class PreventivoController extends Controller
@@ -16,9 +17,9 @@ class PreventivoController extends Controller
 
     // Listar todos preventivos
     public function show_all(Request $request){
-    	$preven = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+    	$reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
         ->Preven($request->get('search'))->paginate(25);
-    	return view('preventivos', compact('preven'));
+    	return view('preventivos', compact('reg'));
     }
 
     // Listar compras menores
@@ -65,6 +66,11 @@ class PreventivoController extends Controller
         $tabla2 = Reporte::whereRaw('fuente = 20 and organismo = 230')
         ->orderBy('id_objeto', 'asc')
         ->get();
+
+        $tabla3 = Reporte::whereRaw('fuente = 41 and organismo = 111')
+        ->orderBy('id_objeto', 'asc')
+        ->get();
+
         return view('reporte_fuenteorg', compact('tabla1', 'tabla2'));
     }
 
@@ -94,11 +100,14 @@ class PreventivoController extends Controller
     }
 
     public function edit($id){
-        $row = Preventivo::where('id_preventivo', $id)->first();
-        $estados = Preventivo::groupBy('estado')->havingRaw('not isnull(estado)')->pluck('estado');
+        $preven = Preventivo::where('id_preventivo', $id)->first();
+        // $estados = Preventivo::groupBy('estado')->havingRaw('not isnull(estado)')->pluck('estado');
+        $tipos = Tipo::pluck('tipo', 'id_tipo');
+        // return $tipos;
+        $estados = ['uno', 'dos', 'tres'];
         $ubicaciones = $this->ubicaciones;
         
-        return view('preventivos.edit', compact('row', 'estados', 'ubicaciones'));
+        return view('preventivos.edit', compact('preven', 'tipos', 'estados', 'ubicaciones'));
     }
 
     public function update(Request $request, $id){

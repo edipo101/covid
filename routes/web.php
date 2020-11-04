@@ -29,3 +29,6 @@ Route::get('/preventivos/compras_mayores', 'PreventivoController@show_mayores')-
 
 Route::get('/compras_men', 'Prueba@compras_men');
 Route::get('/ejec_presup', 'PreventivoController@rep_ejec_presup')->name('ejec_presup');
+
+Route::get('/ubicaciones_men', 'ComboDatos@getUbicacionesMen')->name('ubicaciones_men');
+Route::get('/ubicaciones_dir', 'ComboDatos@getUbicacionesDir')->name('ubicaciones_dir');

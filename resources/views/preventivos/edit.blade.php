@@ -27,7 +27,7 @@
         </div>
       @endif
       <!-- form start -->
-      <form class="form-horizontal" action="{{ route('preventivos.update', $row->id_preventivo) }}" method="POST">
+      <form class="form-horizontal" action="{{ route('preventivos.update', $preven->id_preventivo) }}" method="POST">
         <input name="_method" type="hidden" value="PATCH">
         {{ csrf_field() }}
         @include('preventivos._form')
@@ -41,3 +41,5 @@
   </div>
 </div>{{-- end-row --}}
 @endsection
+
+
