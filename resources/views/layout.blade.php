@@ -177,7 +177,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript">
   $(document).ready(function(){
 
-    $('input[name=tipo]').change(function(){
+    $('input[name=id_tipo]').change(function(){
       var tipo = $(this).val();
       $('#ubicacion').empty();
       
@@ -190,7 +190,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             success: function (response) {
                 $('#ubicacion').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
                 $.each(response.data, function (index, value) {
-                    $('#ubicacion').append("<option value='" + value.id_ubicacion + "'>" + value.ubicacion + "</option>");
+                    $('#ubicacion').append("<option value='" + value.id_ubicacion + "'>"+value.id_ubicacion+". "+ value.ubicacion + "</option>");
                 });
             }
         });
@@ -199,20 +199,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
       if (tipo == 2){
         // alert('tipo2');
         $.ajax({
-            url: "{{route('ubicaciones_dir')}}",
-            type: 'get',
-            dataType: 'json',
-            data: {"id": tipo},
+            url: "{{route('ubicaciones_dir')}}", type: 'get', dataType: 'json',
             success: function (response) {
                 $('#ubicacion').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
                 $.each(response.data, function (index, value) {
-                    $('#ubicacion').append("<option value='" + value.id_ubicacion + "'>" + value.ubicacion + "</option>");
+                    $('#ubicacion').append("<option value='" + value.id_ubicacion + "'>"+value.id_ubicacion+". "+ value.ubicacion + "</option>");
                 });
             }
         });
       } 
-
     });
+
+    // Listar estados
+    // $.ajax({
+    {{-- //     url: "{{route('estados')}}", --}}
+    //     type: 'get',
+    //     dataType: 'json',
+    //     success: function (response) {
+    //       console.log(response);
+    //         $('#estado').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
+    //         $.each(response.data, function (index, value) {
+    //             $('#estado').append("<option value='" + value.id_estado + "'>" + value.estado + "</option>");
+    //         });
+    //     }
+    // });
+
   });  
 </script>
 @endisset

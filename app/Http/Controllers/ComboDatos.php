@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Estado;
 use App\UbicacionDir;
 use App\UbicacionMen;
 use Illuminate\Http\Request;
@@ -26,5 +27,11 @@ class ComboDatos extends Controller
             return response()->json([ 'message' => 'Hubo un error al recuperar los registros' ], 500);
         }
         return response()->json($response);
+    }
+
+    public function getEstados(){
+        $estados = Estado::all();
+        $response = ['data' => $estados];
+        return response()->json($response);   
     }
 }

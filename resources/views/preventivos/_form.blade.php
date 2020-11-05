@@ -17,16 +17,16 @@
               @foreach($tipos as $key => $value)
               <div class="radio">
                 <label>
-                  <input type="radio" name="tipo" id="tipo" value="{{$key}}" {!!(($key == $preven->id_tipo) ? "checked=\"checked\"" : "")!!}>{{$value}}
+                  <input type="radio" name="id_tipo" id="tipo" value="{{$key}}" {!!(($key == $preven->id_tipo) ? "checked=\"checked\"" : "")!!}>{{$value}}
                 </label>
               </div>
               @endforeach              
             </div>
           </div>
           <div class="form-group">
-            <label for="" class="col-sm-3 control-label">Detalle</label>
+            <label for="" class="col-sm-3 control-label">Detalle (Glosa)</label>
             <div class="col-sm-9">
-              <textarea class="form-control" name="detalle" id="detalle" cols="30" rows="6">{{old('glosa', $preven->glosa)}}</textarea>
+              <textarea class="form-control" name="glosa" id="glosa" cols="30" rows="6">{{old('glosa', $preven->glosa)}}</textarea>
             </div>
           </div>
           <div class="form-group">
@@ -62,7 +62,7 @@
             <label for="" class="col-sm-3 control-label">Organismo</label>
             <div class="col-sm-3">
               <select class="form-control" id="organismo" name="organismo">
-                <option value=""></option>
+                <option value='' disabled selected style='display:none;'>Seleccione una opcion</option>
                 <option {!!(($preven->organismo == 210) ? "selected=\"selected\"" : "")!!}>210</option>
                 <option {!!(($preven->organismo == 230) ? "selected=\"selected\"" : "")!!}>230</option>
                 <option {!!(($preven->organismo == 111) ? "selected=\"selected\"" : "")!!}>111</option>
@@ -74,39 +74,51 @@
           <div class="form-group">
             <label for="" class="col-sm-3 control-label">Partida</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" id="partida" name="partida" placeholder="" value="{{old('id_objeto', $preven->id_objeto)}}">
+              <input type="text" class="form-control" id="id_objeto" name="id_objeto" placeholder="" value="{{old('id_objeto', $preven->id_objeto)}}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-3 control-label">Secretaria</label>
+            <div class="col-sm-6">
+              <select class="form-control" id="id_secretaria" name="id_secretaria">
+                <option value='' disabled selected style='display:none;'>Seleccione una opcion</option>
+                @foreach($secretarias as $secretaria)
+                <option value={{$secretaria->id_secretaria}} {!!(($secretaria->id_secretaria == $preven->id_secretaria) ? "selected=\"selected\"" : "")!!}>{{$secretaria->secretaria.' ('.$secretaria->sigla.')'}}</option>
+                @endforeach
+              </select>
             </div>
           </div>
           <div class="form-group">
             <label for="" class="col-sm-3 control-label">Ubicacion</label>
             <div class="col-sm-3">
               <select class="form-control" id="ubicacion" name="ubicacion">
-                <option></option>
-                @foreach($ubicaciones as $ubicacion)
-                  <option {!!(($ubicacion == $preven->ubicacion) ? "selected=\"selected\"" : "")!!}>{{old('ubicacion', $ubicacion)}}</option>
-                @endforeach
+                @if ($preven->id_tipo == 1)
+                  @foreach($ubicaciones_men as $key => $value)
+                  <option value={{$key}} {!!(($key == $preven->id_ubimen) ? "selected=\"selected\"" : "")!!}>{{$key.'. '.$value}}</option>
+                  @endforeach
+                  @elseif ($preven->id_tipo == 2)
+                    @foreach($ubicaciones_dir as $key => $value)
+                    <option value={{$key}} {!!(($key == $preven->id_ubidir) ? "selected=\"selected\"" : "")!!}>{{$key.'. '.$value}}</option>
+                    @endforeach
+                @endif
               </select>
             </div>
-            {{-- <div class="col-sm-9">
-              @foreach($ubicaciones as $ubicacion)
-              <div class="radio">
-                <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                  {{old('ubicacion', $ubicacion)}}
-                </label>
-              </div>
-              @endforeach
-            </div> --}}
           </div>
           <div class="form-group">
             <label for="" class="col-sm-3 control-label">Estado</label>
             <div class="col-sm-3">
-              <select class="form-control" id="estado" name="estado">
-                <option></option>
-                @foreach($estados as $estado)
-                  <option {!!(($estado == $preven->estado) ? "selected=\"selected\"" : "")!!}>{{old('estado', $estado)}}</option>
+              <select class="form-control" id="id_estado" name="id_estado">
+                <option value='' disabled selected style='display:none;'>Seleccione una opcion</option>
+                @foreach($estados as $key => $value)
+                <option value={{$key}} {!!(($key == $preven->id_estado) ? "selected=\"selected\"" : "")!!}>{{$value}}</option>
                 @endforeach
               </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-3 control-label">Observaciones</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" name="observaciones" id="observaciones" cols="30" rows="3">{{old('observaciones', $preven->observaciones)}}</textarea>
             </div>
           </div>
         </div>

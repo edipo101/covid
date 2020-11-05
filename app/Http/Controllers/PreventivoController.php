@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Estado;
 use App\Preven_men;
 use App\Preventivo;
 use App\Reporte;
+use App\Secretaria;
 use App\Tipo;
+use App\UbicacionDir;
+use App\UbicacionMen;
 use Illuminate\Http\Request;
 
 class PreventivoController extends Controller
@@ -51,6 +55,8 @@ class PreventivoController extends Controller
                 if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
             ->leftJoin('ubicacion_men', 'id_ubimen', '=', 'ubicacion_men.id_ubicacion')
             ->leftJoin('ubicacion_dir', 'id_ubidir', '=', 'ubicacion_dir.id_ubicacion')
+            ->leftJoin('secretaria', 'preventivo.id_secretaria', '=', 'secretaria.id_secretaria')
+            ->leftJoin('estado', 'preventivo.id_estado', '=', 'estado.id_estado')
             ->where('id_preventivo', $id)->first();
             $preventivo->importe = number_format($preventivo->importe, 2);
             $preventivo->fecha_elab = date('d/m/Y', strtotime($preventivo->fecha_elab));
@@ -101,17 +107,21 @@ class PreventivoController extends Controller
 
     public function edit($id){
         $preven = Preventivo::where('id_preventivo', $id)->first();
-        // $estados = Preventivo::groupBy('estado')->havingRaw('not isnull(estado)')->pluck('estado');
-        $tipos = Tipo::pluck('tipo', 'id_tipo');
-        // return $tipos;
-        $estados = ['uno', 'dos', 'tres'];
-        $ubicaciones = $this->ubicaciones;
         
-        return view('preventivos.edit', compact('preven', 'tipos', 'estados', 'ubicaciones'));
+        $tipos = Tipo::pluck('tipo', 'id_tipo');
+        $estados = Estado::pluck('estado', 'id_estado');
+        $ubicaciones_men = UbicacionMen::pluck('ubicacion', 'id_ubicacion');
+        $ubicaciones_dir = UbicacionDir::pluck('ubicacion', 'id_ubicacion');
+        // $secretarias = Secretaria::pluck('sigla', 'secretaria', 'id_secretaria');
+        $secretarias = Secretaria::all();
+        // return $secretarias;
+        
+        return view('preventivos.edit', compact('preven', 'tipos', 'estados', 'ubicaciones_men', 
+            'ubicaciones_dir', 'secretarias'));
     }
 
     public function update(Request $request, $id){
-        // return $request;
+        return $request;
         $preven = Preventivo::findOrFail($id);
         $validatedData = $request->validate([
             'nro_preven' => 'required',

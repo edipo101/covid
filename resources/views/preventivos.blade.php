@@ -202,7 +202,7 @@
         $('#id_preventivo').html(data.id_preventivo);
         $('#preventivo').html(data.preventivo);
         $('#importe').html(data.importe);
-        $('#secretaria').html(data.secretaria);
+        $('#secretaria').html(data.secretaria+' ('+data.sigla+')');
         $('#unidad').html(data.unidad);
         $('#detalle').html(data.glosa);
         $('#fecha_elab').html(data.fecha_elab);
