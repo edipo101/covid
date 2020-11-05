@@ -210,19 +210,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
       } 
     });
 
-    // Listar estados
-    // $.ajax({
-    {{-- //     url: "{{route('estados')}}", --}}
-    //     type: 'get',
-    //     dataType: 'json',
-    //     success: function (response) {
-    //       console.log(response);
-    //         $('#estado').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
-    //         $.each(response.data, function (index, value) {
-    //             $('#estado').append("<option value='" + value.id_estado + "'>" + value.estado + "</option>");
-    //         });
-    //     }
-    // });
+    $('#id_secretaria').change(function(){
+      var id_secretaria = $(this).val();
+      $('#id_unidad').empty();
+      $.ajax({
+        url: "{{route('unidades')}}",
+        type: 'get',
+        dataType: 'json',
+        data: {"id": id_secretaria},
+        success: function (response) {
+            $('#id_unidad').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
+            $.each(response.data, function (index, value) {
+                $('#id_unidad').append("<option value='" + value.id_unidad + "'>"+ value.unidad + "</option>");
+            });
+        }
+      });
+    });
 
   });  
 </script>

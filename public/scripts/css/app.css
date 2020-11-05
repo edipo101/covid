@@ -17,3 +17,12 @@
 	padding-right: 20px;
 	width: 152px;
 }
+
+.form-control2 {
+	display: table-cell;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    box-shadow: none;
+    border-color: #d2d6de;
+    border: 1px solid #ccc;
+}

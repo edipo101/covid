@@ -33,3 +33,4 @@ Route::get('/ejec_presup', 'PreventivoController@rep_ejec_presup')->name('ejec_p
 Route::get('/ubicaciones_men', 'ComboDatos@getUbicacionesMen')->name('ubicaciones_men');
 Route::get('/ubicaciones_dir', 'ComboDatos@getUbicacionesDir')->name('ubicaciones_dir');
 Route::get('/estados', 'ComboDatos@getEstados')->name('estados');
+Route::get('/unidades', 'ComboDatos@getUnidades')->name('unidades');

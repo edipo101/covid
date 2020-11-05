@@ -110,22 +110,38 @@
       <div class="btn-add">  
           <a href="{{route('preventivos.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo </a>
       </div>
+      {{-- <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title">Filtrar datos</h3>
+          <div class="box-tools">
+            <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
+            <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+          
+        </div>
+      </div> --}}
+
       <div class="box">
         <div class="box-header">
           Mostrando <span>{{$reg->count()}} de {{$reg->total()}}</span> registros
           <div class="box-tools">
             {{-- Filtro de busqueda --}}
-            <div class="input-group input-group-sm hidden-xs" style="width: 300px;">
+            <div class="input-group input-group-sm hidden-xs">
               <form method="get" action="{{ route('preventivos.all') }}">
                 <div class="input-group input-group-sm">
                   <input type="text" name="search" class="form-control" placeholder="Buscar preventivo" value="{{request('search')}}">
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
-                    {{-- <a href="{{route('preventivos.edit', 23)}}" class="btn btn-info btn-flat"><i class="fa fa-pencil"></i> Nuevo </a> --}}
+                  </span>
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i>Filtrar</button>
                   </span>
                 </div>
               </form>
             </div>
+
           </div>
         </div>
         <!-- /.box-header -->
@@ -209,24 +225,7 @@
         $('#fuente').html(data.fuente);
         $('#organismo').html(data.organismo);
         $('#id_objeto').html(data.id_objeto);
-        var tipo;
-        if (data.tipo){
-          switch(data.tipo){
-            case 'CM':
-              tipo = 'COMPRAS MENORES' 
-              break; 
-            case 'CD':
-              tipo = 'COMPRAS DIRECTAS O MAYORES' 
-              break; 
-            case 'C':
-              tipo = 'CONSULTORIA' 
-              break; 
-            case 'RD':
-              tipo = 'RETENCION O DISMINUCION' 
-              break; 
-          }
-          $('#tipo').html(tipo);
-        }
+        $('#tipo').html(data.tipo);
         
         if (data.porcent){       
           if (data.id_ubimen) 
@@ -249,7 +248,10 @@
          $('#progreso').hide();
         }
         $('#estado').html(data.estado);
-        $('#obs').html(data.observaciones);
+        var obs = 'NINGUNO';
+        if (data.observaciones)
+          obs = data.observaciones;
+        $('#obs').html(obs);
       }, type);
     });
   });

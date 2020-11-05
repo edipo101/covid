@@ -10,12 +10,11 @@ use App\Secretaria;
 use App\Tipo;
 use App\UbicacionDir;
 use App\UbicacionMen;
+use App\Unidad;
 use Illuminate\Http\Request;
 
 class PreventivoController extends Controller
 {
-    // private $ubicaciones = ["UNID_SOLIC", "COMPRAS", "CONTABILIDAD", "DIR_FINANCIERA", "JURIDICA", "RPC",
-    //         "TESORERIA", "SMAF", "ALMACEN"];
     private $ubicaciones = ["1. UNID_SOLIC", "2. COMPRAS", "3. CONTABILIDAD", "4. DIR_FINANCIERA", 
         "5. ALMACEN", "6. TESORERIA", "7. SMAF"];
 
@@ -56,6 +55,8 @@ class PreventivoController extends Controller
             ->leftJoin('ubicacion_men', 'id_ubimen', '=', 'ubicacion_men.id_ubicacion')
             ->leftJoin('ubicacion_dir', 'id_ubidir', '=', 'ubicacion_dir.id_ubicacion')
             ->leftJoin('secretaria', 'preventivo.id_secretaria', '=', 'secretaria.id_secretaria')
+            ->leftJoin('unidad', 'preventivo.id_unidad', '=', 'unidad.id_unidad')
+            ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
             ->leftJoin('estado', 'preventivo.id_estado', '=', 'estado.id_estado')
             ->where('id_preventivo', $id)->first();
             $preventivo->importe = number_format($preventivo->importe, 2);
@@ -112,28 +113,41 @@ class PreventivoController extends Controller
         $estados = Estado::pluck('estado', 'id_estado');
         $ubicaciones_men = UbicacionMen::pluck('ubicacion', 'id_ubicacion');
         $ubicaciones_dir = UbicacionDir::pluck('ubicacion', 'id_ubicacion');
-        // $secretarias = Secretaria::pluck('sigla', 'secretaria', 'id_secretaria');
         $secretarias = Secretaria::all();
-        // return $secretarias;
-        
+        $unidades = (!is_null($preven->id_secretaria)) ? Unidad::where('id_secretaria', $preven->id_secretaria)->get() : null;
         return view('preventivos.edit', compact('preven', 'tipos', 'estados', 'ubicaciones_men', 
-            'ubicaciones_dir', 'secretarias'));
+            'ubicaciones_dir', 'secretarias', 'unidades'));
     }
 
     public function update(Request $request, $id){
-        return $request;
+        // return $request;
         $preven = Preventivo::findOrFail($id);
         $validatedData = $request->validate([
             'nro_preven' => 'required',
-            'detalle' => 'required'
+            'id_objeto' => 'required',
+            'fuente' => 'required',
+            'organismo' => 'required',
+            'id_tipo' => 'required',
         ]);
-        $preven->preventivo = request('nro_preven');
-        $preven->glosa = request('detalle');
-        $preven->importe = request('importe');
-        $var = request('fecha_elab');
-        $date = str_replace('/', '-', $var);
+        // $preven->preventivo = request('nro_preven');
+        $date = str_replace('/', '-', request('fecha_elab'));
         $fecha = date("Y-m-d", strtotime($date));
-        return $fecha;
+        $preven->fecha_elab = $fecha;
+        $preven->id_secretaria = request('id_secretaria');
+        $preven->id_unidad = request('id_unidad');
+        $preven->glosa = request('glosa');
+        $preven->importe = request('importe');
+        $preven->id_objeto = request('id_objeto');
+        $tipo = request('id_tipo');
+        $ubimen = null;
+        $ubidir = null;
+        $preven->id_ubimen = ($tipo == 1) ? request('ubicacion') : null; 
+        $preven->id_ubidir = ($tipo == 2) ? request('ubicacion') : null; 
+        $preven->id_tipo = $tipo;
+        $preven->id_estado = request('id_estado');
+        $preven->observaciones = request('observaciones');
+        
+        // return $preven;
         $preven->save();
 
         return redirect()->route('preventivos.all');

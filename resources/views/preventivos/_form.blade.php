@@ -79,12 +79,25 @@
           </div>
           <div class="form-group">
             <label for="" class="col-sm-3 control-label">Secretaria</label>
-            <div class="col-sm-6">
+            <div class="col-sm-7">
               <select class="form-control" id="id_secretaria" name="id_secretaria">
                 <option value='' disabled selected style='display:none;'>Seleccione una opcion</option>
                 @foreach($secretarias as $secretaria)
                 <option value={{$secretaria->id_secretaria}} {!!(($secretaria->id_secretaria == $preven->id_secretaria) ? "selected=\"selected\"" : "")!!}>{{$secretaria->secretaria.' ('.$secretaria->sigla.')'}}</option>
                 @endforeach
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-3 control-label">Unidad</label>
+            <div class="col-sm-6">
+              <select class="form-control" id="id_unidad" name="id_unidad">
+                @if (!is_null($unidades))
+                <option value='' disabled selected style='display:none;'>Seleccione una opcion</option>
+                @foreach($unidades as $unidad)
+                <option value={{$unidad->id_unidad}} {!!(($unidad->id_unidad == $preven->id_unidad) ? "selected=\"selected\"" : "")!!}>{{$unidad->unidad}}</option>
+                @endforeach
+                @endif
               </select>
             </div>
           </div>
