@@ -78,11 +78,16 @@
                 <th>Observaciones:</th>
                 <td id="obs"></td>
               </tr>
+              <tr>
+                <th>Desembolso:</th>
+                <td id="desembolso"></td>
+              </tr>
             </tbody>
           </table>
         </div>
         <div class="modal-footer">
           {{-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button> --}}
+          <a id="btn_edit" href="#" class="btn btn-info btn-flat"><i class="fa fa-pencil"></i> Editar </a>
           <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
         </div>
       </div>

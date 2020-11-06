@@ -19,28 +19,38 @@ class PreventivoController extends Controller
     public function show_all(Request $request){
     	$reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
         ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
-        ->Fuente($request->get('fuente2'))
-        ->Organismo($request->get('organismo2'))
-        ->Partida($request->get('partida2'))
+        ->Fuente($request->get('f'))
+        ->Organismo($request->get('o'))
+        ->Partida($request->get('p'))
         ->Preven($request->get('search'))
-        ->paginate(25);
+        ->paginate(25);            
     	return view('preventivos', compact('reg'));
     }
 
     // Listar compras menores
     public function show_menores(Request $request){
-        $preven = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+        $reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+        ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
+        ->where('preventivo.id_tipo', 1)
+        ->Fuente($request->get('f'))
+        ->Organismo($request->get('o'))
+        ->Partida($request->get('p'))
         ->Preven($request->get('search'))
-        ->where('tipo', 'CM')->paginate(25);
-        return view('preventivos', compact('preven'));
+        ->paginate(25);
+        return view('menores', compact('reg'));
     }
 
     // Listar compras mayores o directas
     public function show_mayores(Request $request){
-        $preven = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+        $reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+        ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
+        ->where('preventivo.id_tipo', 2)
+        ->Fuente($request->get('f'))
+        ->Organismo($request->get('o'))
+        ->Partida($request->get('p'))
         ->Preven($request->get('search'))
-        ->where('tipo', 'CD')->paginate(25);
-        return view('preventivos', compact('preven'));
+        ->paginate(25);
+        return view('directas', compact('reg'));
     }
 
     public function compras_men(){
@@ -125,7 +135,7 @@ class PreventivoController extends Controller
         // return $request;
         $preven = Preventivo::findOrFail($id);
         $validatedData = $request->validate([
-            'nro_preven' => 'required',
+            // 'nro_preven' => 'required',
             'id_objeto' => 'required',
             'fuente' => 'required',
             'organismo' => 'required',
@@ -138,7 +148,7 @@ class PreventivoController extends Controller
         $preven->id_secretaria = request('id_secretaria');
         $preven->id_unidad = request('id_unidad');
         $preven->glosa = request('glosa');
-        $preven->importe = request('importe');
+        // $preven->importe = request('importe');
         $preven->id_objeto = request('id_objeto');
         $tipo = request('id_tipo');
         $ubimen = null;
@@ -148,6 +158,7 @@ class PreventivoController extends Controller
         $preven->id_tipo = $tipo;
         $preven->id_estado = request('id_estado');
         $preven->observaciones = request('observaciones');
+        $preven->desembolso = request('desembolso');
         
         // return $preven;
         $preven->save();

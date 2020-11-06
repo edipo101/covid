@@ -4,8 +4,8 @@
 
 @section('content-header')
 <h1>
-  Lista de preventivos
-  <small>Lista general de todos los preventivos</small>
+  Compras menores
+  <small>Preventivos con importe menor o igual a Bs 50.000,00</small>
 </h1>
 <ol class="breadcrumb">
   <li><a href=""><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -21,7 +21,7 @@
     <div class="col-xs-12">
         <a href="#" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
       <div class="pull-right form-group">
-        <form method="get" action="{{ route('preventivos.all') }}">
+        <form method="get" action="{{ route('preventivos.men') }}">
           <select name="f" id="f" class="form-control" style="display: inline-block; width: 100px;">
             <option value='' disabled selected style='display:none;'>Fuente</option>
             <option value="">Todos</option>
@@ -41,7 +41,7 @@
           </select>
           <input type="text" name="p" class="form-control" placeholder="Partida" style="display: inline-block; width: 120px;" value="{{request('p')}}">
           <button type="submit" class="btn btn-info btn-flat btn-filter">Filtrar</button>
-          <a href="{{route('preventivos.all')}}" class="btn btn-success btn-flat btn-filter">Borrar</a>
+          <a href="{{route('preventivos.men')}}" class="btn btn-success btn-flat btn-filter">Borrar</a>
         </form>
       </div>
 

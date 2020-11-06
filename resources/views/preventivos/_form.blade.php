@@ -2,13 +2,13 @@
           <div class="form-group">
             <label class="col-sm-3 control-label" for="nro_preven">Nro preventivo</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" id="nro_preven" name="nro_preven" placeholder="" value="{{old('nro_preven', $preven->preventivo)}}">
+              <input type="text" class="form-control" id="nro_preven" name="nro_preven" placeholder="" value="{{old('nro_preven', $preven->preventivo)}}" disabled="">
             </div>
           </div>
           <div class="form-group">
             <label for="" class="col-sm-3 control-label">Importe (Bs)</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" id="importe" name="importe" value="{{old('importe', $preven->importe)}}">
+              <input type="text" class="form-control" id="importe" name="importe" value="{{old('importe', $preven->importe)}}" disabled="">
             </div>
           </div>
           <div class="form-group">
@@ -132,6 +132,23 @@
             <label for="" class="col-sm-3 control-label">Observaciones</label>
             <div class="col-sm-9">
               <textarea class="form-control" name="observaciones" id="observaciones" cols="30" rows="3">{{old('observaciones', $preven->observaciones)}}</textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-3 control-label">Desembolso</label>
+            <div class="col-sm-9">
+              {{-- @foreach($tipos as $key => $value) --}}
+              <div class="radio">
+                <label>
+                  <input type="radio" name="desembolso" id="" value="24" {!!(($preven->desembolso == 24) ? "checked=\"checked\"" : "")!!}> 24 MILLONES
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="desembolso" id="" value="23" {!!(($preven->desembolso == 23) ? "checked=\"checked\"" : "")!!}> 23 MILLONES
+                </label>
+              </div>
+              {{-- @endforeach               --}}
             </div>
           </div>
         </div>

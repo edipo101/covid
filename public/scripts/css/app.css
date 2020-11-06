@@ -26,3 +26,7 @@
     border-color: #d2d6de;
     border: 1px solid #ccc;
 }
+
+.btn-filter {
+	vertical-align: baseline;
+}
