@@ -31,7 +31,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">PREVENTIVOS</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="{{!Route::is('ejec_presup') ?: 'active'}}"><a href="{{route('ejec_presup')}}"><i class="fa fa-pie-chart"></i> <span>Ejecucion Presupuestaria</span></a></li>
+        <li class="{{!Route::is('dashboard') ?: 'active'}}"><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Principal</span></a></li>
         @php
         $ruta = Route::currentRouteName();
         switch ($ruta) {
@@ -39,8 +39,8 @@
           case 'preventivos.men':
           case 'preventivos.dir':
             $menu = 'menu-open';
-            $view = 'display: block;'; 
-            break;          
+            $view = 'display: block;';
+            break;
           default:
             $menu = '';
             $view = 'display: none;';
@@ -60,6 +60,7 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> Por Secretarias</a></li>
           </ul>
         </li>
+        <li class="{{!Route::is('ejec_presup') ?: 'active'}}"><a href="{{route('ejec_presup')}}"><i class="fa fa-pie-chart"></i> <span>Ejecucion Presupuestaria</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

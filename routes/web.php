@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function(){
-	return 'okey makey';
-});
+Route::get('/', 'DashboardController@show')->name('dashboard');
 Route::get('/preventivos/', 'PreventivoController@show_all')->name('preventivos.all');
 Route::post('/preventivos/detalle', 'PreventivoController@view')->name('preventivos.view');
 Route::post('/preventivos/busqueda', 'PreventivoController@search')->name('preventivos.search');

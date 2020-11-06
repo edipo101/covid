@@ -59,7 +59,7 @@
                 </td>
               </td>
                <td>
-                 <a href="#" class="btn btn-primary btn-xs btn-view" data-toggle="modal" data-target="#modal-default"><i class="fa fa-folder"></i> Ver </a>
+                 <a href="#" class="btn btn-primary btn-xs btn-view" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i> Ver </a>
                  <a href="{{route('preventivos.edit', $row->id_preventivo)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>
                  {{-- <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Borrar </a> --}}
                </td>

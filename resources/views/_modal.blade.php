@@ -10,10 +10,10 @@
         <div class="modal-body">
           <table class="table">
             <tbody>
-              <tr>
+              {{-- <tr>
                 <th style="width:25%">Item:</th>
                 <td id="id_preventivo"></td>
-              </tr>
+              </tr> --}}
               <tr>
                 <th>Preventivo:</th>
                 <td id="preventivo"></td>

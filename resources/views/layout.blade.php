@@ -159,8 +159,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 
-@yield('script_preventivos')
-
 {{-- Mostrar grafico de barras si corresponde --}}
 @isset($tabla1)
 {{-- Grafico de barras --}}
@@ -168,10 +166,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 @endisset
 
 <script type="text/javascript">
+  var url_view = "{{route('preventivos.view')}}";
+  var token = "{{csrf_token()}}";
+  var url_edit = "{{config('app.url')}}";
   $(document).ready(function(){
     $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
-  });  
+  });
 </script>
+
+{{-- Ventana modal preventivo --}}
+@isset($reg)
+<script src="{{config('app.url')}}/scripts/js/modal_preven.js"></script>
+@endisset
 
 @isset($preven)
 <script type="text/javascript">
@@ -180,7 +186,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     $('input[name=id_tipo]').change(function(){
       var tipo = $(this).val();
       $('#ubicacion').empty();
-      
+
       if (tipo == 1){
         $.ajax({
             url: "{{route('ubicaciones_men')}}",
@@ -194,7 +200,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 });
             }
         });
-      } 
+      }
 
       if (tipo == 2){
         // alert('tipo2');
@@ -207,7 +213,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 });
             }
         });
-      } 
+      }
     });
 
     $('#id_secretaria').change(function(){
@@ -227,7 +233,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       });
     });
 
-  });  
+  });
 </script>
 @endisset
 
