@@ -14,4 +14,19 @@ class Preventivo extends Model
     	if ($preven != "")
     		$query->where('preventivo', $preven);
     }
+
+    public function scopeFuente($query, $fuente){
+    	if ($fuente != "")
+    		$query->where('fuente', $fuente);		
+    }
+
+    public function scopeOrganismo($query, $org){
+    	if ($org != "")
+    		$query->where('organismo', $org);		
+    }
+
+    public function scopePartida($query, $partida){
+    	if ($partida != "")
+    		$query->where('id_objeto', $partida);		
+    }
 }

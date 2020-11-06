@@ -98,7 +98,8 @@
           </table>
         </div>
         <div class="modal-footer">
-          {{-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button> --}}
+          {{-- <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Editar</button> --}}
+          <a id="btn_edit" href="#" class="btn btn-info btn-flat"><i class="fa fa-pencil"></i> Editar </a>
           <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
         </div>
       </div>
@@ -107,21 +108,31 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <div class="btn-add">  
-          <a href="{{route('preventivos.create')}}" class="btn btn-success"><i class="fa fa-plus"></i> Nuevo </a>
+        <a href="#" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
+      <div class="pull-right form-group">
+        <form method="get" action="{{ route('preventivos.all') }}">
+          <select name="fuente2" id="fuente2" class="form-control" style="display: inline-block; width: 100px;">
+            <option value='' disabled selected style='display:none;'>Fuente</option>
+            <option value="">Todos</option>
+            <option {!!((request('fuente2') == 20) ? "selected=\"selected\"" : "")!!}>20</option>
+            <option {!!((request('fuente2') == 41) ? "selected=\"selected\"" : "")!!}>41</option>
+          </select>
+          <select name="organismo2" id="organismo2" class="form-control" style="display: inline-block; width: 120px;">
+            <option value='' disabled selected style='display:none;'>Organismo</option>  
+            @if (request('fuente2') == 20)
+            <option {!!((request('organismo2') == 210) ? "selected=\"selected\"" : "")!!}>210</option>
+            <option {!!((request('organismo2') == 230) ? "selected=\"selected\"" : "")!!}>230</option>
+            @elseif (request('fuente2') == 41)
+            <option {!!((request('organismo2') == 111) ? "selected=\"selected\"" : "")!!}>111</option>
+            <option {!!((request('organismo2') == 113) ? "selected=\"selected\"" : "")!!}>113</option>
+            <option {!!((request('organismo2') == 119) ? "selected=\"selected\"" : "")!!}>119</option>
+            @endif        
+          </select>
+          <input type="text" name="partida2" class="form-control" placeholder="Partida" style="display: inline-block; width: 120px;" value="{{request('partida2')}}">
+          <button type="submit" class="btn btn-info btn-flat">Filtrar</button>
+          <a href="{{route('preventivos.all')}}" class="btn btn-success btn-flat">Borrar</a>
+        </form>
       </div>
-      {{-- <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Filtrar datos</h3>
-          <div class="box-tools">
-            <button class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove"><i class="fa fa-times"></i></button>
-            <button class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fa fa-minus"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-          
-        </div>
-      </div> --}}
 
       <div class="box">
         <div class="box-header">
@@ -135,9 +146,6 @@
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i></button>
                   </span>
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-info btn-flat"><i class="fa fa-search"></i>Filtrar</button>
-                  </span>
                 </div>
               </form>
             </div>
@@ -150,7 +158,7 @@
           <table class="table table-hover table-striped table-bordered">
             <tbody>
               <tr>
-               <th>Item</th>
+               {{-- <th>Item</th> --}}
                <th>Nro Prev</th>
                <th>Importe (Bs)</th>
                <th style="width: 40%;">Detalle (Resumen)</th>
@@ -158,19 +166,21 @@
                <th>Fte-Org</th>
                {{-- <th>Organismo</th> --}}
                <th>Partida</th>
+               <th>Tipo</th>
                <th>Progreso</th>
                <th>(%)</th>
                <th style="width: 175px;">Operaciones</th>
               </tr>
               @foreach($reg as $row)
               <tr data-id="{{$row->id_preventivo}}">
-               <td>{{$row->id_preventivo}}</td>
+               {{-- <td>{{$row->id_preventivo}}</td> --}}
                <td>{{$row->preventivo}}</td>
                <td>{{number_format($row->importe, 2)}}</td>
                <td>{{$row->glosa}}</td>
                <td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
                <td>{{$row->fuente}}-{{$row->organismo}}</td>
                <td>{{$row->id_objeto}}</td>
+               <td>{{$row->tipo}}</td>
                <td>
                 <div class="progress progress-xs">
                   @php
@@ -190,13 +200,15 @@
                <td>
                  <a href="#" class="btn btn-primary btn-xs btn-view" data-toggle="modal" data-target="#modal-default"><i class="fa fa-folder"></i> Ver </a>
                  <a href="{{route('preventivos.edit', $row->id_preventivo)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>
-                 <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Borrar </a>
+                 {{-- <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Borrar </a> --}}
                </td>
               </tr>
               @endforeach
             </tbody>
           </table>
-          <span class="text-center">{{$reg}}</span>
+          <span class="text-center">
+          {{$reg->appends(Request::all())->links()}}
+          </span>
         </div>
         <!-- /.box-body -->
       </div>
@@ -208,6 +220,21 @@
 @section('script_preventivos')
 <script type="text/javascript">
   $(document).ready(function(){
+    $('#fuente2').change(function(){
+      var fuente = $(this).val();
+      $('#organismo2').empty();
+      $('#organismo2').append("<option value='' disabled selected style='display:none;'>Organismo</option>");
+      if (fuente == 20){
+        $('#organismo2').append("<option>210</option>");
+        $('#organismo2').append("<option>230</option>");
+      }
+      else if (fuente == 41){
+        $('#organismo2').append("<option>111</option>");
+        $('#organismo2').append("<option>113</option>");
+        $('#organismo2').append("<option>119</option>");
+      }
+    });
+
     $('.btn-view').click(function(){
       var row = $(this).parents('tr');
       var id = row.data('id');
@@ -218,7 +245,10 @@
         $('#id_preventivo').html(data.id_preventivo);
         $('#preventivo').html(data.preventivo);
         $('#importe').html(data.importe);
-        $('#secretaria').html(data.secretaria+' ('+data.sigla+')');
+        if (data.secretaria)
+          $('#secretaria').html(data.secretaria+' ('+data.sigla+')');
+        else
+          $('#secretaria').html();
         $('#unidad').html(data.unidad);
         $('#detalle').html(data.glosa);
         $('#fecha_elab').html(data.fecha_elab);
@@ -252,8 +282,12 @@
         if (data.observaciones)
           obs = data.observaciones;
         $('#obs').html(obs);
+        var link = "{{config('app.url')}}"+"/preventivos/edit/"+data.id_preventivo;
+        // console.log(link);
+        $('#btn_edit').attr('href', link);
       }, type);
     });
+
   });
 </script>
 @endsection
