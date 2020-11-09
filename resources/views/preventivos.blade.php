@@ -8,7 +8,7 @@
   <small>Lista general de todos los preventivos</small>
 </h1>
 <ol class="breadcrumb">
-  <li><a href=""><i class="fa fa-dashboard"></i> Inicio</a></li>
+  <li><a href="{{route('download')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
   <li class="active">Preventivos</li>
 </ol>
 @endsection

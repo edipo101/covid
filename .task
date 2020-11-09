@@ -1,0 +1,6 @@
+Tareas a realizar
+- Tras modificar un registro siempre retorna a la pagina 1,
+  deberia retornar a la pagina previa
+- Agregar una nueva columna para ingresar el monto cancelado a cada preventivo,
+  por defecto igualar al monto preventivo
+- Elaborar reportes en PDF

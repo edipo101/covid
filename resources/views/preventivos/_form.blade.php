@@ -8,7 +8,7 @@
           <div class="form-group">
             <label for="" class="col-sm-3 control-label">Importe (Bs)</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" id="importe" name="importe" value="{{old('importe', $preven->importe)}}" disabled="">
+              <input type="text" class="form-control" id="importe" name="importe" value="{{old('importe', $preven->importe)}}">
             </div>
           </div>
           <div class="form-group">

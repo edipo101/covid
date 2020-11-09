@@ -148,7 +148,7 @@ class PreventivoController extends Controller
         $preven->id_secretaria = request('id_secretaria');
         $preven->id_unidad = request('id_unidad');
         $preven->glosa = request('glosa');
-        // $preven->importe = request('importe');
+        $preven->importe = request('importe');
         $preven->id_objeto = request('id_objeto');
         $tipo = request('id_tipo');
         $ubimen = null;
