@@ -8,7 +8,13 @@
           <div class="form-group">
             <label for="" class="col-sm-3 control-label">Importe (Bs)</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" id="importe" name="importe" value="{{old('importe', $preven->importe)}}">
+              <input type="text" class="form-control" id="importe" name="importe" value="{{old('importe', $preven->importe)}}" title="Monto reservado (preventivo)">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="col-sm-3 control-label">Devengado (Bs)</label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" id="pagado" name="pagado" value="{{old('pagado', $preven->pagado)}}" title="Monto a cancelar">
             </div>
           </div>
           <div class="form-group">
@@ -20,7 +26,7 @@
                   <input type="radio" name="id_tipo" id="tipo" value="{{$key}}" {!!(($key == $preven->id_tipo) ? "checked=\"checked\"" : "")!!}>{{$value}}
                 </label>
               </div>
-              @endforeach              
+              @endforeach
             </div>
           </div>
           <div class="form-group">

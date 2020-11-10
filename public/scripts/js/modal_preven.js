@@ -23,6 +23,7 @@
       $.post(url, data, function(data){
         $('#preventivo').html(data.preventivo);
         $('#importe').html(data.importe);
+        $('#pagado').html(data.pagado);
         if (data.secretaria)
           $('#secretaria').html(data.secretaria+' ('+data.sigla+')');
         else

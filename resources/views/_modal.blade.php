@@ -15,12 +15,16 @@
                 <td id="id_preventivo"></td>
               </tr> --}}
               <tr>
-                <th>Preventivo:</th>
+                <th style="width: 20%;">Preventivo:</th>
                 <td id="preventivo"></td>
               </tr>
               <tr>
-                <th>Importe (Bs):</th>
+                <th title="Monto reservado (preventivo)">Importe (Bs):</th>
                 <td id="importe"></td>
+              </tr>
+              <tr>
+                <th title="Monto a cancelar">Devengado (Bs):</th>
+                <td id="pagado"></td>
               </tr>
               <tr>
                 <th>Secretaria:</th>

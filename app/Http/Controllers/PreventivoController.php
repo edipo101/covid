@@ -23,7 +23,7 @@ class PreventivoController extends Controller
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
-        ->paginate(25);            
+        ->paginate(25);
     	return view('preventivos', compact('reg'));
     }
 
@@ -72,6 +72,7 @@ class PreventivoController extends Controller
             ->leftJoin('estado', 'preventivo.id_estado', '=', 'estado.id_estado')
             ->where('id_preventivo', $id)->first();
             $preventivo->importe = number_format($preventivo->importe, 2);
+            $preventivo->pagado = number_format($preventivo->pagado, 2);
             $preventivo->fecha_elab = date('d/m/Y', strtotime($preventivo->fecha_elab));
             echo json_encode($preventivo);
         }
@@ -100,7 +101,7 @@ class PreventivoController extends Controller
         $tipos = array(
             'CM' => 'Compra menor'
         );
-        
+
         return view('preventivos.create', compact('row', 'estados', 'ubicaciones', 'tipos'));
     }
 
@@ -120,14 +121,15 @@ class PreventivoController extends Controller
 
     public function edit($id){
         $preven = Preventivo::where('id_preventivo', $id)->first();
-        
+
         $tipos = Tipo::pluck('tipo', 'id_tipo');
         $estados = Estado::pluck('estado', 'id_estado');
         $ubicaciones_men = UbicacionMen::pluck('ubicacion', 'id_ubicacion');
         $ubicaciones_dir = UbicacionDir::pluck('ubicacion', 'id_ubicacion');
         $secretarias = Secretaria::all();
         $unidades = (!is_null($preven->id_secretaria)) ? Unidad::where('id_secretaria', $preven->id_secretaria)->get() : null;
-        return view('preventivos.edit', compact('preven', 'tipos', 'estados', 'ubicaciones_men', 
+
+        return view('preventivos.edit', compact('preven', 'tipos', 'estados', 'ubicaciones_men',
             'ubicaciones_dir', 'secretarias', 'unidades'));
     }
 
@@ -149,20 +151,20 @@ class PreventivoController extends Controller
         $preven->id_unidad = request('id_unidad');
         $preven->glosa = request('glosa');
         $preven->importe = request('importe');
+        $preven->pagado = request('pagado');
         $preven->id_objeto = request('id_objeto');
         $tipo = request('id_tipo');
         $ubimen = null;
         $ubidir = null;
-        $preven->id_ubimen = ($tipo == 1) ? request('ubicacion') : null; 
-        $preven->id_ubidir = ($tipo == 2) ? request('ubicacion') : null; 
+        $preven->id_ubimen = ($tipo == 1) ? request('ubicacion') : null;
+        $preven->id_ubidir = ($tipo == 2) ? request('ubicacion') : null;
         $preven->id_tipo = $tipo;
         $preven->id_estado = request('id_estado');
         $preven->observaciones = request('observaciones');
         $preven->desembolso = request('desembolso');
-        
-        // return $preven;
+
         $preven->save();
 
-        return redirect()->route('preventivos.all');
+        return redirect(request('url_previous'));
     }
 }

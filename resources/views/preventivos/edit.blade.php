@@ -29,6 +29,7 @@
       <!-- form start -->
       <form class="form-horizontal" action="{{ route('preventivos.update', $preven->id_preventivo) }}" method="POST">
         <input name="_method" type="hidden" value="PATCH">
+        <input name="url_previous" type="hidden" value="{{url()->previous()}}">
         {{ csrf_field() }}
         @include('preventivos._form')
 
