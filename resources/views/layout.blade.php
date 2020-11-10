@@ -158,6 +158,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.js"></script>
 <script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!-- Morris.js charts -->
+<script src="{{config('app.url')}}/bower_components/raphael/raphael.min.js"></script>
+<script src="{{config('app.url')}}/bower_components/morris.js/morris.min.js"></script>
 
 {{-- Mostrar grafico de barras si corresponde --}}
 @isset($tabla1)

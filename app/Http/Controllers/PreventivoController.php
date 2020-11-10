@@ -91,7 +91,11 @@ class PreventivoController extends Controller
         ->orderBy('id_objeto', 'asc')
         ->get();
 
-        return view('reporte_fuenteorg', compact('tabla1', 'tabla2'));
+        $tabla4 = Reporte::whereRaw('fuente = 41 and organismo = 113')
+        ->orderBy('id_objeto', 'asc')
+        ->get();
+
+        return view('reporte_fuenteorg', compact('tabla1', 'tabla2', 'tabla3', 'tabla4'));
     }
 
     public function create(){

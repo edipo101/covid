@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     public function show(){
-    	$preven = Preventivo::selectRaw('fuente, organismo, count(*) as cant, sum(importe) as total')
+    	$preven = Preventivo::selectRaw('fuente, organismo, count(*) as cant, 
+            sum(importe) as imp_preven, sum(pagado) as imp_deven, (sum(importe)-sum(pagado)) as liberado')
     	->groupBy('fuente', 'organismo')
     	->get();
 

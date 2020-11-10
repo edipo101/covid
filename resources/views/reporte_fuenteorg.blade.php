@@ -29,21 +29,24 @@
                <th>No</th>
                <th>Partida</th>
                <th style="width: 50%">Descripcion</th>
-               <th>Preventivo</th>
+               <th style="text-align: center">Preventivo (Bs)</th>
+               <th style="text-align: center">Devengado (Bs)</th>
              </tr>
-             @php $total = 0; @endphp
+             @php $total = 0; $tot_deven = 0; @endphp
              @foreach($tabla1 as $row)
              <tr data-id="{{$row->id_preventivo}}">
-               <td>{{++$loop->index}}</td>
-               <td>{{$row->id_objeto}}</td>
+               <td>{{$loop->iteration}}</td>
+               <td><strong>{{$row->id_objeto}}</strong></td>
                <td>{{$row->descripcion}}</td>
-               <td>{{number_format($row->subtotal, 2)}}</td>
-               @php $total += $row->subtotal @endphp
+               <td class="right">{{number_format($row->importe, 2)}}</td>
+               <td class="right">{{number_format($row->pagado, 2)}}</td>
+               @php $total += $row->importe; $tot_deven += $row->pagado @endphp
              </tr>
              @endforeach
              <tr>
                <th colspan="3">Total</th>
                <th>{{number_format($total, 2)}}</th>
+               <th>{{number_format($tot_deven, 2)}}</th>
              </tr>
            </tbody>
          </table>
@@ -65,9 +68,11 @@
         </div>
         <!-- /.box-body -->
       </div>
+
     </div>
   </div>
 
+  {{-- Fuente 20, Organismo 230 --}}
   <div class="row">
     <div class="col-md-7">
       <div class="box box-danger">
@@ -83,21 +88,24 @@
                <th>No</th>
                <th>Partida</th>
                <th style="width: 50%">Descripcion</th>
-               <th>Preventivo</th>
+               <th style="text-align: center">Preventivo (Bs)</th>
+               <th style="text-align: center">Devengado (Bs)</th>
              </tr>
-             @php $total = 0; @endphp
+             @php $total = 0; $deven = 0; @endphp
              @foreach($tabla2 as $row)
              <tr data-id="{{$row->id_preventivo}}">
                <td>{{++$loop->index}}</td>
                <td>{{$row->id_objeto}}</td>
                <td>{{$row->descripcion}}</td>
-               <td>{{number_format($row->subtotal, 2)}}</td>
-               @php $total += $row->subtotal @endphp
+               <td class="right">{{number_format($row->importe, 2)}}</td>
+               <td class="right">{{number_format($row->pagado, 2)}}</td>
+               @php $total += $row->importe; $deven += $row->pagado; @endphp
              </tr>
              @endforeach
              <tr>
                <th colspan="3">Total</th>
-               <th>{{number_format($total, 2)}}</th>
+               <th class="right">{{number_format($total, 2)}}</th>
+               <th class="right">{{number_format($deven, 2)}}</th>
              </tr>
            </tbody>
          </table>
@@ -121,6 +129,109 @@
       </div>
     </div>
   </div>
+
+  {{-- Fuente 41, Organismo 111 --}}
+  <div class="row">
+    <div class="col-md-7">
+      <div class="box box-info">
+        <div class="box-header">
+          <h3 class="box-title"></h3>
+            <h3 class="box-title">Fuente: 41 &nbsp;&nbsp;Organismo: 111</h3>
+        </div>
+
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover table-striped table-bordered">
+            <tbody>
+              <tr>
+               <th>No</th>
+               <th>Partida</th>
+               <th style="width: 50%">Descripcion</th>
+               <th style="text-align: center">Preventivo (Bs)</th>
+               <th style="text-align: center">Devengado (Bs)</th>
+             </tr>
+             @php $total = 0; $deven = 0; @endphp
+             @foreach($tabla3 as $row)
+             <tr data-id="{{$row->id_preventivo}}">
+               <td>{{++$loop->index}}</td>
+               <td>{{$row->id_objeto}}</td>
+               <td>{{$row->descripcion}}</td>
+               <td class="right">{{number_format($row->importe, 2)}}</td>
+               <td class="right">{{number_format($row->pagado, 2)}}</td>
+               @php $total += $row->importe; $deven += $row->pagado; @endphp
+             </tr>
+             @endforeach
+             <tr>
+               <th colspan="3">Total</th>
+               <th class="right">{{number_format($total, 2)}}</th>
+               <th class="right">{{number_format($deven, 2)}}</th>
+             </tr>
+           </tbody>
+         </table>
+        </div>
+      <!-- /.box-header -->
+      </div>
+    </div>        
+  </div>
+
+  {{-- Fuente 41, Organismo 113 --}}
+  <div class="row">
+    <div class="col-md-8">
+      <div class="box box-warning">
+        <div class="box-header">
+          <h3 class="box-title"></h3>
+            <h3 class="box-title">Fuente: 41 &nbsp;&nbsp;Organismo: 113</h3>
+        </div>
+
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover table-striped table-bordered">
+            <tbody>
+              <tr>
+               <th>No</th>
+               <th>Partida</th>
+               <th style="width: 50%">Descripcion</th>
+               <th style="text-align: center">Preventivo (Bs)</th>
+               <th style="text-align: center">Devengado (Bs)</th>
+             </tr>
+             @php $total = 0; $deven = 0; @endphp
+             @foreach($tabla4 as $row)
+             <tr data-id="{{$row->id_preventivo}}">
+               <td>{{++$loop->index}}</td>
+               <td>{{$row->id_objeto}}</td>
+               <td>{{$row->descripcion}}</td>
+               <td class="right">{{number_format($row->importe, 2)}}</td>
+               <td class="right">{{number_format($row->pagado, 2)}}</td>
+               @php $total += $row->importe; $deven += $row->pagado; @endphp
+             </tr>
+             @endforeach
+             <tr>
+               <th colspan="3">Total</th>
+               <th class="right">{{number_format($total, 2)}}</th>
+               <th class="right">{{number_format($deven, 2)}}</th>
+             </tr>
+           </tbody>
+         </table>
+        </div>
+      <!-- /.box-header -->
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- BAR CHART -->
+    <div class="col-md-12">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">Distribucion gráfica de datos</h3>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="barChart4" style="height:230px"></canvas>
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+  </div>
 @endsection
 
 @section('script_barras')
@@ -128,10 +239,13 @@
   $(function () {
     var data1 = @php echo $tabla1 @endphp;
     var partidas1 = [];
-    var subtotales1 = [];
+    var subtot_210 = [];
+    var deven_210 = [];
+
     for (var i = 0; i < data1.length; i++) {
       partidas1[i] = data1[i].id_objeto;
-      subtotales1[i] = data1[i].subtotal;
+      subtot_210[i] = data1[i].importe;
+      deven_210[i] = data1[i].pagado;
     }
     var barChartCanvas1 = $('#barChart1').get(0).getContext('2d')
     var barChart1 = new Chart(barChartCanvas1)
@@ -140,21 +254,20 @@
       datasets: [
         {
           label               : 'Preventivos',
-          fillColor           : 'rgba(60,141,188,0.9)',
-          strokeColor         : 'rgba(60,141,188,0.8)',
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : subtotales1
+          fillColor           : 'green',
+          strokeColor         : 'green',
+          data                : subtot_210
+        },
+        {
+          label               : 'Devengados',
+          fillColor           : 'rgba(210, 214, 222, 1)',
+          strokeColor         : 'rgba(210, 214, 222, 1)',
+          data                : deven_210
         }
       ]
     }
-    var barChartData1                     = areaChartData1
-    barChartData1.datasets[0].fillColor   = '#00a65a'
-    barChartData1.datasets[0].strokeColor = '#00a65a'
-    barChartData1.datasets[0].pointColor  = '#00a65a'
-    var barChartOptions                  = {
+    var barChartData1         = areaChartData1
+    var barChartOptions       = {
       scaleBeginAtZero        : true,
       scaleShowGridLines      : true,
       scaleGridLineColor      : 'rgba(0,0,0,.05)',
@@ -165,7 +278,6 @@
       barStrokeWidth          : 2,
       barValueSpacing         : 5,
       barDatasetSpacing       : 1,
-      //String - A legend template
       legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
       responsive              : true,
       maintainAspectRatio     : true
@@ -175,35 +287,67 @@
 
     // Fuente 20, Organismo 230
     var data2 = @php echo $tabla2 @endphp;
-    var partidas2 = [];
-    var subtotales2 = [];
+    var part_230 = [];
+    var imp_230 = [];
+    var deven_230 = [];
     for (var i = 0; i < data2.length; i++) {
-      partidas2[i] = data2[i].id_objeto;
-      subtotales2[i] = data2[i].subtotal;
+      part_230[i] = data2[i].id_objeto;
+      imp_230[i] = data2[i].importe;
+      deven_230[i] = data2[i].pagado;
     }
     var barChartCanvas2 = $('#barChart2').get(0).getContext('2d')
     var barChart2 = new Chart(barChartCanvas2)
     var areaChartData2 = {
-      labels : partidas2,
+      labels : part_230,
       datasets: [
         {
-          label               : 'Preventivos',
-          fillColor           : 'rgba(60,141,188,0.9)',
-          strokeColor         : 'rgba(60,141,188,0.8)',
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(60,141,188,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : subtotales2
+          label               : 'Preventivo',
+          fillColor           : 'red',
+          strokeColor         : 'red',
+          data                : imp_230
+        },
+        {
+          label               : 'Devengado',
+          fillColor           : 'rgba(210, 214, 222, 1)',
+          strokeColor         : 'rgba(210, 214, 222, 1)',
+          data                : deven_230
         }
       ]
     }
-    var barChartData2                     = areaChartData2
-    barChartData2.datasets[0].fillColor   = 'red'
-    barChartData2.datasets[0].strokeColor = 'red'
-    barChartData2.datasets[0].pointColor  = 'red'
-    barChartOptions.datasetFill = false
+    var barChartData2 = areaChartData2
     barChart2.Bar(barChartData2, barChartOptions)
+
+    // Fuente 41, Organismo 113
+    var data4 = @php echo $tabla4 @endphp;
+    var part_113 = [];
+    var imp_113 = [];
+    var deven_113 = [];
+    for (var i = 0; i < data4.length; i++) {
+      part_113[i] = data4[i].id_objeto;
+      imp_113[i] = data4[i].importe;
+      deven_113[i] = data4[i].pagado;
+    }
+    var barChartCanvas4 = $('#barChart4').get(0).getContext('2d')
+    var barChart4 = new Chart(barChartCanvas4)
+    var areaChartData4 = {
+      labels : part_113,
+      datasets: [
+        {
+          label               : 'Preventivo',
+          fillColor           : 'orange',
+          strokeColor         : 'orange',
+          data                : imp_113
+        },
+        {
+          label               : 'Devengado',
+          fillColor           : 'rgba(210, 214, 222, 1)',
+          strokeColor         : 'rgba(210, 214, 222, 1)',
+          data                : deven_113
+        }
+      ]
+    }
+    var barChartData4 = areaChartData4
+    barChart4.Bar(barChartData4, barChartOptions)
   })
 </script>
 @endsection
