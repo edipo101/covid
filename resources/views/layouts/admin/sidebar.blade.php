@@ -38,6 +38,7 @@
           case 'preventivos.all':
           case 'preventivos.men':
           case 'preventivos.dir':
+          case 'preventivos.secretarias':
             $menu = 'menu-open';
             $view = 'display: block;';
             break;
@@ -57,7 +58,7 @@
             <li class="{{!Route::is('preventivos.all') ?: 'active'}}"><a href="{{route('preventivos.all')}}"><i class="fa fa-circle-o"></i> Por Fuente y Organismo</a></li>
             <li class="{{!Route::is('preventivos.men') ?: 'active'}}"><a href="{{route('preventivos.men')}}"><i class="fa fa-circle-o"></i> Compras menores</a></li>
             <li class="{{!Route::is('preventivos.dir') ?: 'active'}}"><a href="{{route('preventivos.dir')}}"><i class="fa fa-circle-o"></i> Compras mayores o directas</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Por Secretarias</a></li>
+            <li class="{{!Route::is('preventivos.secretarias') ?: 'active'}}"><a href="{{route('preventivos.secretarias')}}"><i class="fa fa-circle-o"></i> Por Secretarias</a></li>
           </ul>
         </li>
         <li class="{{!Route::is('ejec_presup') ?: 'active'}}"><a href="{{route('ejec_presup')}}"><i class="fa fa-pie-chart"></i> <span>Ejecucion Presupuestaria</span></a></li>

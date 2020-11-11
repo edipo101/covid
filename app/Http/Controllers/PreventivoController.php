@@ -27,6 +27,22 @@ class PreventivoController extends Controller
     	return view('preventivos', compact('reg'));
     }
 
+    // Listar todos preventivos por secretarias
+    public function by_secretarias(Request $request){
+        $reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+        ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
+        ->leftJoin('secretaria', 'preventivo.id_secretaria', '=', 'secretaria.id_secretaria')
+        ->leftJoin('unidad', 'preventivo.id_unidad', '=', 'unidad.id_unidad')
+        ->Secretaria($request->get('se'))
+        ->Unidad($request->get('un'))
+        ->Preven($request->get('search'))
+        ->paginate(25);
+
+        $secre = Secretaria::all();
+
+        return view('by_secretarias', compact('reg', 'secre'));
+    }
+
     // Listar compras menores
     public function show_menores(Request $request){
         $reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
@@ -95,7 +111,11 @@ class PreventivoController extends Controller
         ->orderBy('id_objeto', 'asc')
         ->get();
 
-        return view('reporte_fuenteorg', compact('tabla1', 'tabla2', 'tabla3', 'tabla4'));
+        $tabla5 = Reporte::whereRaw('fuente = 41 and organismo = 119')
+        ->orderBy('id_objeto', 'asc')
+        ->get();
+
+        return view('reporte_fuenteorg', compact('tabla1', 'tabla2', 'tabla3', 'tabla4', 'tabla5'));
     }
 
     public function create(){

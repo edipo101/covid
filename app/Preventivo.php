@@ -29,4 +29,14 @@ class Preventivo extends Model
     	if ($partida != "")
     		$query->where('id_objeto', $partida);		
     }
+
+    public function scopeSecretaria($query, $secre){
+        if ($secre != "")
+            $query->where('preventivo.id_secretaria', $secre);       
+    }
+
+    public function scopeUnidad($query, $unidad){
+        if ($unidad != "")
+            $query->where('preventivo.id_unidad', $unidad);       
+    }
 }

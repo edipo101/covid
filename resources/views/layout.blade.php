@@ -170,12 +170,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script type="text/javascript">
   var url_view = "{{route('preventivos.view')}}";
+  var url_unidades = "{{route('unidades')}}";
   var token = "{{csrf_token()}}";
   var url_edit = "{{config('app.url')}}";
   $(document).ready(function(){
     $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
   });
 </script>
+
+{{-- Filtrado de preventivos por secretarias --}}
+@if(Route::is('preventivos.secretarias'))
+<script src="{{config('app.url')}}/scripts/js/filter_secretarias.js"></script>
+@endif
 
 {{-- Ventana modal preventivo --}}
 @isset($reg)

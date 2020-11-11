@@ -63,7 +63,7 @@
         </div>
         <div class="box-body">
           <div class="chart">
-            <canvas id="barChart1" style="height:230px"></canvas>
+            <canvas id="barChart1" style="height:330px"></canvas>
           </div>
         </div>
         <!-- /.box-body -->
@@ -232,6 +232,66 @@
       </div>
     </div>
   </div>
+
+  {{-- Fuente 41, Organismo 119 --}}
+  <div class="row">
+    <div class="col-md-8">
+      <div class="box box-warning">
+        <div class="box-header">
+          <h3 class="box-title"></h3>
+            <h3 class="box-title">Fuente: 41 &nbsp;&nbsp;Organismo: 119</h3>
+        </div>
+
+        <div class="box-body table-responsive no-padding">
+          <table class="table table-hover table-striped table-bordered">
+            <tbody>
+              <tr>
+               <th>No</th>
+               <th>Partida</th>
+               <th style="width: 50%">Descripcion</th>
+               <th style="text-align: center">Preventivo (Bs)</th>
+               <th style="text-align: center">Devengado (Bs)</th>
+             </tr>
+             @php $total = 0; $deven = 0; @endphp
+             @foreach($tabla5 as $row)
+             <tr data-id="{{$row->id_preventivo}}">
+               <td>{{++$loop->index}}</td>
+               <td>{{$row->id_objeto}}</td>
+               <td>{{$row->descripcion}}</td>
+               <td class="right">{{number_format($row->importe, 2)}}</td>
+               <td class="right">{{number_format($row->pagado, 2)}}</td>
+               @php $total += $row->importe; $deven += $row->pagado; @endphp
+             </tr>
+             @endforeach
+             <tr>
+               <th colspan="3">Total</th>
+               <th class="right">{{number_format($total, 2)}}</th>
+               <th class="right">{{number_format($deven, 2)}}</th>
+             </tr>
+           </tbody>
+         </table>
+        </div>
+      <!-- /.box-header -->
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- BAR CHART -->
+    <div class="col-md-12">
+      <div class="box box-warning">
+        <div class="box-header with-border">
+          <h3 class="box-title">Distribucion gráfica de datos</h3>
+        </div>
+        <div class="box-body">
+          <div class="chart">
+            <canvas id="barChart5" style="height:230px"></canvas>
+          </div>
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+  </div>
 @endsection
 
 @section('script_barras')
@@ -348,6 +408,39 @@
     }
     var barChartData4 = areaChartData4
     barChart4.Bar(barChartData4, barChartOptions)
+
+    // Fuente 41, Organismo 119
+    var data5 = @php echo $tabla5 @endphp;
+    var part_119 = [];
+    var imp_119 = [];
+    var deven_119 = [];
+    for (var i = 0; i < data5.length; i++) {
+      part_119[i] = data5[i].id_objeto;
+      imp_119[i] = data5[i].importe;
+      deven_119[i] = data5[i].pagado;
+    }
+    var barChartCanvas5 = $('#barChart5').get(0).getContext('2d')
+    var barChart5 = new Chart(barChartCanvas5)
+    var areaChartData5 = {
+      labels : part_119,
+      datasets: [
+        {
+          label               : 'Preventivo',
+          fillColor           : 'purple',
+          strokeColor         : 'purple',
+          data                : imp_119
+        },
+        {
+          label               : 'Devengado',
+          fillColor           : 'rgba(210, 214, 222, 1)',
+          strokeColor         : 'rgba(210, 214, 222, 1)',
+          data                : deven_119
+        }
+      ]
+    }
+    var barChartData5 = areaChartData5
+    barChart5.Bar(barChartData5, barChartOptions)
+
   })
 </script>
 @endsection
