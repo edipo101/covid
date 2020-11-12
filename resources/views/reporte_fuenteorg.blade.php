@@ -18,8 +18,7 @@
     <div class="col-md-5">
       <div class="box box-success">
         <div class="box-header">
-          <h3 class="box-title"></h3>
-          	<h3 class="box-title">Fuente: 20 &nbsp;&nbsp;Organismo: 210</h3>
+          <h3 class="box-title">Fuente: 20 &nbsp;&nbsp;Organismo: 210</h3>
         </div>
 
         <div class="box-body table-responsive no-padding">

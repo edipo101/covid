@@ -22,42 +22,26 @@
             <tbody>
               <tr>
                <th>Nro Prev</th>
-               <th>Importe (Bs)</th>
-               <th style="width: 40%;">Detalle (Glosa)</th>
-               <th>Fecha elab</th>
-               <th>Fte-Org</th>
-               <th>Partida</th>
+               <th style="width: 40%;">Detalle (Resumen)</th>
+               <th>Secretaria</th>
+               <th>Unidad</th>
                <th>Tipo</th>
-               <th>Progreso</th>
-               <th>(%)</th>
+               <th style="text-align: center;">Importe (Bs)</th>
+               <th style="text-align: center;">Devengado (Bs)</th>
+               <th style="text-align: center;">Por liberar (Bs)</th>
                <th>Operaciones</th>
               </tr>
               @foreach($reg as $row)
               <tr data-id="{{$row->id_preventivo}}">
                <td>{{$row->preventivo}}</td>
-               <td>{{number_format($row->importe, 2)}}</td>
                <td>{{substr($row->glosa, 0, 100)."..."}}</td>
-               <td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
-               <td>{{$row->fuente}}-{{$row->organismo}}</td>
-               <td>{{$row->id_objeto}}</td>
+               <td title="{{$row->secretaria}}">{{$row->sigla}}</td>
+               <td>{{$row->unidad}}</td>
                @php $label = (isset($row->label)) ? $row->label : 'default'; @endphp
-               <td><span class="label label-{{$label}}">{{$row->tipo}}</span></td>
-               <td>
-                <div class="progress progress-xs">
-                  @php
-                  $label = 'green';
-                  if ($row->porcent <= 25) $label = 'red';
-                  if ($row->porcent > 26 && $row->porcent <= 50) $label = 'yellow';
-                  if ($row->porcent > 51 && $row->porcent <= 75) $label = 'aqua';
-                  @endphp
-                  <div class="progress-bar progress-bar-{{$label}}" style="width: {{$row->porcent}}%"></div>
-                </div>
-                <td>
-                  @if (!is_null($row->porcent))
-                  <span class="badge bg-{{$label}}">{{$row->porcent}}%</span>
-                  @endif
-                </td>
-              </td>
+               <td><span class="label label-{{$label}}">{{$row->tipo}}</span></td>               
+               <td class="right">{{number_format($row->importe, 2)}}</td>
+               <td class="right">{{number_format($row->pagado, 2)}}</td>
+               <td class="right">{{number_format($row->liberado, 2)}}</td>
                <td>
                  <a href="#" class="btn btn-primary btn-xs btn-view" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i> Ver </a>
                  <a href="{{route('preventivos.edit', $row->id_preventivo)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>

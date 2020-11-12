@@ -1,7 +1,20 @@
 Tareas a realizar
 - Tras modificar un registro siempre retorna a la pagina 1,
   deberia retornar a la pagina previa (SOLUCIONADO)
+
 - Agregar una nueva columna para ingresar el monto cancelado a cada preventivo,
   por defecto igualar al monto preventivo
   (SOLUCIONADO, el nuevo campo se llama "pagado")
-- Elaborar reportes en PDF
+
+- Elaborar reportes en 
+
+- Desembolsos: 1ro por 24 millones y 2do con 3ro por 23 millones
+
+- Clasificar los proceso de bien o servicio adquiridos por los 24 millones y aquellos 
+  adquiridos por los 23 millones
+
+- Mostrar preventivos liberados de Compras Menores (SOLUCIONADO)
+
+- Imprimir preventivos de Unidad Solicitante
+
+- Habilitar boton Nuevo

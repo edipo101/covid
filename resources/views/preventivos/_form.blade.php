@@ -85,7 +85,7 @@
           </div>
           <div class="form-group">
             <label for="" class="col-sm-3 control-label">Secretaria</label>
-            <div class="col-sm-7">
+            <div class="col-sm-8">
               <select class="form-control" id="id_secretaria" name="id_secretaria">
                 <option value='' disabled selected style='display:none;'>Seleccione una opcion</option>
                 @foreach($secretarias as $secretaria)
@@ -96,7 +96,7 @@
           </div>
           <div class="form-group">
             <label for="" class="col-sm-3 control-label">Unidad</label>
-            <div class="col-sm-6">
+            <div class="col-sm-7">
               <select class="form-control" id="id_unidad" name="id_unidad">
                 @if (!is_null($unidades))
                 <option value='' disabled selected style='display:none;'>Seleccione una opcion</option>

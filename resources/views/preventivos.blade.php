@@ -24,7 +24,6 @@
         <form method="get" action="{{ route('preventivos.all') }}">
           <select name="f" id="f" class="form-control" style="display: inline-block; width: 100px;">
             <option value='' disabled selected style='display:none;'>Fuente</option>
-            <option value="">Todos</option>
             <option {!!((request('f') == 20) ? "selected=\"selected\"" : "")!!}>20</option>
             <option {!!((request('f') == 41) ? "selected=\"selected\"" : "")!!}>41</option>
           </select>

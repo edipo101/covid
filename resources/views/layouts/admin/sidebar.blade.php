@@ -28,10 +28,9 @@
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">PREVENTIVOS</li>
-        <!-- Optionally, you can add icons to the links -->
+      <ul class="sidebar-menu" data-widget="tree">        
         <li class="{{!Route::is('dashboard') ?: 'active'}}"><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Principal</span></a></li>
+        <li class="header">PREVENTIVOS</li>
         @php
         $ruta = Route::currentRouteName();
         switch ($ruta) {
@@ -39,6 +38,7 @@
           case 'preventivos.men':
           case 'preventivos.dir':
           case 'preventivos.secretarias':
+          case 'preventivos.liberados':
             $menu = 'menu-open';
             $view = 'display: block;';
             break;
@@ -59,9 +59,13 @@
             <li class="{{!Route::is('preventivos.men') ?: 'active'}}"><a href="{{route('preventivos.men')}}"><i class="fa fa-circle-o"></i> Compras menores</a></li>
             <li class="{{!Route::is('preventivos.dir') ?: 'active'}}"><a href="{{route('preventivos.dir')}}"><i class="fa fa-circle-o"></i> Compras mayores o directas</a></li>
             <li class="{{!Route::is('preventivos.secretarias') ?: 'active'}}"><a href="{{route('preventivos.secretarias')}}"><i class="fa fa-circle-o"></i> Por Secretarias</a></li>
+            <li class="{{!Route::is('preventivos.liberados') ?: 'active'}}"><a href="{{route('preventivos.liberados')}}"><i class="fa fa-circle-o"></i> Por liberar</a></li>
           </ul>
         </li>
+
+        <li class="header">REPORTES</li>
         <li class="{{!Route::is('ejec_presup') ?: 'active'}}"><a href="{{route('ejec_presup')}}"><i class="fa fa-pie-chart"></i> <span>Ejecucion Presupuestaria</span></a></li>
+        <li><a href="{{route('desembolsos')}}"><i class="fa fa-table"></i> <span>Desembolsos</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

@@ -22,9 +22,14 @@
         <a href="#" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
       <div class="pull-right form-group">
         <form method="get" action="{{ route('preventivos.men') }}">
+          <select name="ub" id="ub" class="form-control" style="display: inline-block; width: 200px;">
+            <option value='' disabled selected style='display:none;'>Ubicacion</option>
+            @foreach($ubicaciones as $key => $value)
+            <option {!!((request('ub') == $key) ? "selected=\"selected\"" : "")!!} value="{{$key}}">{{$key.'. '.$value}}</option>
+            @endforeach
+          </select>
           <select name="f" id="f" class="form-control" style="display: inline-block; width: 100px;">
             <option value='' disabled selected style='display:none;'>Fuente</option>
-            <option value="">Todos</option>
             <option {!!((request('f') == 20) ? "selected=\"selected\"" : "")!!}>20</option>
             <option {!!((request('f') == 41) ? "selected=\"selected\"" : "")!!}>41</option>
           </select>

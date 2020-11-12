@@ -22,12 +22,15 @@ Route::post('/preventivos', 'PreventivoController@store')->name('preventivos.sto
 Route::get('/preventivos/edit/{id}', 'PreventivoController@edit')->name('preventivos.edit');
 Route::patch('/preventivos/{id}', 'PreventivoController@update')->name('preventivos.update');
 
-Route::get('/preventivos/secretarias', 'PreventivoController@by_secretarias')->name('preventivos.secretarias'); //Mostrar por secretarias
+//Mostrar por secretarias
+Route::get('/preventivos/secretarias', 'PreventivoController@by_secretarias')->name('preventivos.secretarias'); 
+Route::get('/preventivos/liberados', 'PreventivoController@by_liberados')->name('preventivos.liberados'); 
 Route::get('/preventivos/men', 'PreventivoController@show_menores')->name('preventivos.men');
 Route::get('/preventivos/dir', 'PreventivoController@show_mayores')->name('preventivos.dir');
 
 Route::get('/compras_men', 'Prueba@compras_men');
 Route::get('/ejec_presup', 'PreventivoController@rep_ejec_presup')->name('ejec_presup');
+Route::get('/desembolsos', 'ReporteController@show_desembolsos')->name('desembolsos');
 
 Route::get('/ubicaciones_men', 'ComboDatos@getUbicacionesMen')->name('ubicaciones_men');
 Route::get('/ubicaciones_dir', 'ComboDatos@getUbicacionesDir')->name('ubicaciones_dir');

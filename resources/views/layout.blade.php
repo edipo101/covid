@@ -179,7 +179,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </script>
 
 {{-- Filtrado de preventivos por secretarias --}}
-@if(Route::is('preventivos.secretarias'))
+@if((Route::is('preventivos.secretarias')) or (Route::is('preventivos.liberados')))
 <script src="{{config('app.url')}}/scripts/js/filter_secretarias.js"></script>
 @endif
 

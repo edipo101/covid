@@ -39,4 +39,14 @@ class Preventivo extends Model
         if ($unidad != "")
             $query->where('preventivo.id_unidad', $unidad);       
     }
+
+    public function scopeUbicacionMen($query, $ubicacion){
+        if ($ubicacion != "")
+            $query->where('preventivo.id_ubimen', $ubicacion);       
+    }
+
+    public function scopeTipo($query, $tipo){
+        if ($tipo != "")
+            $query->where('preventivo.id_tipo', $tipo);       
+    }
 }
