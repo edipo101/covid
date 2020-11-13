@@ -1,0 +1,20 @@
+<?php
+
+function getFuentes(){
+	$fuentes = array(
+		20 => 'RECURSOS ESPECIFICOS',
+		41 => 'TRANSFERENCIAS T.G.N.'
+	);
+	return $fuentes;
+}
+
+function getOrganismos(){
+	$orgs = array(
+		210 => 'RECURSOS ESPECIFICOS DE LOS GOBIERNOS AUTONOMOS MUNICIPALES',
+		230 => 'OTROS RECURSOS ESPECIFICOS',
+		111 => 'TESORO GENERAL DE LA NACION',
+		113 => 'TESORO GENERAL DE LA NACION - COPARTICIPACION TRIBUTARIA',
+		119 => 'TESORO GENERAL DE LA NACION - IMPUESTO DIRECTO A LOS HIDROCARBUROS',
+	);
+	return $orgs;
+}

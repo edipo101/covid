@@ -20,8 +20,15 @@ header {
 }
 
 .params {
-	font-size: 11px;
+	font-size: 10px;
 	margin-bottom: 20px;
+}
+.params table {
+  text-align: left;
+}
+
+.params table tr th {
+  text-align: left;
 }
 
 hr {
@@ -36,7 +43,7 @@ hr {
 	margin-bottom: 3px;
 }
 
-table{
+.table-datos{
     font-size: 50%;
     border-spacing: initial;
 }
@@ -51,7 +58,7 @@ thead tr {
 	background-color: lightgray;
 }
 
-tbody tr td {
+.table-datos tbody tr td {
 	text-align: center;
 	padding: 5px;
 }

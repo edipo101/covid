@@ -49,6 +49,6 @@ class PDFController extends Controller
         // return view('pdfs.pdf_menores', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida', 'ubicacion'));
         $pdf = \PDF::loadView('pdfs.pdf_menores', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida', 'ubicacion'))
         ->setPaper('letter', 'landscape');
-        return $pdf->download('comp_menores.pdf');
+        return $pdf->stream('comp_menores.pdf');
     }
 }

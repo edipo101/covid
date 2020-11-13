@@ -8,32 +8,39 @@
 	<link rel="stylesheet" href="{{asset('scripts/css/pdf.css')}}">
 	<style type="text/css">
 
-		
+
 	</style>
 </head>
 <body>
 	<main>
 		<h3 class="title-pdf">Compras menores</h3>
 		<div class="params">
-			@php 
-				$array_fuente = array(
-					20 => 'RECURSOS ESPECIFICOS',
-					41 => 'TRANSFERENCIAS T.G.N.'
-				);
-				$array_org = array(
-					210 => 'RECURSOS ESPECIFICOS DE LOS GOBIERNOS AUTONOMOS MUNICIPALES',
-					230 => 'OTROS RECURSOS ESPECIFICOS',
-					111 => 'TESORO GENERA DE LA NACION',
-					113 => 'TESORO GENERA DE LA NACION - COPARTICIPACION TRIBUTARIA',
-					119 => 'TESORO GENERA DE LA NACION - IMPUESTO DIRECTO A LOS HIDROCARBUROS',
-				);
-			@endphp
-			<strong>Fuente: </strong>{{$fuente}} {{$array_fuente[$fuente]}}<br>
-			<strong>Organismo: </strong>{{$organismo}} {{$array_org[$organismo]}}<br>
-			<strong>Partida: </strong>{{$id_partida}} {{$partida}} <br>
-			<strong>Ubicacion: </strong>{{$ubicacion}}
+			<table width="100%">
+				<tr>
+					<th style="width: 2.5cm;">Fuente</th>
+					<td>{{$fuente." ".getFuentes()[$fuente]}}</td>
+					<th style="text-align: right;">Fecha</th>
+					<td style="text-align: right;  width: 2cm;">{{date('d/m/Y')}}</td>
+				</tr>
+				<tr>
+					<th>Organismo</th>
+					<td>{{$organismo." ".getOrganismos()[$organismo]}}</td>
+					<th style="text-align: right;">Hora</th>
+					<td style="text-align: right;">{{date('h:i:s A', time())}}</td>
+					{{-- <td>{{localtime()}}</td> --}}
+				</tr>
+				<tr>
+					<th>Partida</th>
+					<td>{{$id_partida}} {{$partida}}</td>
+				</tr>
+				<tr>
+					<th>Ubicación</th>
+					<td>{{$ubicacion}}</td>
+				</tr>
+			</table>
 		</div>
-		<table class="table-bordered">
+
+		<table class="table-bordered table-datos">
 			<thead>
 				<tr>
 					<th>No.</th>
@@ -45,7 +52,7 @@
 					<th>Partida</th>
 					<th>Ubicacion</th>
 					<th>Progreso</th>
-				</tr>		
+				</tr>
 			</thead>
 			<tbody>
 				@php $total = 0; @endphp
@@ -70,7 +77,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="3">Total</td>
+					<td colspan="3">TOTAL</td>
 					<td style="text-align: right;">{{number_format($total, 2)}}</td>
 				</tr>
 			</tfoot>

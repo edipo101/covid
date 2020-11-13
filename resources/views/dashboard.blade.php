@@ -97,10 +97,10 @@
 	            	</tr>
 	            	@php $total_preven = 0; $total_deven = 0; $total_liberado = 0; @endphp
 	            	@foreach($preven as $row)
-	            	@php 
-	            	$total_preven += $row->imp_preven; 
-	            	$total_deven += $row->imp_deven; 
-	            	$total_liberado += $row->liberado; 
+	            	@php
+	            	$total_preven += $row->imp_preven;
+	            	$total_deven += $row->imp_deven;
+	            	$total_liberado += $row->liberado;
 	            	@endphp
 	            	<tr>
 	            		<td>{{$loop->iteration}}</td>
