@@ -23,8 +23,8 @@ Route::get('/preventivos/edit/{id}', 'PreventivoController@edit')->name('prevent
 Route::patch('/preventivos/{id}', 'PreventivoController@update')->name('preventivos.update');
 
 //Mostrar por secretarias
-Route::get('/preventivos/secretarias', 'PreventivoController@by_secretarias')->name('preventivos.secretarias'); 
-Route::get('/preventivos/liberados', 'PreventivoController@by_liberados')->name('preventivos.liberados'); 
+Route::get('/preventivos/secretarias', 'PreventivoController@by_secretarias')->name('preventivos.secretarias');
+Route::get('/preventivos/liberados', 'PreventivoController@by_liberados')->name('preventivos.liberados');
 Route::get('/preventivos/men', 'PreventivoController@show_menores')->name('preventivos.men');
 Route::get('/preventivos/dir', 'PreventivoController@show_mayores')->name('preventivos.dir');
 

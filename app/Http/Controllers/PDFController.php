@@ -14,10 +14,10 @@ class PDFController extends Controller
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
-        // ->paginate(25);
-        ->take(10)->get();
-
+        ->get();
+        // ->take(10)->get();
+        return view('pdfs.prueba', compact('reg'));
     	$pdf = \PDF::loadView('pdfs.prueba', compact('reg'))->setPaper('letter', 'landscape');
-    	return $pdf->stream('archivo.pdf');
+    	return $pdf->download('archivo.pdf');
     }
 }

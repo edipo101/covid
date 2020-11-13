@@ -36,9 +36,9 @@
                <td>{{$row->preventivo}}</td>
                <td>{{substr($row->glosa, 0, 100)."..."}}</td>
                <td title="{{$row->secretaria}}">{{$row->sigla}}</td>
-               <td>{{$row->unidad}}</td>
+               <td style="font-size: 75%">{{$row->unidad}}</td>
                @php $label = (isset($row->label)) ? $row->label : 'default'; @endphp
-               <td><span class="label label-{{$label}}">{{$row->tipo}}</span></td>               
+               <td><span class="label label-{{$label}}">{{$row->tipo}}</span></td>
                <td class="right">{{number_format($row->importe, 2)}}</td>
                <td class="right">{{number_format($row->pagado, 2)}}</td>
                <td class="right">{{number_format($row->liberado, 2)}}</td>

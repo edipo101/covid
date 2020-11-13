@@ -21,7 +21,7 @@
     <div class="col-xs-12">
         <a href="#" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
       <div class="pull-right form-group">
-        <form method="get" action="{{ route('preventivos.all') }}">
+        <form id="form-filter" method="get" action="{{ route('preventivos.all') }}">
           <select name="f" id="f" class="form-control" style="display: inline-block; width: 100px;">
             <option value='' disabled selected style='display:none;'>Fuente</option>
             <option {!!((request('f') == 20) ? "selected=\"selected\"" : "")!!}>20</option>
@@ -41,6 +41,7 @@
           <input type="text" name="p" class="form-control" placeholder="Partida" style="display: inline-block; width: 120px;" value="{{request('p')}}">
           <button type="submit" class="btn btn-info btn-flat btn-filter">Filtrar</button>
           <a href="{{route('preventivos.all')}}" class="btn btn-success btn-flat btn-filter">Borrar</a>
+          <a id="btn-pdf" class="btn btn-danger btn-filter">Exportar PDF</a>
         </form>
       </div>
 

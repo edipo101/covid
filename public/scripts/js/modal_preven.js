@@ -1,4 +1,12 @@
   $(document).ready(function(){
+    $('#btn-pdf').click(function(){
+      var form =$('#form-filter');
+      form.attr('action', url_pdf);
+      // alert(form.attr('action'));
+      form.submit();
+      form.attr('action', url_preventivos);
+    });
+
     $('#f').change(function(){
       var fuente = $(this).val();
       $('#o').empty();

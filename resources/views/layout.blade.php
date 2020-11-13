@@ -170,6 +170,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <script type="text/javascript">
   var url_view = "{{route('preventivos.view')}}";
+  var url_pdf = "{{route('download')}}";
+  var url_preventivos = "{{route('preventivos.all')}}";
   var url_unidades = "{{route('unidades')}}";
   var token = "{{csrf_token()}}";
   var url_edit = "{{config('app.url')}}";
