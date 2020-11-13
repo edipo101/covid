@@ -37,4 +37,6 @@ Route::get('/ubicaciones_dir', 'ComboDatos@getUbicacionesDir')->name('ubicacione
 Route::get('/estados', 'ComboDatos@getEstados')->name('estados');
 Route::get('/unidades', 'ComboDatos@getUnidades')->name('unidades');
 
+// Descarga de archivos
 Route::get('/pdf', 'PDFController@pdf')->name('download');
+Route::get('/pdf_menores', 'PDFController@pdf_menores')->name('download.menores');

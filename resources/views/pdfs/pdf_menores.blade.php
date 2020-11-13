@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>Compras menores</title>
 	{{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
 	<link rel="stylesheet" href="{{asset('scripts/css/pdf.css')}}">
 	<style type="text/css">
@@ -13,7 +13,7 @@
 </head>
 <body>
 	<main>
-		<h3 class="title-pdf">Lista de preventivos</h3>
+		<h3 class="title-pdf">Compras menores</h3>
 		<div class="params">
 			@php 
 				$array_fuente = array(
@@ -30,7 +30,8 @@
 			@endphp
 			<strong>Fuente: </strong>{{$fuente}} {{$array_fuente[$fuente]}}<br>
 			<strong>Organismo: </strong>{{$organismo}} {{$array_org[$organismo]}}<br>
-			<strong>Partida: </strong>{{$id_partida}} {{$partida}}
+			<strong>Partida: </strong>{{$id_partida}} {{$partida}} <br>
+			<strong>Ubicacion: </strong>{{$ubicacion}}
 		</div>
 		<table class="table-bordered">
 			<thead>
@@ -42,7 +43,7 @@
 					<th>Fecha elab</th>
 					<th>Fte-Org</th>
 					<th>Partida</th>
-					<th>Tipo</th>
+					<th>Ubicacion</th>
 					<th>Progreso</th>
 				</tr>		
 			</thead>
@@ -58,7 +59,7 @@
 					<td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
 					<td>{{$row->fuente}}-{{$row->organismo}}</td>
 					<td>{{$row->id_objeto}}</td>
-					<td style="text-align: left;">{{$row->tipo}}</td>
+					<td style="text-align: left;">{{$row->ubicacion}}</td>
 					<td>
 					@if (!is_null($row->porcent))
 					{{$row->porcent}}%

@@ -171,10 +171,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript">
   var url_view = "{{route('preventivos.view')}}";
   var url_pdf = "{{route('download')}}";
+  var url_pdf_menores = "{{route('download.menores')}}";
   var url_preventivos = "{{route('preventivos.all')}}";
+  var url_menores = "{{route('preventivos.men')}}";
   var url_unidades = "{{route('unidades')}}";
   var token = "{{csrf_token()}}";
   var url_edit = "{{config('app.url')}}";
+  var fuente = "{{request('f')}}";
+  var org = "{{request('o')}}";
+  var partida = "{{request('p')}}";
+  var reg = {{isset($reg) ? $reg->count() : 0}};
+  var ub = "{{request('ub')}}";
+
   $(document).ready(function(){
     $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
   });

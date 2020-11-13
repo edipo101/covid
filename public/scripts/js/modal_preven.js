@@ -1,10 +1,30 @@
   $(document).ready(function(){
+    console.log(fuente, org, partida, reg, ub);
+    if (fuente != "" && org != "" && partida != "" && reg > 0)
+      $('#btn-pdf').removeAttr('disabled');
+
+    if (fuente != "" && org != "" && partida != "" && ub != "" && reg > 0)
+      $('#btn-pdf2').removeAttr('disabled');
+
     $('#btn-pdf').click(function(){
-      var form =$('#form-filter');
-      form.attr('action', url_pdf);
-      // alert(form.attr('action'));
-      form.submit();
-      form.attr('action', url_preventivos);
+      if ($(this).attr('disabled') != 'disabled') {
+        var form = $('#form-filter');
+        form.attr('action', url_pdf);
+        form.submit();
+        form.attr('action', url_preventivos);  
+      }
+      
+    });
+
+    // Boton para descargar compras menores
+    $('#btn-pdf2').click(function(){
+      if ($(this).attr('disabled') != 'disabled') {
+        var form = $('#form-filter');
+        form.attr('action', url_pdf_menores);
+        form.submit();
+        form.attr('action', url_menores);  
+      }
+      
     });
 
     $('#f').change(function(){

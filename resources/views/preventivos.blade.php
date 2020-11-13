@@ -38,10 +38,10 @@
             <option {!!((request('o') == 119) ? "selected=\"selected\"" : "")!!}>119</option>
             @endif
           </select>
-          <input type="text" name="p" class="form-control" placeholder="Partida" style="display: inline-block; width: 120px;" value="{{request('p')}}">
-          <button type="submit" class="btn btn-info btn-flat btn-filter">Filtrar</button>
-          <a href="{{route('preventivos.all')}}" class="btn btn-success btn-flat btn-filter">Borrar</a>
-          <a id="btn-pdf" class="btn btn-danger btn-filter">Exportar PDF</a>
+          <input type="text" name="p" id="partida" class="form-control" placeholder="Partida" style="display: inline-block; width: 120px;" value="{{request('p')}}">
+          <button id="btn-filter" type="submit" class="btn btn-info btn-flat btn-filter"><i class="fa fa-filter"></i> Filtrar</button>
+          <a href="{{route('preventivos.all')}}" class="btn btn-success btn-flat btn-filter"><i class="fa fa-times"></i> Borrar</a>
+          <a id="btn-pdf" class="btn btn-danger btn-filter" disabled><i class="fa fa-download"></i> Descargar</a>
         </form>
       </div>
 

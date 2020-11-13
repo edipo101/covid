@@ -21,7 +21,7 @@
     <div class="col-xs-12">
         <a href="#" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
       <div class="pull-right form-group">
-        <form method="get" action="{{ route('preventivos.men') }}">
+        <form method="get" id="form-filter" action="{{ route('preventivos.men') }}">
           <select name="ub" id="ub" class="form-control" style="display: inline-block; width: 200px;">
             <option value='' disabled selected style='display:none;'>Ubicacion</option>
             @foreach($ubicaciones as $key => $value)
@@ -44,9 +44,10 @@
             <option {!!((request('o') == 119) ? "selected=\"selected\"" : "")!!}>119</option>
             @endif
           </select>
-          <input type="text" name="p" class="form-control" placeholder="Partida" style="display: inline-block; width: 120px;" value="{{request('p')}}">
-          <button type="submit" class="btn btn-info btn-flat btn-filter">Filtrar</button>
-          <a href="{{route('preventivos.men')}}" class="btn btn-success btn-flat btn-filter">Borrar</a>
+          <input type="text" name="p" id="partida" class="form-control" placeholder="Partida" style="display: inline-block; width: 120px;" value="{{request('p')}}">
+          <button type="submit" class="btn btn-info btn-flat btn-filter"><i class="fa fa-filter"></i> Filtrar</button>
+          <a href="{{route('preventivos.men')}}" class="btn btn-success btn-flat btn-filter"><i class="fa fa-times"></i> Borrar</a>
+          <a id="btn-pdf2" class="btn btn-danger btn-filter" disabled><i class="fa fa-download"></i> Descargar</a>
         </form>
       </div>
 
