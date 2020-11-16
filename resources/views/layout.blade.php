@@ -174,6 +174,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   var url_pdf_menores = "{{route('download.menores')}}";
   var url_preventivos = "{{route('preventivos.all')}}";
   var url_menores = "{{route('preventivos.men')}}";
+  var url_ubicaciones_men = "{{route('ubicaciones_men')}}";
+  var url_ubicaciones_dir = "{{route('ubicaciones_dir')}}";
   var url_unidades = "{{route('unidades')}}";
   var token = "{{csrf_token()}}";
   var url_edit = "{{config('app.url')}}";

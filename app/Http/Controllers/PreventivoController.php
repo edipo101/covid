@@ -35,6 +35,8 @@ class PreventivoController extends Controller
         ->leftJoin('unidad', 'preventivo.id_unidad', '=', 'unidad.id_unidad')
         ->Secretaria($request->get('se'))
         ->Unidad($request->get('un'))
+        ->Tipo($request->get('t'))
+        ->Ubicacion($request->get('t'), $request->get('ub'))
         ->Preven($request->get('search'))
         ->paginate(25);
 
@@ -43,8 +45,10 @@ class PreventivoController extends Controller
         if ($request->get('se')){
             $unidades = Unidad::where('id_secretaria', $request->get('se'))->get();
         }
+        $ubicaciones_men = UbicacionMen::pluck('ubicacion', 'id_ubicacion');
+        $ubicaciones_dir = UbicacionDir::pluck('ubicacion', 'id_ubicacion');
 
-        return view('by_secretarias', compact('reg', 'secre', 'unidades'));
+        return view('by_secretarias', compact('reg', 'secre', 'unidades', 'ubicaciones_men', 'ubicaciones_dir'));
     }
 
     // Listar todos preventivos por secretarias

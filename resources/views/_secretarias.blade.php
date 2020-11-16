@@ -35,7 +35,7 @@
               <tr data-id="{{$row->id_preventivo}}">
                <td>{{$row->preventivo}}</td>
                <td>{{number_format($row->importe, 2)}}</td>
-               <td>{{$row->glosa}}</td>
+               <td>{{substr($row->glosa, 0, 100)."..."}}</td>
                <td title="{{$row->secretaria}}">{{$row->sigla}}</td>
                <td>{{$row->unidad}}</td>
                @php $label = (isset($row->label)) ? $row->label : 'default'; @endphp

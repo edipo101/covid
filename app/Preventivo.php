@@ -45,6 +45,20 @@ class Preventivo extends Model
             $query->where('preventivo.id_ubimen', $ubicacion);       
     }
 
+    public function scopeUbicacionDir($query, $ubicacion){
+        if ($ubicacion != "")
+            $query->where('preventivo.id_ubidir', $ubicacion);       
+    }
+
+    public function scopeUbicacion($query, $tipo, $ubicacion){
+        if ($tipo != "" && $ubicacion != ""){
+            if ($tipo == 1)
+                $query->where('preventivo.id_ubimen', $ubicacion);       
+            if ($tipo == 2)
+                $query->where('preventivo.id_ubidir', $ubicacion);       
+        }
+    }
+
     public function scopeTipo($query, $tipo){
         if ($tipo != "")
             $query->where('preventivo.id_tipo', $tipo);       

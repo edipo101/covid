@@ -43,6 +43,25 @@
       }
     });
 
+    $('#t').change(function(){
+      var tipo = $(this).val();
+      $('#ub').empty();
+      $('#ub').append("<option value='' disabled selected style='display:none;'>ubicacion</option>");
+      
+      $.ajax({
+          url: (tipo == 1) ? url_ubicaciones_men : url_ubicaciones_dir,
+          type: 'get',
+          dataType: 'json',
+          data: {"id": tipo},
+          success: function (response) {
+              $.each(response.data, function (index, value) {
+                  $('#ub').append("<option value='" + value.id_ubicacion + "'>"+value.id_ubicacion+". "+ value.ubicacion + "</option>");
+              });
+          }
+      });
+      
+    });
+
     $('.btn-view').click(function(){
       var row = $(this).parents('tr');
       var id = row.data('id');
