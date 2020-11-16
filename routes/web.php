@@ -1,18 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', 'DashboardController@show')->name('dashboard');
 Route::get('/preventivos/', 'PreventivoController@show_all')->name('preventivos.all');
 Route::post('/preventivos/detalle', 'PreventivoController@view')->name('preventivos.view');
@@ -28,7 +16,6 @@ Route::get('/preventivos/liberados', 'PreventivoController@by_liberados')->name(
 Route::get('/preventivos/men', 'PreventivoController@show_menores')->name('preventivos.men');
 Route::get('/preventivos/dir', 'PreventivoController@show_mayores')->name('preventivos.dir');
 
-Route::get('/compras_men', 'Prueba@compras_men');
 Route::get('/ejec_presup', 'PreventivoController@rep_ejec_presup')->name('ejec_presup');
 Route::get('/desembolsos', 'ReporteController@show_desembolsos')->name('desembolsos');
 
@@ -40,3 +27,6 @@ Route::get('/unidades', 'ComboDatos@getUnidades')->name('unidades');
 // Descarga de archivos
 Route::get('/pdf', 'PDFController@pdf')->name('download');
 Route::get('/pdf_menores', 'PDFController@pdf_menores')->name('download.menores');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

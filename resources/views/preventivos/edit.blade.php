@@ -16,25 +16,27 @@
 @section('content')
 <div class="row">
   <div class="col-md-8">
+    @if ($errors->any())
+      <div class="alert alert-danger">
+        Corrige los siguientes errores:
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+    @endif
+
     <div class="box box-primary">
-      @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-      @endif
       <!-- form start -->
       <form class="form-horizontal" action="{{ route('preventivos.update', $preven->id_preventivo) }}" method="POST">
         <input name="_method" type="hidden" value="PATCH">
-        <input name="url_previous" type="hidden" value="{{url()->previous()}}">
+        <input name="url_previous" type="hidden" value="{{old('url_previous', url()->previous())}}">
         {{ csrf_field() }}
         @include('preventivos._form')
 
         <div class="box-footer">
-          <a href="{{ url()->previous() }}" class="btn btn-default">Cancelar</a>
+          <a href="{{old('url_previous', url()->previous())}}" class="btn btn-default">Cancelar</a>
           <button type="submit" class="btn btn-primary pull-right">Enviar</button>
         </div>
       </form>

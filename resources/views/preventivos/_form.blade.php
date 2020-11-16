@@ -2,7 +2,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label" for="nro_preven">Nro preventivo</label>
             <div class="col-sm-3">
-              <input type="text" class="form-control" id="nro_preven" name="nro_preven" placeholder="" value="{{old('nro_preven', $preven->preventivo)}}" disabled="">
+              <input type="text" class="form-control" id="nro_preven" name="nro_preven" placeholder="" value="{{old('nro_preven', $preven->preventivo)}}" {{!Route::is('preventivos.edit') ?: 'disabled'}}>
             </div>
           </div>
           <div class="form-group">
@@ -52,13 +52,13 @@
             <div class="col-sm-9">
                 <div class="radio">
                   <label>
-                    <input type="radio" name="fuente" id="fuente" value="20" {!!(($preven->fuente == 20) ? "checked=\"checked\"" : "")!!}>
+                    <input type="radio" name="fuente" id="fuente" value="20" {!!((old('fuente', $preven->fuente) == 20) ? "checked=\"checked\"" : "")!!}>
                     20 (Rec. Propios)
                   </label>
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="fuente" id="fuente" value="41" {!!(($preven->fuente == 41) ? "checked=\"checked\"" : "")!!}>
+                    <input type="radio" name="fuente" id="fuente" value="41" {!!((old('fuente', $preven->fuente) == 41) ? "checked=\"checked\"" : "")!!}>
                     41 (Trans. T.G.N.)
                   </label>
                 </div>
@@ -69,11 +69,11 @@
             <div class="col-sm-3">
               <select class="form-control" id="organismo" name="organismo">
                 <option value='' disabled selected style='display:none;'>Seleccione una opcion</option>
-                <option {!!(($preven->organismo == 210) ? "selected=\"selected\"" : "")!!}>210</option>
-                <option {!!(($preven->organismo == 230) ? "selected=\"selected\"" : "")!!}>230</option>
-                <option {!!(($preven->organismo == 111) ? "selected=\"selected\"" : "")!!}>111</option>
-                <option {!!(($preven->organismo == 113) ? "selected=\"selected\"" : "")!!}>113</option>
-                <option {!!(($preven->organismo == 119) ? "selected=\"selected\"" : "")!!}>119</option>
+                <option {!!((old('organismo', $preven->organismo) == 210) ? "selected=\"selected\"" : "")!!}>210</option>
+                <option {!!((old('organismo', $preven->organismo) == 230) ? "selected=\"selected\"" : "")!!}>230</option>
+                <option {!!((old('organismo', $preven->organismo) == 111) ? "selected=\"selected\"" : "")!!}>111</option>
+                <option {!!((old('organismo', $preven->organismo) == 113) ? "selected=\"selected\"" : "")!!}>113</option>
+                <option {!!((old('organismo', $preven->organismo) == 119) ? "selected=\"selected\"" : "")!!}>119</option>
               </select>
             </div>
           </div>
@@ -129,7 +129,7 @@
               <select class="form-control" id="id_estado" name="id_estado">
                 <option value='' disabled selected style='display:none;'>Seleccione una opcion</option>
                 @foreach($estados as $key => $value)
-                <option value={{$key}} {!!(($key == $preven->id_estado) ? "selected=\"selected\"" : "")!!}>{{$value}}</option>
+                <option value={{$key}} {!!(($key == old('id_estado', $preven->id_estado)) ? "selected=\"selected\"" : "")!!}>{{$value}}</option>
                 @endforeach
               </select>
             </div>
@@ -143,15 +143,14 @@
           <div class="form-group">
             <label for="" class="col-sm-3 control-label">Desembolso</label>
             <div class="col-sm-9">
-              {{-- @foreach($tipos as $key => $value) --}}
               <div class="radio">
                 <label>
-                  <input type="radio" name="desembolso" id="" value="24" {!!(($preven->desembolso == 24) ? "checked=\"checked\"" : "")!!}> 24 MILLONES
+                  <input type="radio" name="desembolso" id="" value="24" {!!((old('desembolso', $preven->desembolso) == 24) ? "checked=\"checked\"" : "")!!}> 24 MILLONES
                 </label>
               </div>
               <div class="radio">
                 <label>
-                  <input type="radio" name="desembolso" id="" value="23" {!!(($preven->desembolso == 23) ? "checked=\"checked\"" : "")!!}> 23 MILLONES
+                  <input type="radio" name="desembolso" id="" value="23" {!!((old('desembolso', $preven->desembolso) == 23) ? "checked=\"checked\"" : "")!!}> 23 MILLONES
                 </label>
               </div>
               {{-- @endforeach               --}}

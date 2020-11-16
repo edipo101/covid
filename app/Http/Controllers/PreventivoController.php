@@ -147,28 +147,75 @@ class PreventivoController extends Controller
     }
 
     public function create(){
-        $row = new Preventivo;
-        $estados = Preventivo::groupBy('estado')->havingRaw('not isnull(estado)')->pluck('estado');
-        $ubicaciones = $this->ubicaciones;
-        $tipos = array(
-            'CM' => 'Compra menor'
-        );
+        $preven = new Preventivo;
+        $tipos = Tipo::pluck('tipo', 'id_tipo');
+        $estados = Estado::pluck('estado', 'id_estado');
+        $ubicaciones_men = UbicacionMen::pluck('ubicacion', 'id_ubicacion');
+        $ubicaciones_dir = UbicacionDir::pluck('ubicacion', 'id_ubicacion');
+        $secretarias = Secretaria::all();
+        $unidades = (!is_null($preven->id_secretaria)) ? Unidad::where('id_secretaria', $preven->id_secretaria)->get() : null;
 
-        return view('preventivos.create', compact('row', 'estados', 'ubicaciones', 'tipos'));
+        return view('preventivos.create', compact('preven', 'tipos', 'estados', 'ubicaciones_men',
+            'ubicaciones_dir', 'secretarias', 'unidades'));
+    }
+
+    private function getValidate(){
+        $validate = [
+            'importe' => 'required',
+            'id_tipo' => 'required',
+            'glosa' => 'required',
+            'fuente' => 'required',
+            'organismo' => 'required',
+            'id_objeto' => 'required',
+        ];
+        return $validate;
+    }
+
+    private function getMessages(){
+        $messages = [
+            'nro_preven.required' => 'Agrega el Número de preventivo.',
+            'importe.required' =>'Agrega el Importe.',
+            'id_tipo.required' => 'Agrega el Tipo de preventivo.',
+            'glosa.required' => 'Agrega la Glosa o Detalle.',
+            'fuente.required' => 'Agrega la Fuente.',
+            'organismo.required' => 'Agrega el Organismo.',
+            'id_objeto.required' => 'Agrega la partida.',
+        ];
+        return $messages;
     }
 
     public function store(Request $request){
-        $validatedData = $request->validate([
-            'nro_preven' => 'required',
-            'detalle' => 'required'
-        ]);
+        $validate = ['nro_preven' => 'required'];
+        $validate = array_merge($validate, $this->getValidate());
+        $validatedData = $request->validate($validate, $this->getMessages());
+        // return $request;
         $preven = new Preventivo;
-        $preven->preventivo = request('nro_preven');
-        $preven->importe = request('importe');
-        // $preven->save();
 
-        return $preven;
-        return redirect()->route('preventivos.all');
+        $preven->preventivo = request('nro_preven');
+        $date = str_replace('/', '-', request('fecha_elab'));
+        $fecha = date("Y-m-d", strtotime($date));
+        $preven->fecha_elab = $fecha;
+        $preven->id_secretaria = request('id_secretaria');
+        $preven->id_unidad = request('id_unidad');
+        $preven->glosa = request('glosa');
+        $preven->importe = request('importe');
+        $preven->pagado = (is_null(request('pagado'))) ? 0 : request('pagado');
+        $preven->fuente = request('fuente');
+        $preven->organismo = request('organismo');
+        $preven->id_objeto = request('id_objeto');
+        $tipo = request('id_tipo');
+        $ubimen = null;
+        $ubidir = null;
+        $preven->id_ubimen = ($tipo == 1) ? request('ubicacion') : null;
+        $preven->id_ubidir = ($tipo == 2) ? request('ubicacion') : null;
+        $preven->id_tipo = $tipo;
+        $preven->id_estado = request('id_estado');
+        $preven->observaciones = request('observaciones');
+        $preven->desembolso = request('desembolso');
+        $preven->save();
+
+        // return $preven;
+        return redirect(request('url_previous'));
     }
 
     public function edit($id){
@@ -187,15 +234,9 @@ class PreventivoController extends Controller
 
     public function update(Request $request, $id){
         // return $request;
-        $preven = Preventivo::findOrFail($id);
-        $validatedData = $request->validate([
-            // 'nro_preven' => 'required',
-            'id_objeto' => 'required',
-            'fuente' => 'required',
-            'organismo' => 'required',
-            'id_tipo' => 'required',
-        ]);
+        $validatedData = $request->validate($this->getValidate(), $this->getMessages());
         // $preven->preventivo = request('nro_preven');
+        $preven = Preventivo::findOrFail($id);
         $date = str_replace('/', '-', request('fecha_elab'));
         $fecha = date("Y-m-d", strtotime($date));
         $preven->fecha_elab = $fecha;
@@ -203,8 +244,10 @@ class PreventivoController extends Controller
         $preven->id_unidad = request('id_unidad');
         $preven->glosa = request('glosa');
         $preven->importe = request('importe');
-        $preven->pagado = request('pagado');
+        $preven->pagado = (is_null(request('pagado'))) ? 0 : request('pagado');
         $preven->id_objeto = request('id_objeto');
+        $preven->fuente = request('fuente');
+        $preven->organismo = request('organismo');
         $tipo = request('id_tipo');
         $ubimen = null;
         $ubidir = null;
@@ -214,7 +257,7 @@ class PreventivoController extends Controller
         $preven->id_estado = request('id_estado');
         $preven->observaciones = request('observaciones');
         $preven->desembolso = request('desembolso');
-
+        // return $preven;
         $preven->save();
 
         return redirect(request('url_previous'));

@@ -19,7 +19,7 @@
 
   <div class="row">
     <div class="col-xs-12">
-        <a href="#" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
+        <a href="{{route('preventivos.create')}}" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
       <div class="pull-right form-group">
         <form id="form-filter" method="get" action="{{ route('preventivos.all') }}">
           <select name="f" id="f" class="form-control" style="display: inline-block; width: 100px;">
