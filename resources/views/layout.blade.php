@@ -172,8 +172,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   var url_view = "{{route('preventivos.view')}}";
   var url_pdf = "{{route('download')}}";
   var url_pdf_menores = "{{route('download.menores')}}";
+  var url_pdf_secretarias = "{{route('download.secretarias')}}";
   var url_preventivos = "{{route('preventivos.all')}}";
   var url_menores = "{{route('preventivos.men')}}";
+  var url_secretarias = "{{route('preventivos.secretarias')}}";
   var url_ubicaciones_men = "{{route('ubicaciones_men')}}";
   var url_ubicaciones_dir = "{{route('ubicaciones_dir')}}";
   var url_unidades = "{{route('unidades')}}";
@@ -184,6 +186,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
   var partida = "{{request('p')}}";
   var reg = {{isset($reg) ? $reg->count() : 0}};
   var ub = "{{request('ub')}}";
+  var se = "{{request('se')}}";
+  var un = "{{request('un')}}";
+  var t = "{{request('t')}}";
 
   $(document).ready(function(){
     $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });

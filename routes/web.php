@@ -27,6 +27,7 @@ Route::get('/unidades', 'ComboDatos@getUnidades')->name('unidades');
 // Descarga de archivos
 Route::get('/pdf', 'PDFController@pdf')->name('download');
 Route::get('/pdf_menores', 'PDFController@pdf_menores')->name('download.menores');
+Route::get('/pdf_secretarias', 'PDFController@pdf_secretarias')->name('download.secretarias');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

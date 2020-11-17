@@ -1,11 +1,14 @@
   $(document).ready(function(){
-    console.log(fuente, org, partida, reg, ub);
+    console.log(se, un, t, reg, ub);
     if (fuente != "" && org != "" && partida != "" && reg > 0)
       $('#btn-pdf').removeAttr('disabled');
 
     // if (fuente != "" && org != "" && partida != "" && ub != "" && reg > 0)
     if (fuente != "" && org != "" && ub != "" && reg > 0)
       $('#btn-pdf2').removeAttr('disabled');
+
+    if (se != "" && un != "" && t != "" && ub != "" && reg > 0)
+      $('#btn-pdf3').removeAttr('disabled');
 
     $('#btn-pdf').click(function(){
       if ($(this).attr('disabled') != 'disabled') {
@@ -24,6 +27,17 @@
         form.attr('action', url_pdf_menores);
         form.submit();
         form.attr('action', url_menores);
+      }
+
+    });
+
+    // Boton para descargar por secretarias y ubicaciones
+    $('#btn-pdf3').click(function(){
+      if ($(this).attr('disabled') != 'disabled') {
+        var form = $('#form-filter');
+        form.attr('action', url_pdf_secretarias);
+        form.submit();
+        form.attr('action', url_secretarias);
       }
 
     });
