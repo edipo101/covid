@@ -19,16 +19,17 @@ class PDFController extends Controller
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
+        ->orderBy('preventivo')
         ->get();
         $fuente = $request->get('f');
         $organismo = $request->get('o');
         $id_partida = $request->get('p');
         $partida = Objeto::where('id_objeto', $id_partida)->pluck('descripcion')->first();
 
-        // return view('pdfs.prueba', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida'));
-    	$pdf = \PDF::loadView('pdfs.prueba', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida'))
+        // return view('pdfs.pdf_all', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida'));
+    	$pdf = \PDF::loadView('pdfs.pdf_all', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida'))
         ->setPaper('letter', 'landscape');
-    	return $pdf->download('archivo.pdf');
+    	return $pdf->stream('preventivos.pdf');
     }
 
     public function pdf_menores(Request $request){
@@ -41,6 +42,7 @@ class PDFController extends Controller
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
+        ->orderBy('preventivo')
         ->get();
         $fuente = $request->get('f');
         $organismo = $request->get('o');
@@ -65,6 +67,7 @@ class PDFController extends Controller
         ->Tipo($request->get('t'))
         ->Ubicacion($request->get('t'), $request->get('ub'))
         ->Preven($request->get('search'))
+        ->orderBy('preventivo')
         ->get();
         $secretaria = Secretaria::where('id_secretaria', $request->get('se'))->pluck('secretaria')->first();
         $unidad = Unidad::where('id_unidad', $request->get('un'))->pluck('unidad')->first();
@@ -74,7 +77,7 @@ class PDFController extends Controller
             $ubicacion = UbicacionMen::where('id_ubicacion', $id_ubicacion)->pluck('ubicacion')->first();
         else
             $ubicacion = UbicacionDir::where('id_ubicacion', $id_ubicacion)->pluck('ubicacion')->first();
-        
+
         // return view('pdfs.pdf_secretarias', compact('reg', 'secretaria', 'unidad', 'tipo', 'ubicacion'));
         $pdf = \PDF::loadView('pdfs.pdf_secretarias', compact('reg', 'secretaria', 'unidad', 'tipo', 'ubicacion'))
         ->setPaper('letter', 'landscape');

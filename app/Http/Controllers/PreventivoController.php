@@ -23,6 +23,7 @@ class PreventivoController extends Controller
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
+        ->orderBy('preventivo')
         ->paginate(25);
     	return view('preventivos', compact('reg'));
     }
@@ -38,6 +39,7 @@ class PreventivoController extends Controller
         ->Tipo($request->get('t'))
         ->Ubicacion($request->get('t'), $request->get('ub'))
         ->Preven($request->get('search'))
+        ->orderBy('preventivo')
         ->paginate(25);
 
         $secre = Secretaria::all();
@@ -61,6 +63,7 @@ class PreventivoController extends Controller
         ->Unidad($request->get('un'))
         ->Tipo($request->get('t'))
         ->whereRaw('(importe - pagado) > 0')
+        ->orderBy('preventivo')
         ->paginate(25);
 
         $secre = Secretaria::all();
@@ -82,6 +85,7 @@ class PreventivoController extends Controller
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
+        ->orderBy('preventivo')
         ->paginate(25);
 
         $ubicaciones = UbicacionMen::pluck('ubicacion', 'id_ubicacion');
@@ -97,6 +101,7 @@ class PreventivoController extends Controller
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
+        ->orderBy('preventivo')
         ->paginate(25);
         return view('directas', compact('reg'));
     }
