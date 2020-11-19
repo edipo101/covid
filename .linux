@@ -1,0 +1,64 @@
+INSTALACION EN UBUNTU SERVER
+============================
+
+Instalacion de PHP
+sudo apt-get install php
+
+Verificar modulos de PHP
+php -m
+
+Instalacion de los modulos de PHP para Laravel
+sudo apt-get install php-bcmath
+sudo apt-get install php7.0-mbstring
+sudo apt-get install php7.4-xml
+
+Instalacion de composer
+sudo apt-get install composer
+
+Crear proyectos en el directorio /var/www/html
+
+Habilitar el modo escritura w a /storage de Laravel
+chmod -R 777 storage/
+
+INSTALACION Y CONFIGURACION DE MYSQL
+====================================
+
+Instalar el servicio
+sudo apt install mysql-server
+
+Verificar el estado y funcionamiento del servicio
+sudo systemctl status mysql
+
+Para ingresar a mysql, el password es ""
+sudo mysql -u root -p
+
+Reiniciar el servicio
+service mysql restart
+
+Habilitar el servicio para conexiones remotas
+sudo nano /etc/mysql/my.cnf
+
+Agregar las siguientes lineas al archivo my.cnf
+[mysqld]
+bind-address = 0.0.0.0
+
+Ver usuarios habilitados en el servidor
+select user, host from mysql.user;
+
+Ver privilegios del usuario root sobre localhost
+show grants for root@localhost;
+
+Crear usuario 'root' para acceso remoto con contraseña 'okeymakey'
+CREATE USER 'root'@'%' IDENTIFIED BY 'okeymakey';
+
+Habilitar privilegios al nuevo usuario
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+
+Recargar las tablas de otorgamiento en la base de datos mysql
+flush privileges;
+
+Modificar contraseña de usuario
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_new_password';
+flush privileges;
+
+

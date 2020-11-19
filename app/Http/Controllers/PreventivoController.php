@@ -19,13 +19,16 @@ class PreventivoController extends Controller
     public function show_all(Request $request){
     	$reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
         ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
+        ->Tipo($request->get('t'))
         ->Fuente($request->get('f'))
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
         ->orderBy('preventivo')
         ->paginate(25);
-    	return view('preventivos', compact('reg'));
+
+        $tipos = Tipo::all();
+    	return view('preventivos', compact('reg', 'tipos'));
     }
 
     // Listar todos preventivos por secretarias

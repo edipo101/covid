@@ -20,7 +20,7 @@
   <div class="row">
     <div class="col-xs-12">
         <a href="#" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
-      <div class="pull-right form-group">
+      <div class="pull-right form-group filter">
         <form method="get" action="{{ route('preventivos.liberados') }}">
           <select name="t" id="t" class="form-control" style="display: inline-block; width: 150px;">            
             <option value='' disabled selected style='display:none;'>Tipo</option>

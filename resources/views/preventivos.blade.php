@@ -20,8 +20,14 @@
   <div class="row">
     <div class="col-xs-12">
         <a href="{{route('preventivos.create')}}" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
-      <div class="pull-right form-group">
+      <div class="pull-right form-group filter">
         <form id="form-filter" method="get" action="{{ route('preventivos.all') }}">
+          <select name="t" id="t" class="form-control" style="display: inline-block; width: 150px;">            
+            <option value='' disabled selected style='display:none;'>Tipo</option>
+            @foreach($tipos as $row)
+            <option {!!((request('t') == $row->id_tipo) ? "selected=\"selected\"" : "")!!} value="{{$row->id_tipo}}">{{$row->tipo}}</option>
+            @endforeach
+          </select>
           <select name="f" id="f" class="form-control" style="display: inline-block; width: 100px;">
             <option value='' disabled selected style='display:none;'>Fuente</option>
             <option {!!((request('f') == 20) ? "selected=\"selected\"" : "")!!}>20</option>
