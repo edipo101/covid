@@ -229,7 +229,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       }
 
       if (tipo == 2){
-        // alert('tipo2');
         $.ajax({
             url: "{{route('ubicaciones_dir')}}", type: 'get', dataType: 'json',
             success: function (response) {
@@ -240,6 +239,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             }
         });
       }
+
+      if (tipo == 7){
+        $('#importe').val(0);
+        $('#pagado').val(0);
+      }
+
     });
 
     $('#id_secretaria').change(function(){
