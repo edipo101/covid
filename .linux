@@ -11,6 +11,7 @@ Instalacion de los modulos de PHP para Laravel
 sudo apt-get install php-bcmath
 sudo apt-get install php7.0-mbstring
 sudo apt-get install php7.4-xml
+sudo apt-get install php-mysql
 
 Instalacion de composer
 sudo apt-get install composer
@@ -61,4 +62,42 @@ Modificar contraseña de usuario
 ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'your_new_password';
 flush privileges;
 
+INSTALACION DEL SERVIDOR FTP
+============================
+Instalar el servicio
+sudo apt-get install vsftpd
 
+Verificar el servicio
+sudo systemctl status vsftp
+
+Realizar copia del archivo de configuracion
+sudo cp /etc/vsftpd.conf /etc/vsftpd.conf.original
+
+Configurar el servicio
+sudo nano /etc/vsftpd.conf
+
+Habilitar el modo escritura
+write_enable=YES
+
+Reiniciar el servicio
+sudo service vsftpd restart
+
+INSTALACION DE GIT
+==================
+Verificar si se tiene instalado el servicio
+git --version
+
+Instalacion de git
+sudo apt install git
+
+AJUSTES A APACHE SERVER
+=======================
+Modificar AllowOverride del archivo /etc/apache2/apache2.conf
+<Directory /var/www/html> 
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+
+reiniciar el servicio
+sudo service apache2 restart

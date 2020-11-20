@@ -15,6 +15,7 @@ class PDFController extends Controller
     public function pdf(Request $request){
     	$reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
         ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
+        ->Tipo($request->get('t'))
         ->Fuente($request->get('f'))
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
@@ -25,9 +26,10 @@ class PDFController extends Controller
         $organismo = $request->get('o');
         $id_partida = $request->get('p');
         $partida = Objeto::where('id_objeto', $id_partida)->pluck('descripcion')->first();
+        $tipo = Tipo::where('id_tipo', $request->get('t'))->pluck('tipo')->first();
 
-        // return view('pdfs.pdf_all', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida'));
-    	$pdf = \PDF::loadView('pdfs.pdf_all', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida'))
+        // return view('pdfs.pdf_all', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida', 'tipo'));
+    	$pdf = \PDF::loadView('pdfs.pdf_all', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida', 'tipo'))
         ->setPaper('letter', 'landscape');
     	return $pdf->stream('preventivos.pdf');
     }

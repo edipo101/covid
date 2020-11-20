@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Preventivos</title>
-	{{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> --}}
 	<link rel="stylesheet" href="{{asset('scripts/css/pdf.css')}}">
 	<style type="text/css">
 
@@ -27,12 +26,17 @@
 					<td>{{$organismo." ".getOrganismos()[$organismo]}}</td>
 					<th style="text-align: right;">Hora</th>
 					<td style="text-align: right;">{{date('h:i:s A', time())}}</td>
-					{{-- <td>{{localtime()}}</td> --}}
 				</tr>
 				<tr>
 					<th>Partida</th>
 					<td>{{$id_partida}} {{$partida}}</td>
 				</tr>
+				@isset ($tipo)
+				<tr>
+					<th>Tipo</th>
+					<td>{{$tipo}}</td>
+				</tr>
+				@endisset
 			</table>
 		</div>
 
@@ -44,8 +48,8 @@
 					<th>Detalle (Glosa)</th>
 					<th>Importe (Bs)</th>
 					<th>Fecha elab</th>
-					<th>Fte-Org</th>
-					<th>Partida</th>
+					<th>Tipo</th>
+					{{-- <th>Partida</th> --}}
 					<th>Observaciones</th>
 					<th>Progreso</th>
 				</tr>
@@ -56,13 +60,13 @@
 				<tr data-id="{{$row->id_preventivo}}">
 					<td>{{$loop->iteration}}</td>
 					<td>{{$row->preventivo}}</td>
-					<td style="text-align: left;" width="50%">{{$row->glosa}}</td>
+					<td style="text-align: left;" width="40%">{{$row->glosa}}</td>
 					<td style="text-align: right;">{{number_format($row->importe, 2)}}</td>
 					@php $total += $row->importe; @endphp
 					<td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
-					<td>{{$row->fuente}}-{{$row->organismo}}</td>
-					<td>{{$row->id_objeto}}</td>
-					<td style="text-align: left;">{{(is_null($row->observaciones)) ? 'NINGUNO': $row->observaciones}}</td>
+					{{-- <td>{{$row->fuente}}-{{$row->organismo}}</td> --}}
+					<td>{{$row->tipo}}</td>
+					<td style="text-align: left;" width="20%">{{(is_null($row->observaciones)) ? 'NINGUNO': $row->observaciones}}</td>
 					<td>
 					@if (!is_null($row->porcent))
 					{{$row->porcent}}%

@@ -15,7 +15,7 @@
 
 @section('content')
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
       <div class="box box-success">
         <div class="box-header">
           <h3 class="box-title">Fuente: 20 &nbsp;&nbsp;Organismo: 210</h3>
@@ -55,7 +55,7 @@
     </div>
 
     <!-- BAR CHART -->
-    <div class="col-md-7">
+    <div class="col-md-6">
       <div class="box box-success">
         <div class="box-header with-border">
           <h3 class="box-title">Distribucion gráfica de datos</h3>

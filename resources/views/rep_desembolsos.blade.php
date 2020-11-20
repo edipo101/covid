@@ -15,7 +15,7 @@
 
 @section('content')
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-md-8">
 		<div class="box box-success">
 			{{-- <div class="box-header"> --}}
           		{{-- <h3 class="box-title">Fuente: 20 &nbsp;&nbsp;Organismo: 210</h3> --}}

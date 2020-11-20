@@ -20,3 +20,8 @@ Tareas a realizar
 - Habilitar boton Nuevo (SOLUCIONADO)
 
 - Evitar preventidos duplicados
+
+- Crear Reporte SALDO DISPONIBLE, que es la diferencia entre Monto Aprobado y Preventivo
+  de cada partida por fuente y organismo
+
+- Crear tabla de preventivos con columnas importes preventivo, devengado y liberado 
