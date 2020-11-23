@@ -178,6 +178,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   var url_secretarias = "{{route('preventivos.secretarias')}}";
   var url_ubicaciones_men = "{{route('ubicaciones_men')}}";
   var url_ubicaciones_dir = "{{route('ubicaciones_dir')}}";
+  var url_presupuesto = "{{route('partidas.presupuesto')}}";
+  var url_pdf_presupuesto = "{{route('download.presupuesto')}}";
   var url_unidades = "{{route('unidades')}}";
   var token = "{{csrf_token()}}";
   var url_edit = "{{config('app.url')}}";

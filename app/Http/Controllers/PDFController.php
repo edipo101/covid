@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Objeto;
 use App\Preventivo;
+use App\Reporte_montos;
 use App\Secretaria;
 use App\Tipo;
 use App\UbicacionMen;
@@ -84,5 +85,23 @@ class PDFController extends Controller
         $pdf = \PDF::loadView('pdfs.pdf_secretarias', compact('reg', 'secretaria', 'unidad', 'tipo', 'ubicacion'))
         ->setPaper('letter', 'landscape');
         return $pdf->stream('comp_bysecretarias.pdf');
+    }
+
+    public function pdf_presupuesto(Request $request){
+        $reg = Reporte_montos::
+            Fuente($request->get('f'))
+            ->Organismo($request->get('o'))
+            ->orderBy('fuente', 'asc')
+            ->orderBy('organismo', 'asc')
+            ->orderBy('partida', 'asc')
+            ->get();
+        
+        $fuente = $request->get('f');
+        $organismo = $request->get('o');
+
+        // return view('pdfs.pdf_presupuesto', compact('reg', 'fuente', 'organismo'));
+        $pdf = \PDF::loadView('pdfs.pdf_presupuesto', compact('reg', 'fuente', 'organismo'))
+        ->setPaper('letter', 'landscape');
+        return $pdf->stream('presupuesto.pdf');
     }
 }

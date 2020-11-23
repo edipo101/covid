@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Organismo;
+use App\Reporte_montos;
+use Illuminate\Http\Request;
 
 class ReporteController extends Controller
 {
@@ -19,5 +20,18 @@ class ReporteController extends Controller
     		(desem_1 + desem_23) as total')->get();
     	return view('rep_desembolsos', compact('org'));
     	return $org;
+    }
+
+    public function show_presupuesto(Request $request){
+        $reg = Reporte_montos::
+            selectRaw('*, monto_aprob - monto_preven as saldo_aprob, monto_preven - monto_pagado as saldo_preven, monto_aprob - monto_pagado as saldo_deven')
+            ->Fuente($request->get('f'))
+            ->Organismo($request->get('o'))
+            ->orderBy('fuente', 'asc')
+            ->orderBy('organismo', 'asc')
+            ->orderBy('partida', 'asc')
+            ->get();
+
+        return view('partidas.presupuesto', compact('reg'));
     }
 }

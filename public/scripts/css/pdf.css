@@ -52,6 +52,10 @@ hr {
 	border: 1px solid #dee2e6;
 }
 
+.total td {
+  font-weight: bold;
+}
+
 thead tr {
 	font-size: 10px;
 	height: 22px;

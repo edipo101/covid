@@ -99,5 +99,8 @@ Modificar AllowOverride del archivo /etc/apache2/apache2.conf
     Require all granted
 </Directory>
 
+Habilitar el modulo mod_rewrite con el comando
+sudo a2enmod rewrite
+
 reiniciar el servicio
 sudo service apache2 restart

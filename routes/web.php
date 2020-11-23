@@ -16,6 +16,8 @@ Route::get('/preventivos/liberados', 'PreventivoController@by_liberados')->name(
 Route::get('/preventivos/men', 'PreventivoController@show_menores')->name('preventivos.men');
 Route::get('/preventivos/dir', 'PreventivoController@show_mayores')->name('preventivos.dir');
 
+Route::get('/partidas/presupuesto', 'ReporteController@show_presupuesto')->name('partidas.presupuesto');
+
 Route::get('/ejec_presup', 'PreventivoController@rep_ejec_presup')->name('ejec_presup');
 Route::get('/desembolsos', 'ReporteController@show_desembolsos')->name('desembolsos');
 
@@ -28,6 +30,7 @@ Route::get('/unidades', 'ComboDatos@getUnidades')->name('unidades');
 Route::get('/pdf', 'PDFController@pdf')->name('download');
 Route::get('/pdf_menores', 'PDFController@pdf_menores')->name('download.menores');
 Route::get('/pdf_secretarias', 'PDFController@pdf_secretarias')->name('download.secretarias');
+Route::get('/pdf_presupuesto', 'PDFController@pdf_presupuesto')->name('download.presupuesto');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -10,6 +10,20 @@
     if (se != "" && un != "" && t != "" && ub != "" && reg > 0)
       $('#btn-pdf3').removeAttr('disabled');
 
+    // Saldo disponible
+    if (fuente != "")
+      $('#btn-pdf4').removeAttr('disabled');
+
+    $('#btn-pdf4').click(function(){
+      if ($(this).attr('disabled') != 'disabled') {
+        var form = $('#form-filter');
+        form.attr('action', url_pdf_presupuesto);
+        form.submit();
+        form.attr('action', url_presupuesto);
+      }
+
+    });
+
     $('#btn-pdf').click(function(){
       if ($(this).attr('disabled') != 'disabled') {
         var form = $('#form-filter');
