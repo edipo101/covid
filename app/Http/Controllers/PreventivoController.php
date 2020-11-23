@@ -25,6 +25,7 @@ class PreventivoController extends Controller
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
         ->orderBy('preventivo')
+        ->orderBy('fecha_elab', 'desc')
         ->paginate(25);
 
         $tipos = Tipo::all();

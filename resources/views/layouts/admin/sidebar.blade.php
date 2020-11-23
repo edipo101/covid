@@ -64,8 +64,8 @@
         </li>
 
         <li class="header">REPORTES</li>
-        <li class="{{!Route::is('ejec_presup') ?: 'active'}}"><a href="{{route('ejec_presup')}}"><i class="fa fa-pie-chart"></i> <span>Ejecucion Presupuestaria</span></a></li>
-        <li class="{{!Route::is('partidas.presupuesto') ?: 'active'}}"><a href="{{route('partidas.presupuesto')}}"><i class="fa fa-pie-chart"></i> <span>Saldo disponible</span></a></li>
+        {{-- <li class="{{!Route::is('ejec_presup') ?: 'active'}}"><a href="{{route('ejec_presup')}}"><i class="fa fa-pie-chart"></i> <span>Ejecucion Presupuestaria</span></a></li> --}}
+        <li class="{{!Route::is('partidas.presupuesto') ?: 'active'}}"><a href="{{route('partidas.presupuesto')}}"><i class="fa fa-pie-chart"></i> <span>Ejecucion Presupuestaria</span></a></li>
         <li><a href="{{route('desembolsos')}}"><i class="fa fa-table"></i> <span>Desembolsos</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->

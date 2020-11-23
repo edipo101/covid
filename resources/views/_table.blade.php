@@ -22,9 +22,9 @@
             <tbody>
               <tr>
                <th>Nro Prev</th>
-               <th>Importe (Bs)</th>
                <th style="width: 40%;">Detalle (Glosa)</th>
                <th>Fecha elab</th>
+               <th>Importe (Bs)</th>
                <th>Fte-Org</th>
                <th>Partida</th>
                <th>Tipo</th>
@@ -32,12 +32,14 @@
                <th>(%)</th>
                <th>Operaciones</th>
               </tr>
+              @php $total = 0; @endphp
               @foreach($reg as $row)
               <tr data-id="{{$row->id_preventivo}}">
                <td>{{$row->preventivo}}</td>
-               <td>{{number_format($row->importe, 2)}}</td>
                <td>{{substr($row->glosa, 0, 100)."..."}}</td>
                <td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
+               <td>{{number_format($row->importe, 2)}}</td>
+               @php $total += $row->importe; @endphp
                <td>{{$row->fuente}}-{{$row->organismo}}</td>
                <td>{{$row->id_objeto}}</td>
                @php $label = (isset($row->label)) ? $row->label : 'default'; @endphp
@@ -63,8 +65,16 @@
                  <a href="{{route('preventivos.edit', $row->id_preventivo)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>
                  {{-- <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Borrar </a> --}}
                </td>
-              </tr>
+              </tr>              
               @endforeach
+              @if (($reg->count() < 25 && $reg->count() > 1))
+              <tfoot>
+                <tr>
+                  <th colspan="3" style="text-align: left;">TOTAL </th>
+                  <th style="text-align: right;">{{number_format($total, 2)}}</th>
+                </tr>
+              </tfoot>
+              @endif
             </tbody>
           </table>
           <span class="text-center">

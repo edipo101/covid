@@ -12,7 +12,8 @@
 </head>
 <body>
 	<main>
-		<h3 class="title-pdf">Presupuesto</h3>
+		<h3 class="title-pdf">Ejecucion presupuestaria</h3>
+		<h5 class="title-pdf" style="margin-top: 3px;">(Montos expresados en Bolivianos)</h5>
 		<div class="params">
 			<table width="100%">
 				<tr>
@@ -38,9 +39,12 @@
 					<th>Organismo</th>
 					<th>Partida</th>
 					<th>Descripcion</th>
-					<th>Aprobado (Bs)</th>
-					<th>Preventivo (Bs)</th>
-					<th>Devengado (Bs)</th>
+					<th>Aprobado (A)</th>
+					<th>Preventivo (P)</th>
+					<th>Devengado (D)</th>
+					<th>Saldo aprobado (A-P)</th>
+               		<th>Saldo preventivo (P-D)</th>
+               		<th>Saldo devengado (A-D)</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -48,11 +52,12 @@
 					$total_aprob = 0;
 					$total_preven = 0;
 					$total_pagado = 0;
-					// $fuente = 20;
 					$org = ($fuente == 20) ? 210 : 111;
 					$tot_org_aprob = 0;
 					$tot_org_preven = 0;
 					$tot_org_pagado = 0;
+					$total_saldo_aprob = 0; $total_saldo_preven = 0; $total_saldo_deven = 0;
+                	$total_org_saldo_aprob = 0; $total_org_saldo_preven = 0; $total_org_saldo_deven = 0;
 				@endphp
 				@foreach($reg as $row)
 					@if ($row->organismo <> $org)
@@ -61,12 +66,17 @@
 							<td style="text-align: right;">{{number_format($tot_org_aprob, 2)}}</td>
 							<td style="text-align: right;">{{number_format($tot_org_preven, 2)}}</td>
 							<td style="text-align: right;">{{number_format($tot_org_pagado, 2)}}</td>
+							<td style="text-align: right;">{{number_format($total_org_saldo_aprob, 2)}}</td>
+		                    <td style="text-align: right;">{{number_format($total_org_saldo_preven, 2)}}</td>
+		                    <td style="text-align: right;">{{number_format($total_org_saldo_deven, 2)}}</td>
 						</tr>
 						@php 
 							$org = $row->organismo; 
 							$tot_org_aprob = 0;
 							$tot_org_preven = 0;
 							$tot_org_pagado = 0;
+							$total_org_aprob = 0; $total_org_preven = 0; $total_org_pagado = 0;
+                    		$total_org_saldo_aprob = 0; $total_org_saldo_preven = 0; $total_org_saldo_deven = 0;
 						@endphp
 					@endif
 
@@ -83,10 +93,19 @@
 							$tot_org_aprob += $row->monto_aprob;
 							$tot_org_preven += $row->monto_preven;
 							$tot_org_pagado += $row->monto_pagado;
+							$total_saldo_aprob += $row->saldo_aprob;
+			                $total_saldo_preven += $row->saldo_preven;
+			                $total_saldo_deven += $row->saldo_deven;
+			                $total_org_saldo_aprob += $row->saldo_aprob;
+			                $total_org_saldo_preven += $row->saldo_preven;
+			                $total_org_saldo_deven += $row->saldo_deven;
 						@endphp
 						<td style="text-align: right;">{{number_format($row->monto_aprob, 2)}}</td>
 						<td style="text-align: right;">{{number_format($row->monto_preven, 2)}}</td>
 						<td style="text-align: right;">{{number_format($row->monto_pagado, 2)}}</td>
+						<td style="text-align: right;">{{number_format($row->saldo_aprob, 2)}}</td>
+						<td style="text-align: right;">{{number_format($row->saldo_preven, 2)}}</td>
+						<td style="text-align: right;">{{number_format($row->saldo_deven, 2)}}</td>
 					</tr>
 
 					@if (!isset($organismo) && $loop->last))
@@ -95,16 +114,22 @@
 							<td style="text-align: right;">{{number_format($tot_org_aprob, 2)}}</td>
 							<td style="text-align: right;">{{number_format($tot_org_preven, 2)}}</td>
 							<td style="text-align: right;">{{number_format($tot_org_pagado, 2)}}</td>
+							<td style="text-align: right;">{{number_format($total_org_saldo_aprob, 2)}}</td>
+                    		<td style="text-align: right;">{{number_format($total_org_saldo_preven, 2)}}</td>
+                    		<td style="text-align: right;">{{number_format($total_org_saldo_deven, 2)}}</td>
 						</tr>
 					@endif
 				@endforeach
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="5">TOTAL GENERAL</td>
+					<td colspan="5">TOTAL</td>
 					<td style="text-align: right;">{{number_format($total_aprob, 2)}}</td>
 					<td style="text-align: right;">{{number_format($total_preven, 2)}}</td>
 					<td style="text-align: right;">{{number_format($total_pagado, 2)}}</td>
+					<td style="text-align: right;">{{number_format($total_saldo_aprob, 2)}}</td>
+                	<td style="text-align: right;">{{number_format($total_saldo_preven, 2)}}</td>
+                	<td style="text-align: right;">{{number_format($total_saldo_deven, 2)}}</td>
 				</tr>
 			</tfoot>
 		</table>

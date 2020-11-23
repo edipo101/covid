@@ -89,7 +89,8 @@ class PDFController extends Controller
 
     public function pdf_presupuesto(Request $request){
         $reg = Reporte_montos::
-            Fuente($request->get('f'))
+            selectRaw('*, monto_aprob - monto_preven as saldo_aprob, monto_preven - monto_pagado as saldo_preven, monto_aprob - monto_pagado as saldo_deven')
+            ->Fuente($request->get('f'))
             ->Organismo($request->get('o'))
             ->orderBy('fuente', 'asc')
             ->orderBy('organismo', 'asc')
