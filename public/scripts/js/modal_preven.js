@@ -7,8 +7,11 @@
     if (fuente != "" && org != "" && ub != "" && reg > 0)
       $('#btn-pdf2').removeAttr('disabled');
 
-    if (se != "" && un != "" && t != "" && ub != "" && reg > 0)
-      $('#btn-pdf3').removeAttr('disabled');
+    // Por Secretarias
+    // if (se != "" && un != "" && t != "" && ub != "" && reg > 0)
+    if (reg > 0)
+      if ((t != "" && ub != "") || (se != "" && un != ""))
+        $('#btn-pdf3').removeAttr('disabled');
 
     // Saldo disponible
     if (fuente != "")
@@ -74,7 +77,7 @@
     $('#t').change(function(){
       var tipo = $(this).val();
       $('#ub').empty();
-      $('#ub').append("<option value='' disabled selected style='display:none;'>ubicacion</option>");
+      $('#ub').append("<option value='' disabled selected style='display:none;'>Ubicacion</option>");
       
       $.ajax({
           url: (tipo == 1) ? url_ubicaciones_men : url_ubicaciones_dir,

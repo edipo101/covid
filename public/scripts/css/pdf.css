@@ -75,3 +75,14 @@ tfoot tr{
 
 .gray {
     background-color: lightgray
+}
+
+span.title{
+  font-weight: bold;
+  width: 120px;
+  display: inline-block;
+}
+
+#title_filter li{
+  padding: 3px 0px;
+}

@@ -13,31 +13,25 @@
 </head>
 <body>
 	<main>
-		<h3 class="title-pdf">Preventivos filtrados por Secretaria y Ubicación</h3>
-		<div class="params">
-			<table width="100%">
-				<tr>
-					<th style="width: 2.5cm;">Secretaria</th>
-					<td>{{$secretaria}}</td>
-					<th style="text-align: right;">Fecha</th>
-					<td style="text-align: right;  width: 2cm;">{{date('d/m/Y')}}</td>
-				</tr>
-				<tr>
-					<th>Unidad</th>
-					<td>{{$unidad}}</td>
-					<th style="text-align: right;">Hora</th>
-					<td style="text-align: right;">{{date('h:i:s A', time())}}</td>
-					{{-- <td>{{localtime()}}</td> --}}
-				</tr>
-				<tr>
-					<th>Tipo</th>
-					<td>{{$tipo}}</td>
-				</tr>
-				<tr>
-					<th>Ubicación</th>
-					<td>{{$ubicacion}}</td>
-				</tr>
-			</table>
+		<h3 class="title-pdf">LISTA DE PREVENTIVOS</h3>
+		<div class="params" style="margin-bottom: 0px;">
+			<div style="display: inline-block;">
+				<ul id="title_filter" style="padding-left: 0px;">
+					@isset($secretaria)
+					<li><span class="title">Secretaria</span> {{$secretaria}}</li>
+					<li><span class="title">Unidad</span> {{$unidad}}</li>
+					@endisset
+					@isset($tipo)
+					<li><span class="title">Tipo</span> {{$tipo}}</li>
+					<li><span class="title">Ubicacion</span> {{$ubicacion}}</li>
+					@endisset
+					<li><span class="title">Cant. de registros</span> {{$reg->count()}}</li>
+				</ul>
+			</div>
+
+			<div style="display: inline; float: right;">
+				<strong>Fecha y Hora</strong> {{date('d/m/Y')}} {{date('h:i:s A', time())}}
+			</div>
 		</div>
 
 		<table class="table-bordered table-datos">
@@ -50,8 +44,10 @@
 					<th>Fecha elab</th>
 					<th>Fte-Org</th>
 					<th>Partida</th>
-					<th>Observaciones</th>
+					<th>Ubicacion</th>
 					<th>Progreso</th>
+					<th>Estado</th>
+					<th>Observaciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -60,18 +56,20 @@
 				<tr data-id="{{$row->id_preventivo}}">
 					<td>{{$loop->iteration}}</td>
 					<td>{{$row->preventivo}}</td>
-					<td style="text-align: left;" width="50%">{{$row->glosa}}</td>
+					<td style="text-align: left;" width="40%">{{$row->glosa}}</td>
 					<td style="text-align: right;">{{number_format($row->importe, 2)}}</td>
 					@php $total += $row->importe; @endphp
 					<td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
 					<td>{{$row->fuente}}-{{$row->organismo}}</td>
 					<td>{{$row->id_objeto}}</td>
-					<td style="text-align: left;">{{(is_null($row->observaciones)) ? 'NINGUNO': $row->observaciones}}</td>
+					<td>{{$row->ubicacion}}</td>
 					<td>
 					@if (!is_null($row->porcent))
 					{{$row->porcent}}%
 					@endif
 					</td>
+					<td style="text-align: left;">{{$row->estado}}</td>
+					<td style="text-align: left;">{{(is_null($row->observaciones)) ? 'NINGUNO': $row->observaciones}}</td>
 				</tr>
 				@endforeach
 			</tbody>

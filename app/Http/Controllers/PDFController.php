@@ -8,7 +8,9 @@ use App\Reporte_montos;
 use App\Secretaria;
 use App\Tipo;
 use App\UbicacionMen;
+use App\UbicacionDir;
 use App\Unidad;
+use App\Estado;
 use Illuminate\Http\Request;
 
 class PDFController extends Controller
@@ -61,10 +63,21 @@ class PDFController extends Controller
     }
 
     public function pdf_secretarias(Request $request){
-        $reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+        $reg = Preventivo::selectRaw('*, 
+            if(id_ubimen is not null, 
+                round(id_ubimen/7*100), 
+                if(id_ubidir is not null, 
+                round(id_ubidir/9*100), null)) as porcent,
+            if(id_ubimen is not null, 
+                ubicacion_men.ubicacion, 
+                if(id_ubidir is not null, 
+                ubicacion_dir.ubicacion, null)) as ubicacion')
         ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
         ->leftJoin('secretaria', 'preventivo.id_secretaria', '=', 'secretaria.id_secretaria')
         ->leftJoin('unidad', 'preventivo.id_unidad', '=', 'unidad.id_unidad')
+        ->leftJoin('ubicacion_men', 'preventivo.id_ubimen', '=', 'ubicacion_men.id_ubicacion')
+        ->leftJoin('ubicacion_dir', 'preventivo.id_ubidir', '=', 'ubicacion_dir.id_ubicacion')
+        ->leftJoin('estado', 'preventivo.id_estado', '=', 'estado.id_estado')
         ->Secretaria($request->get('se'))
         ->Unidad($request->get('un'))
         ->Tipo($request->get('t'))
@@ -80,8 +93,8 @@ class PDFController extends Controller
             $ubicacion = UbicacionMen::where('id_ubicacion', $id_ubicacion)->pluck('ubicacion')->first();
         else
             $ubicacion = UbicacionDir::where('id_ubicacion', $id_ubicacion)->pluck('ubicacion')->first();
-
-        // return view('pdfs.pdf_secretarias', compact('reg', 'secretaria', 'unidad', 'tipo', 'ubicacion'));
+        // return $reg;
+        return view('pdfs.pdf_secretarias', compact('reg', 'secretaria', 'unidad', 'tipo', 'ubicacion'));
         $pdf = \PDF::loadView('pdfs.pdf_secretarias', compact('reg', 'secretaria', 'unidad', 'tipo', 'ubicacion'))
         ->setPaper('letter', 'landscape');
         return $pdf->stream('comp_bysecretarias.pdf');
