@@ -14,9 +14,9 @@
 <body>
 	<main>
 		<h3 class="title-pdf">LISTA DE PREVENTIVOS</h3>
-		<div class="params" style="margin-bottom: 0px;">
+		<div class="params" style="margin-bottom: 0px; padding-top: 12px; padding-bottom: 0px;">
 			<div style="display: inline-block;">
-				<ul id="title_filter" style="padding-left: 0px;">
+				<ul id="title_filter" style="padding-left: 0px; list-style: none; margin-bottom: 0px;">
 					@isset($secretaria)
 					<li><span class="title">Secretaria</span> {{$secretaria}}</li>
 					<li><span class="title">Unidad</span> {{$unidad}}</li>

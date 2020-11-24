@@ -11,12 +11,12 @@
                <th>Organismo</th>
                <th>Partida</th>
                <th>Descripcion</th>
-               <th style="text-align: center; font-size: 85%">Aprobado (A)</th>
-               <th style="text-align: center; font-size: 85%">Preventivo (P)</th>
-               <th style="text-align: center; font-size: 85%">Devengado (D)</th>
-               <th style="text-align: center; font-size: 85%">Saldo aprobado (A-P)</th>
-               <th style="text-align: center; font-size: 85%">Saldo preventivo (P-D)</th>
-               <th style="text-align: center; font-size: 85%">Saldo devengado (A-D)</th>
+               <th style="text-align: center; font-size: 85%">Aprobado <br>(A)</th>
+               <th style="text-align: center; font-size: 85%">Preventivo <br>(P)</th>
+               <th style="text-align: center; font-size: 85%">Devengado <br>(D)</th>
+               <th style="text-align: center; font-size: 85%">Saldo aprobado <br>(A-P)</th>
+               <th style="text-align: center; font-size: 85%">Saldo preventivo <br>(P-D)</th>
+               <th style="text-align: center; font-size: 85%">Saldo devengado <br>(A-D)</th>
               </tr>
               @php 
                 $total_aprob = 0; $total_preven = 0; $total_pagado = 0; 

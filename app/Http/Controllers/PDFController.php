@@ -94,7 +94,7 @@ class PDFController extends Controller
         else
             $ubicacion = UbicacionDir::where('id_ubicacion', $id_ubicacion)->pluck('ubicacion')->first();
         // return $reg;
-        return view('pdfs.pdf_secretarias', compact('reg', 'secretaria', 'unidad', 'tipo', 'ubicacion'));
+        // return view('pdfs.pdf_secretarias', compact('reg', 'secretaria', 'unidad', 'tipo', 'ubicacion'));
         $pdf = \PDF::loadView('pdfs.pdf_secretarias', compact('reg', 'secretaria', 'unidad', 'tipo', 'ubicacion'))
         ->setPaper('letter', 'landscape');
         return $pdf->stream('comp_bysecretarias.pdf');
