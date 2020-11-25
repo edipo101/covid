@@ -15,6 +15,10 @@ use Illuminate\Http\Request;
 
 class PreventivoController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     // Listar todos preventivos
     public function show_all(Request $request){
     	$reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')

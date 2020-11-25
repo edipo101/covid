@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-Route::get('/', 'DashboardController@show')->name('dashboard');
+
+Route::get('/dashboard', 'DashboardController@show')->name('dashboard');
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('login.form');
+
 Route::get('/preventivos/', 'PreventivoController@show_all')->name('preventivos.all');
 Route::post('/preventivos/detalle', 'PreventivoController@view')->name('preventivos.view');
 Route::post('/preventivos/busqueda', 'PreventivoController@search')->name('preventivos.search');
@@ -9,8 +12,6 @@ Route::get('/preventivos/create', 'PreventivoController@create')->name('preventi
 Route::post('/preventivos', 'PreventivoController@store')->name('preventivos.store');
 Route::get('/preventivos/edit/{id}', 'PreventivoController@edit')->name('preventivos.edit');
 Route::patch('/preventivos/{id}', 'PreventivoController@update')->name('preventivos.update');
-
-//Mostrar por secretarias
 Route::get('/preventivos/secretarias', 'PreventivoController@by_secretarias')->name('preventivos.secretarias');
 Route::get('/preventivos/liberados', 'PreventivoController@by_liberados')->name('preventivos.liberados');
 Route::get('/preventivos/men', 'PreventivoController@show_menores')->name('preventivos.men');
@@ -31,6 +32,9 @@ Route::get('/pdf', 'PDFController@pdf')->name('download');
 Route::get('/pdf_menores', 'PDFController@pdf_menores')->name('download.menores');
 Route::get('/pdf_secretarias', 'PDFController@pdf_secretarias')->name('download.secretarias');
 Route::get('/pdf_presupuesto', 'PDFController@pdf_presupuesto')->name('download.presupuesto');
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::post('login', 'Auth\LoginController@login')->name('login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+     public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function show(){
     	$preven = Preventivo::selectRaw('fuente, organismo, count(*) as cant, 
             sum(importe) as imp_preven, sum(pagado) as imp_deven, (sum(importe)-sum(pagado)) as liberado')
