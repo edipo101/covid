@@ -33,8 +33,6 @@ Route::get('/pdf_menores', 'PDFController@pdf_menores')->name('download.menores'
 Route::get('/pdf_secretarias', 'PDFController@pdf_secretarias')->name('download.secretarias');
 Route::get('/pdf_presupuesto', 'PDFController@pdf_presupuesto')->name('download.presupuesto');
 
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login.show');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');

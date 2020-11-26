@@ -217,10 +217,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       if (tipo == 1){
         $.ajax({
-            url: "{{route('ubicaciones_men')}}",
-            type: 'get',
-            dataType: 'json',
-            data: {"id": tipo},
+            url: "{{route('ubicaciones_men')}}", type: 'get', dataType: 'json',
             success: function (response) {
                 $('#ubicacion').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
                 $.each(response.data, function (index, value) {

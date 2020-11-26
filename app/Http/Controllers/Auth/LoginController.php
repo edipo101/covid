@@ -27,7 +27,9 @@ class LoginController extends Controller
             return redirect()->route('dashboard');
         }
 
-        return back()->withErrors(['email' => 'Estas credenciales no coinciden con nuestros registros']);
+        return back()
+            ->withErrors(['email' => 'Estas credenciales no coinciden con nuestros registros'])
+            ->withInput(request(['email']));
     }
 
     public function logout(){
