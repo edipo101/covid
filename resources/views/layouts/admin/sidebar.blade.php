@@ -64,9 +64,13 @@
         </li>
 
         <li class="header">REPORTES</li>
-        {{-- <li class="{{!Route::is('ejec_presup') ?: 'active'}}"><a href="{{route('ejec_presup')}}"><i class="fa fa-pie-chart"></i> <span>Ejecucion Presupuestaria</span></a></li> --}}
         <li class="{{!Route::is('partidas.presupuesto') ?: 'active'}}"><a href="{{route('partidas.presupuesto')}}"><i class="fa fa-pie-chart"></i> <span>Ejecucion Presupuestaria</span></a></li>
         <li><a href="{{route('desembolsos')}}"><i class="fa fa-table"></i> <span>Desembolsos</span></a></li>
+
+        <li class="header">USUARIO</li>
+        <li class="{{!Route::is('desembolsos') ?: 'active'}}"><a href="{{route('desembolsos')}}"><i class="fa fa-table"></i> <span>Ver perfil</span></a></li>
+        <li class="{{!Route::is('usuarios.index') ?: 'active'}}"><a href="{{route('usuarios.index')}}"><i class="fa fa-table"></i> <span>Ver usuarios</span></a></li>
+
       </ul>
       <!-- /.sidebar-menu -->
     </section>

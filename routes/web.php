@@ -36,3 +36,5 @@ Route::get('/pdf_presupuesto', 'PDFController@pdf_presupuesto')->name('download.
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login.show');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::resource('usuarios', 'UsuarioController');
