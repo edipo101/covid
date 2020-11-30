@@ -15,7 +15,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $users = User::get();
+        $users = User::
+            leftJoin('roles', 'users.id_role', '=', 'roles.id_role')
+            ->get();
         return view('usuarios.list', compact('users'));
     }
 
@@ -59,7 +61,11 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-        //
+        // return $id;
+        $user = User::
+            leftJoin('roles', 'users.id_role', '=', 'roles.id_role')
+            ->find($id);
+        return view('usuarios.view', compact('user'));
     }
 
     /**

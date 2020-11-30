@@ -18,13 +18,14 @@
     <a href="{{route('usuarios.create')}}" class="btn btn-success" style="margin-bottom: 10px;">
       <i class="fa fa-plus"></i> Nuevo </a>
       <div class="box box-primary">
-        <div class="box-body">              
+        <div class="box-body">    
           <table class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>Id</th>
                 <th>Nombre</th>
                 <th>Usuario</th>
+                <th>Rol</th>
                 <th>Creado el</th>
                 <th>Ult. modificación</th>
                 <th>Operaciones</th>
@@ -36,6 +37,7 @@
                 <td>{{$user->id}}</td>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
+                <td>{{$user->role}}</td>
                 <td>{{$user->created_at}}</td>
                 <td>{{$user->updated_at}}</td>
                 <td>

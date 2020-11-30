@@ -20,9 +20,9 @@
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Buscar...">
           <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
+            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+            </button>
+          </span>
         </div>
       </form>
       <!-- /.search form -->
@@ -39,20 +39,20 @@
           case 'preventivos.dir':
           case 'preventivos.secretarias':
           case 'preventivos.liberados':
-            $menu = 'menu-open';
-            $view = 'display: block;';
-            break;
+          $menu = 'menu-open';
+          $view = 'display: block;';
+          break;
           default:
-            $menu = '';
-            $view = 'display: none;';
-            break;
+          $menu = '';
+          $view = 'display: none;';
+          break;
         }
         @endphp
         <li class="treeview {{$menu}}">
           <a href="#"><i class="fa fa-table"></i> <span>Listar preventivos</span>
             <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
           <ul class="treeview-menu" style="{{$view}}">
             <li class="{{!Route::is('preventivos.all') ?: 'active'}}"><a href="{{route('preventivos.all')}}"><i class="fa fa-circle-o"></i> Por Fuente y Organismo</a></li>
@@ -68,11 +68,14 @@
         <li><a href="{{route('desembolsos')}}"><i class="fa fa-table"></i> <span>Desembolsos</span></a></li>
 
         <li class="header">USUARIO</li>
-        <li class="{{!Route::is('desembolsos') ?: 'active'}}"><a href="{{route('desembolsos')}}"><i class="fa fa-table"></i> <span>Ver perfil</span></a></li>
-        <li class="{{!Route::is('usuarios.index') ?: 'active'}}"><a href="{{route('usuarios.index')}}"><i class="fa fa-table"></i> <span>Ver usuarios</span></a></li>
+        <li class="{{!Route::is('usuarios.show') ?: 'active'}}"><a href="{{route('usuarios.show', auth()->user()->id)}}"><i class="fa fa-table"></i> <span>Ver perfil</span></a></li>
+        @if (auth()->user()->id_role == 1)
+        <li class="{{!Route::is('usuarios.index') ?: 'active'}}"><a href="{{route('usuarios.index')}}"><i class="fa fa-table"></i> 
+          <span>Ver usuarios</span></a></li>
+          @endif
 
-      </ul>
-      <!-- /.sidebar-menu -->
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+        </ul>
+        <!-- /.sidebar-menu -->
+      </section>
+      <!-- /.sidebar -->
+    </aside>
