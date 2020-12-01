@@ -41,8 +41,13 @@
                 <td>{{$user->created_at}}</td>
                 <td>{{$user->updated_at}}</td>
                 <td>
-                  <a href="#" class="btn btn-primary btn-xs btn-view" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i> Ver </a>
-                  <a href="{{route('usuarios.edit', $user->id)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>
+                  <a href="#" class="btn btn-primary btn-xs btn-view" data-toggle="modal" data-target="#modal-default" title="Ver"><i class="fa fa-eye"></i></a>
+                  <a href="{{route('usuarios.edit', $user->id)}}" class="btn btn-info btn-xs" title="Editar"><i class="fa fa-pencil"></i></a>
+                  <form action="{{route('usuarios.destroy', $user->id)}}" method="post" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-xs" title="Eliminar"><i class="fa fa-trash"></i></button>
+                  </form>
                 </td>
               </tr>
               @endforeach

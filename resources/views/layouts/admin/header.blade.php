@@ -21,15 +21,13 @@
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The user image in the navbar-->
-              <img src="{{config('app.url')}}/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <img src="{{asset('dist/img/avatar'.auth()->user()->avatar.'.png')}}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{auth()->user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="{{config('app.url')}}/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="{{asset('dist/img/avatar'.auth()->user()->avatar.'.png')}}" class="img-circle" alt="User Image">
 
                 <p>
                   {{auth()->user()->name}} - {{auth()->user()->email}}
@@ -40,7 +38,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Ver perfil</a>
+                  <a href="{{route('usuarios.show', auth()->user()->id)}}" class="btn btn-default btn-flat">Ver perfil</a>
                 </div>
                 <div class="pull-right">
                   <form method="post" action="{{route('logout')}}">

@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -110,6 +114,16 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('usuarios.index');
     }
+
+    public function update_avatar(Request $request, $id){
+        $user = User::find($id);
+        $user->avatar = request('image');
+        $user->save();
+        return redirect()->route('usuarios.show', $id);
+    }
+
 }

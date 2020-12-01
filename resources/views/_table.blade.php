@@ -36,7 +36,7 @@
               @foreach($reg as $row)
               <tr data-id="{{$row->id_preventivo}}">
                <td>{{$row->preventivo}}</td>
-               <td>{{substr($row->glosa, 0, 100)."..."}}</td>
+               <td>{{substr($row->glosa, 0, 90)."..."}}</td>
                <td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
                <td>{{number_format($row->importe, 2)}}</td>
                @php $total += $row->importe; @endphp

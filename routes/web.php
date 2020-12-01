@@ -38,3 +38,4 @@ Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::resource('usuarios', 'UsuarioController');
+Route::patch('usuarios/avatar/{usuario}', 'UsuarioController@update_avatar')->name('usuarios.update_avatar');
