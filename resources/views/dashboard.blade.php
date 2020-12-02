@@ -5,7 +5,7 @@
 @section('content-header')
 <h1>
   Principal
-  <small>Panel de control</small>
+  {{-- <small>Panel de control</small> --}}
 </h1>
 <ol class="breadcrumb">
   <li class="active"><i class="fa fa-dashboard"></i> Inicio</li>
@@ -90,10 +90,9 @@
 		               <th>No.</th>
 		               <th>Fuente</th>
 		               <th>Organismo</th>
-		               <th>Cantidad</th>
-		               <th>Preventivo (Bs)</th>
-		               <th>Devengado (Bs)</th>
-		               <th>Liberado (Bs)</th>
+		               <th style="text-align: center;">Preventivo<br>(Bs)</th>
+		               <th style="text-align: center;">Devengado<br>(Bs)</th>
+		               <th style="text-align: center;">Liberado<br>(Bs)</th>
 	            	</tr>
 	            	@php $total_preven = 0; $total_deven = 0; $total_liberado = 0; @endphp
 	            	@foreach($preven as $row)
@@ -106,14 +105,13 @@
 	            		<td>{{$loop->iteration}}</td>
 	            		<td>{{$row->fuente}}</td>
 	            		<td>{{$row->organismo}}</td>
-	            		<td class="right">{{$row->cant}}</td>
 	            		<td class="right">{{number_format($row->imp_preven, 2)}}</td>
 	            		<td class="right">{{number_format($row->imp_deven, 2)}}</td>
 	            		<td class="right">{{number_format($row->liberado, 2)}}</td>
 	            	</tr>
 	            	@endforeach
 	            	<tr>
-	               		<th colspan="4">Total</th>
+	               		<th colspan="3">Total</th>
 	               		<th class="right">{{number_format($total_preven, 2)}}</th>
 	               		<th class="right">{{number_format($total_deven, 2)}}</th>
 	               		<th class="right">{{number_format($total_liberado, 2)}}</th>

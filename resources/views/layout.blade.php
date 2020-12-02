@@ -24,254 +24,262 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{config('app.url')}}/scripts/css/app.css">
 
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+  <div class="wrapper">
 
-  <!-- Main Header -->
-  @include('layouts.admin.header')
+    <!-- Main Header -->
+    @include('layouts.admin.header')
 
-  <!-- Left side column. contains the logo and sidebar -->
-  @include('layouts.admin.sidebar')
+    <!-- Left side column. contains the logo and sidebar -->
+    @include('layouts.admin.sidebar')
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      @yield('content-header')
-    </section>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        @yield('content-header')
+      </section>
 
-    <!-- Main content -->
-    <section class="content container-fluid">
+      <!-- Main content -->
+      <section class="content container-fluid">
 
-      @yield('content')
+        @yield('content')
 
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
 
-  <!-- Main Footer -->
-  @include('layouts.admin.footer')
+    <!-- Main Footer -->
+    @include('layouts.admin.footer')
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane active" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Create the tabs -->
+      <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+        <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+        <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+      </ul>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <!-- Home tab content -->
+        <div class="tab-pane active" id="control-sidebar-home-tab">
+          <h3 class="control-sidebar-heading">Recent Activity</h3>
+          <ul class="control-sidebar-menu">
+            <li>
+              <a href="javascript:;">
+                <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                <div class="menu-info">
+                  <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
 
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
+                  <p>Will be 23 on April 24th</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+          <!-- /.control-sidebar-menu -->
 
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="pull-right-container">
+          <h3 class="control-sidebar-heading">Tasks Progress</h3>
+          <ul class="control-sidebar-menu">
+            <li>
+              <a href="javascript:;">
+                <h4 class="control-sidebar-subheading">
+                  Custom Template Design
+                  <span class="pull-right-container">
                     <span class="label label-danger pull-right">70%</span>
                   </span>
-              </h4>
+                </h4>
 
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
+                <div class="progress progress-xxs">
+                  <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                </div>
+              </a>
+            </li>
+          </ul>
+          <!-- /.control-sidebar-menu -->
 
+        </div>
+        <!-- /.tab-pane -->
+        <!-- Stats tab content -->
+        <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+        <!-- /.tab-pane -->
+        <!-- Settings tab content -->
+        <div class="tab-pane" id="control-sidebar-settings-tab">
+          <form method="post">
+            <h3 class="control-sidebar-heading">General Settings</h3>
+
+            <div class="form-group">
+              <label class="control-sidebar-subheading">
+                Report panel usage
+                <input type="checkbox" class="pull-right" checked>
+              </label>
+
+              <p>
+                Some information about this general settings option
+              </p>
+            </div>
+            <!-- /.form-group -->
+          </form>
+        </div>
+        <!-- /.tab-pane -->
       </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
+    </aside>
+    <!-- /.control-sidebar -->
 
   <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
+    immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+  </div>
+  <!-- ./wrapper -->
 
-<!-- REQUIRED JS SCRIPTS -->
+  <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 3 -->
-<script src="{{config('app.url')}}/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="{{config('app.url')}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
-<script src="{{config('app.url')}}/dist/js/adminlte.min.js"></script>
-<!-- ChartJS -->
-<script src="{{config('app.url')}}/bower_components/chart.js/Chart.js"></script>
-{{-- InputMask --}}
-<script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.extensions.js"></script>
-<!-- Morris.js charts -->
-<script src="{{config('app.url')}}/bower_components/raphael/raphael.min.js"></script>
-<script src="{{config('app.url')}}/bower_components/morris.js/morris.min.js"></script>
+  <!-- jQuery 3 -->
+  <script src="{{config('app.url')}}/bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="{{config('app.url')}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="{{config('app.url')}}/dist/js/adminlte.min.js"></script>
+  <!-- ChartJS -->
+  <script src="{{config('app.url')}}/bower_components/chart.js/Chart.js"></script>
+  {{-- InputMask --}}
+  <script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.js"></script>
+  <script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+  <script src="{{config('app.url')}}/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+  <!-- Morris.js charts -->
+  <script src="{{config('app.url')}}/bower_components/raphael/raphael.min.js"></script>
+  <script src="{{config('app.url')}}/bower_components/morris.js/morris.min.js"></script>
 
-{{-- Mostrar grafico de barras si corresponde --}}
-@isset($tabla1)
-{{-- Grafico de barras --}}
-@yield('script_barras')
-@endisset
+  {{-- Mostrar grafico de barras si corresponde --}}
+  @isset($tabla1)
+  @yield('script_barras')
+  @endisset
 
-<script type="text/javascript">
-  var url_view = "{{route('preventivos.view')}}";
-  var url_pdf = "{{route('download')}}";
-  var url_pdf_menores = "{{route('download.menores')}}";
-  var url_pdf_secretarias = "{{route('download.secretarias')}}";
-  var url_preventivos = "{{route('preventivos.all')}}";
-  var url_menores = "{{route('preventivos.men')}}";
-  var url_secretarias = "{{route('preventivos.secretarias')}}";
-  var url_ubicaciones_men = "{{route('ubicaciones_men')}}";
-  var url_ubicaciones_dir = "{{route('ubicaciones_dir')}}";
-  var url_presupuesto = "{{route('partidas.presupuesto')}}";
-  var url_pdf_presupuesto = "{{route('download.presupuesto')}}";
-  var url_unidades = "{{route('unidades')}}";
-  var token = "{{csrf_token()}}";
-  var url_edit = "{{config('app.url')}}";
-  var fuente = "{{request('f')}}";
-  var org = "{{request('o')}}";
-  var partida = "{{request('p')}}";
-  var reg = {{isset($reg) ? $reg->count() : 0}};
-  var ub = "{{request('ub')}}";
-  var se = "{{request('se')}}";
-  var un = "{{request('un')}}";
-  var t = "{{request('t')}}";
+  <script type="text/javascript">
+    var url_view = "{{route('preventivos.view')}}";
+    var url_pdf = "{{route('download')}}";
+    var url_pdf_menores = "{{route('download.menores')}}";
+    var url_pdf_secretarias = "{{route('download.secretarias')}}";
+    var url_preventivos = "{{route('preventivos.all')}}";
+    var url_menores = "{{route('preventivos.men')}}";
+    var url_secretarias = "{{route('preventivos.secretarias')}}";
+    var url_ubicaciones_men = "{{route('ubicaciones_men')}}";
+    var url_ubicaciones_dir = "{{route('ubicaciones_dir')}}";
+    var url_presupuesto = "{{route('partidas.presupuesto')}}";
+    var url_pdf_presupuesto = "{{route('download.presupuesto')}}";
+    var url_unidades = "{{route('unidades')}}";
+    var token = "{{csrf_token()}}";
+    var url_edit = "{{config('app.url')}}";
+    var fuente = "{{request('f')}}";
+    var org = "{{request('o')}}";
+    var partida = "{{request('p')}}";
+    var reg = {{isset($reg) ? $reg->count() : 0}};
+    var ub = "{{request('ub')}}";
+    var se = "{{request('se')}}";
+    var un = "{{request('un')}}";
+    var t = "{{request('t')}}";
 
-  $(document).ready(function(){
-    $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
-  });
-</script>
+    $(document).ready(function(){
+      $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
+    });
+  </script>
 
-{{-- Filtrado de preventivos por secretarias --}}
-@if((Route::is('preventivos.secretarias')) or (Route::is('preventivos.liberados')))
-<script src="{{config('app.url')}}/scripts/js/filter_secretarias.js"></script>
-@endif
+  @if((Route::is('dashboard')))
+  <script src="{{config('app.url')}}/scripts/js/dashboard.js"></script>
+  <script type="text/javascript">
+    var data = @php echo $preven @endphp;
+    var barChart = $('#barChart1');
+    showChart(data, barChart);  
+  </script>
+  @endif
 
-@if((Route::is('usuarios.show')))
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#chg-avatar').click(function(){
+  {{-- Filtrado de preventivos por secretarias --}}
+  @if((Route::is('preventivos.secretarias')) or (Route::is('preventivos.liberados')))
+  <script src="{{config('app.url')}}/scripts/js/filter_secretarias.js"></script>
+  @endif
+
+  @if((Route::is('usuarios.show')))
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#chg-avatar').click(function(){
        $('input[name=image]:radio').prop('checked', false);
        $('#btn-save').prop('disabled', true);
-    });
+     });
 
-    $('input[name=image]:radio').change(function(){
-      $('#btn-save').prop('disabled', false);
-    });
-  });
-</script>
-@endif
-
-{{-- Ventana modal preventivo --}}
-@isset($reg)
-<script src="{{config('app.url')}}/scripts/js/modal_preven.js"></script>
-@endisset
-
-@isset($preven)
-<script type="text/javascript">
-  $(document).ready(function(){
-
-    $('input[name=id_tipo]').change(function(){
-      var tipo = $(this).val();
-      $('#ubicacion').empty();
-
-      if (tipo == 1){
-        $.ajax({
-            url: "{{route('ubicaciones_men')}}", type: 'get', dataType: 'json',
-            success: function (response) {
-                $('#ubicacion').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
-                $.each(response.data, function (index, value) {
-                    $('#ubicacion').append("<option value='" + value.id_ubicacion + "'>"+value.id_ubicacion+". "+ value.ubicacion + "</option>");
-                });
-            }
-        });
-      }
-
-      if (tipo == 2){
-        $.ajax({
-            url: "{{route('ubicaciones_dir')}}", type: 'get', dataType: 'json',
-            success: function (response) {
-                $('#ubicacion').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
-                $.each(response.data, function (index, value) {
-                    $('#ubicacion').append("<option value='" + value.id_ubicacion + "'>"+value.id_ubicacion+". "+ value.ubicacion + "</option>");
-                });
-            }
-        });
-      }
-
-      if (tipo == 7){
-        $('#importe').val(0);
-        $('#pagado').val(0);
-      }
-
-    });
-
-    $('#id_secretaria').change(function(){
-      var id_secretaria = $(this).val();
-      $('#id_unidad').empty();
-      $.ajax({
-        url: "{{route('unidades')}}",
-        type: 'get',
-        dataType: 'json',
-        data: {"id": id_secretaria},
-        success: function (response) {
-            $('#id_unidad').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
-            $.each(response.data, function (index, value) {
-                $('#id_unidad').append("<option value='" + value.id_unidad + "'>"+ value.unidad + "</option>");
-            });
-        }
+      $('input[name=image]:radio').change(function(){
+        $('#btn-save').prop('disabled', false);
       });
     });
+  </script>
+  @endif
 
-  });
-</script>
-@endisset
+  {{-- Ventana modal preventivo --}}
+  @isset($reg)
+  <script src="{{config('app.url')}}/scripts/js/modal_preven.js"></script>
+  @endisset
+
+  @isset($preven)
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+      $('input[name=id_tipo]').change(function(){
+        var tipo = $(this).val();
+        $('#ubicacion').empty();
+
+        if (tipo == 1){
+          $.ajax({
+            url: "{{route('ubicaciones_men')}}", type: 'get', dataType: 'json',
+            success: function (response) {
+              $('#ubicacion').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
+              $.each(response.data, function (index, value) {
+                $('#ubicacion').append("<option value='" + value.id_ubicacion + "'>"+value.id_ubicacion+". "+ value.ubicacion + "</option>");
+              });
+            }
+          });
+        }
+
+        if (tipo == 2){
+          $.ajax({
+            url: "{{route('ubicaciones_dir')}}", type: 'get', dataType: 'json',
+            success: function (response) {
+              $('#ubicacion').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
+              $.each(response.data, function (index, value) {
+                $('#ubicacion').append("<option value='" + value.id_ubicacion + "'>"+value.id_ubicacion+". "+ value.ubicacion + "</option>");
+              });
+            }
+          });
+        }
+
+        if (tipo == 7){
+          $('#importe').val(0);
+          $('#pagado').val(0);
+        }
+
+      });
+
+      $('#id_secretaria').change(function(){
+        var id_secretaria = $(this).val();
+        $('#id_unidad').empty();
+        $.ajax({
+          url: "{{route('unidades')}}",
+          type: 'get',
+          dataType: 'json',
+          data: {"id": id_secretaria},
+          success: function (response) {
+            $('#id_unidad').append("<option value='' disabled selected style='display:none;'>Seleccione una opcion</option>");
+            $.each(response.data, function (index, value) {
+              $('#id_unidad').append("<option value='" + value.id_unidad + "'>"+ value.unidad + "</option>");
+            });
+          }
+        });
+      });
+
+    });
+  </script>
+  @endisset
 
 </body> </html>
