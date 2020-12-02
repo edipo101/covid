@@ -6,7 +6,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{asset('dist/img/avatar'.auth()->user()->avatar.'.png')}}" class="img-circle" alt="User Image">
+          <img src="{{asset('dist/img/avatar'.auth()->user()->avatar.'.jpg')}}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{auth()->user()->name}}</p>
@@ -28,7 +28,7 @@
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
-      <ul class="sidebar-menu" data-widget="tree">        
+      <ul class="sidebar-menu" data-widget="tree">
         <li class="{{!Route::is('dashboard') ?: 'active'}}"><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Principal</span></a></li>
         <li class="header">PREVENTIVOS</li>
         @php
@@ -70,7 +70,7 @@
         <li class="header">USUARIO</li>
         <li class="{{!Route::is('usuarios.show') ?: 'active'}}"><a href="{{route('usuarios.show', auth()->user()->id)}}"><i class="fa fa-table"></i> <span>Ver perfil</span></a></li>
         @if (auth()->user()->id_role == 1)
-        <li class="{{!Route::is('usuarios.index') ?: 'active'}}"><a href="{{route('usuarios.index')}}"><i class="fa fa-table"></i> 
+        <li class="{{!Route::is('usuarios.index') ?: 'active'}}"><a href="{{route('usuarios.index')}}"><i class="fa fa-table"></i>
           <span>Ver usuarios</span></a></li>
           @endif
 

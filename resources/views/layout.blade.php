@@ -199,6 +199,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   $(document).ready(function(){
     $('#chg-avatar').click(function(){
        $('input[name=image]:radio').prop('checked', false);
+       $('#btn-save').prop('disabled', true);
+    });
+
+    $('input[name=image]:radio').change(function(){
+      $('#btn-save').prop('disabled', false);
     });
   });
 </script>

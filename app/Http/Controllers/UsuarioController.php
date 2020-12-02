@@ -11,7 +11,7 @@ class UsuarioController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -65,7 +65,6 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-        // return $id;
         $user = User::
             leftJoin('roles', 'users.id_role', '=', 'roles.id_role')
             ->find($id);
@@ -79,7 +78,7 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {        
+    {
         $user = User::where('id', $id)->first();
         return view('usuarios.edit', compact('user'));
     }
@@ -117,6 +116,26 @@ class UsuarioController extends Controller
         $user = User::find($id);
         $user->delete();
         return redirect()->route('usuarios.index');
+    }
+
+    public function update_password(Request $request, $id){
+        // return $request;
+        $validate = $this->validate(request(), [
+            'password_old' => 'required|string',
+            'password_new' => 'required|string',
+        ]);
+        $user = User::find($id);
+        $password = Hash::make(request('password_old'));
+        return $password;
+        if ($password == $user->password){
+            return 'contraseña verificada';
+        }
+        else
+            return 'contraseña erronea';
+
+        // $user->avatar = request('image');
+        // $user->save();
+        // return redirect()->route('usuarios.show', $id);
     }
 
     public function update_avatar(Request $request, $id){

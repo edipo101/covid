@@ -21,20 +21,20 @@
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{asset('dist/img/avatar'.auth()->user()->avatar.'.png')}}" class="user-image" alt="User Image">
+              <img src="{{asset('dist/img/avatar'.auth()->user()->avatar.'.jpg')}}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{auth()->user()->name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="{{asset('dist/img/avatar'.auth()->user()->avatar.'.png')}}" class="img-circle" alt="User Image">
+                <img src="{{asset('dist/img/avatar'.auth()->user()->avatar.'.jpg')}}" class="img-circle" alt="User Image">
 
                 <p>
                   {{auth()->user()->name}} - {{auth()->user()->email}}
                   <small>Miembro desde {{auth()->user()->created_at}}</small>
                 </p>
               </li>
-              
+
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
@@ -52,7 +52,7 @@
           </li>
           <!-- Control Sidebar Toggle Button -->
           <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+            <a href="#"><i class="fa fa-gears"></i></a>
           </li>
         </ul>
       </div>
