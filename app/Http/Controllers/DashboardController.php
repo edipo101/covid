@@ -12,7 +12,7 @@ class DashboardController extends Controller
     }
 
     public function show(){
-    	$preven = Preventivo::selectRaw('fuente, organismo, count(*) as cant, 
+    	$preven = Preventivo::selectRaw('fuente, organismo, count(*) as cant,
             sum(importe) as imp_preven, sum(pagado) as imp_deven, (sum(importe)-sum(pagado)) as liberado')
     	->groupBy('fuente', 'organismo')
     	->get();
@@ -21,7 +21,7 @@ class DashboardController extends Controller
 		->leftJoin('secretaria', 'preventivo.id_secretaria', '=', 'secretaria.id_secretaria')
     	->groupBy('preventivo.id_secretaria')
     	->get();
-    	// return $sec_unid;
+        // return $sec_unid;
     	return view('dashboard', compact('preven', 'sec_unid'));
     }
 }
