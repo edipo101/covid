@@ -16,6 +16,7 @@ Route::get('/preventivos/secretarias', 'PreventivoController@by_secretarias')->n
 Route::get('/preventivos/liberados', 'PreventivoController@by_liberados')->name('preventivos.liberados');
 Route::get('/preventivos/men', 'PreventivoController@show_menores')->name('preventivos.men');
 Route::get('/preventivos/dir', 'PreventivoController@show_mayores')->name('preventivos.dir');
+Route::post('/preventivos/destroy', 'PreventivoController@destroy')->name('preventivos.destroy');
 
 Route::get('/partidas/presupuesto', 'ReporteController@show_presupuesto')->name('partidas.presupuesto');
 

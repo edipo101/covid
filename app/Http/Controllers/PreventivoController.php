@@ -33,7 +33,7 @@ class PreventivoController extends Controller
         ->paginate(25);
 
         $tipos = Tipo::all();
-    	return view('preventivos', compact('reg', 'tipos'));
+        return view('preventivos', compact('reg', 'tipos'));
     }
 
     // Listar todos preventivos por secretarias
@@ -278,5 +278,16 @@ class PreventivoController extends Controller
         $preven->save();
 
         return redirect(request('url_previous'));
+    }
+
+    public function destroy(Request $request)
+    {
+        if ($request->ajax()){
+            $preven = Preventivo::find(request('id'));
+            if ($preven){
+                $preven->delete();
+                echo json_encode('deleted');
+            }
+        }
     }
 }
