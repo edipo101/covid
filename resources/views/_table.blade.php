@@ -24,7 +24,7 @@
                <th>Nro Prev</th>
                <th style="width: 40%;">Detalle (Glosa)</th>
                <th>Fecha elab</th>
-               <th>Importe (Bs)</th>
+               <th style="text-align: center;">Importe<br>(Bs)</th>
                <th>Fte-Org</th>
                <th>Partida</th>
                <th>Tipo</th>

@@ -16,6 +16,7 @@
 @section('content')
 
   @include('_modal')
+  @include('modals.delete')
 
   <div class="row">
     <div class="col-xs-12">
@@ -49,4 +50,30 @@
 
     </div>
   </div>
+@endsection
+
+@section('javascript')
+<script>
+  $(document).ready(function(){
+    var id;
+
+    $('.btn-delete').click(function(){
+      var prev = $(this).parents('tr').find("td")[0].innerHTML;
+      var row = $(this).parents('tr');
+      id = row.data('id');
+      $('#reg').html(prev);
+    });
+
+    $('#btn-delete').click(function(){
+      var data = "id="+id+"&_token="+token;
+      var url = "{{route('preventivos.destroy')}}";
+      var type = "json";
+      $.post(url, data, function(data){
+          console.log('!El registro fue eliminado correctamente!');
+      });
+      $('#btn-cancel').click();
+      location.reload();
+    });
+  });
+</script>
 @endsection

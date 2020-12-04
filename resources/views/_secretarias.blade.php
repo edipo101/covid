@@ -22,7 +22,7 @@
             <tbody>
               <tr>
                <th>Nro Prev</th>
-               <th>Importe (Bs)</th>
+               <th style="text-align: center;">Importe<br>(Bs)</th>
                <th style="width: 40%;">Detalle (Resumen)</th>
                <th>Secretaria</th>
                <th>Unidad</th>
@@ -35,7 +35,7 @@
               <tr data-id="{{$row->id_preventivo}}">
                <td>{{$row->preventivo}}</td>
                <td>{{number_format($row->importe, 2)}}</td>
-               <td>{{substr($row->glosa, 0, 100)."..."}}</td>
+               <td style="font-size: 70%" >{{$row->glosa}}</td>
                <td title="{{$row->secretaria}}">{{$row->sigla}}</td>
                <td>{{$row->unidad}}</td>
                @php $label = (isset($row->label)) ? $row->label : 'default'; @endphp
