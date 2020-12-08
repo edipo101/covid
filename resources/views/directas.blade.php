@@ -20,12 +20,11 @@
 
   <div class="row">
     <div class="col-xs-12">
-        <a href="#" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
+        <a href="{{route('preventivos.create')}}" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
       <div class="pull-right form-group">
-        <form method="get" action="{{ route('preventivos.dir') }}">
+        <form method="get" id="form-filter" action="{{ route('preventivos.dir') }}">
           <select name="f" id="f" class="form-control" style="display: inline-block; width: 100px;">
             <option value='' disabled selected style='display:none;'>Fuente</option>
-            <option value="">Todos</option>
             <option {!!((request('f') == 20) ? "selected=\"selected\"" : "")!!}>20</option>
             <option {!!((request('f') == 41) ? "selected=\"selected\"" : "")!!}>41</option>
           </select>
@@ -43,6 +42,7 @@
           <input type="text" name="p" class="form-control" placeholder="Partida" style="display: inline-block; width: 120px;" value="{{request('p')}}">
           <button type="submit" class="btn btn-info btn-flat btn-filter">Filtrar</button>
           <a href="{{route('preventivos.dir')}}" class="btn btn-success btn-flat btn-filter">Borrar</a>
+          <a id="btn-downdir" class="btn btn-danger btn-filter" target="_blank" disabled><i class="fa fa-download"></i> Descargar</a>
         </form>
       </div>
 
@@ -74,6 +74,18 @@
       $('#btn-cancel').click();
       location.reload();
     });
+
+    $('#btn-downdir').removeAttr('disabled');
+
+    $('#btn-downdir').click(function(){
+      if ($(this).attr('disabled') != 'disabled') {
+        var form = $('#form-filter');
+        form.attr('action', "{{route('download.mayores')}}");
+        form.submit();
+        form.attr('action', "{{route('preventivos.dir')}}");
+      }
+    });
+
   });
 </script>
 @endsection

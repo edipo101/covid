@@ -62,6 +62,31 @@ class PDFController extends Controller
         return $pdf->stream('comp_menores.pdf');
     }
 
+    public function pdf_mayores(Request $request){
+        $reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
+        ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
+        ->leftJoin('ubicacion_dir', 'preventivo.id_ubidir', '=', 'ubicacion_dir.id_ubicacion')
+        ->leftJoin('estado', 'preventivo.id_estado', '=', 'estado.id_estado')
+        ->where('preventivo.id_tipo', 2)
+        ->Fuente($request->get('f'))
+        ->Organismo($request->get('o'))
+        ->Partida($request->get('p'))
+        ->Preven($request->get('search'))
+        ->orderBy('fuente', 'asc')
+        ->orderBy('organismo', 'asc')
+        ->orderBy('id_objeto', 'asc')
+        ->get();
+        $fuente = $request->get('f');
+        $organismo = $request->get('o');
+        $id_partida = $request->get('p');
+        $partida = Objeto::where('id_objeto', $id_partida)->pluck('descripcion')->first();
+
+        // return view('pdfs.pdf_mayores', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida'));
+        $pdf = \PDF::loadView('pdfs.pdf_mayores', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida'))
+        ->setPaper('letter', 'landscape');
+        return $pdf->stream('comp_mayores.pdf');
+    }
+
     public function pdf_secretarias(Request $request){
         $reg = Preventivo::selectRaw('*, 
             if(id_ubimen is not null, 

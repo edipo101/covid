@@ -31,6 +31,7 @@ Route::get('/unidades', 'ComboDatos@getUnidades')->name('unidades');
 // Descarga de archivos
 Route::get('/pdf', 'PDFController@pdf')->name('download');
 Route::get('/pdf_menores', 'PDFController@pdf_menores')->name('download.menores');
+Route::get('/pdf_mayores', 'PDFController@pdf_mayores')->name('download.mayores');
 Route::get('/pdf_secretarias', 'PDFController@pdf_secretarias')->name('download.secretarias');
 Route::get('/pdf_presupuesto', 'PDFController@pdf_presupuesto')->name('download.presupuesto');
 
