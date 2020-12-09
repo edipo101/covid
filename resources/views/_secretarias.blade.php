@@ -34,7 +34,7 @@
               @foreach($reg as $row)
               <tr data-id="{{$row->id_preventivo}}">
                <td>{{$row->preventivo}}</td>
-               <td>{{number_format($row->importe, 2)}}</td>
+               <td style="text-align: right;">{{number_format($row->importe, 2)}}</td>
                <td style="font-size: 70%" >{{$row->glosa}}</td>
                <td title="{{$row->secretaria}}">{{$row->sigla}}</td>
                <td>{{$row->unidad}}</td>

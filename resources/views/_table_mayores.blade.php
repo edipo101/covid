@@ -24,10 +24,10 @@
                <th>Nro Prev</th>
                <th style="width: 40%;">Detalle (Glosa)</th>
                <th>Fecha elab</th>
-               <th style="text-align: center;">Importe<br>(Bs)</th>
                <th>Fte/Org</th>
                <th>Partida</th>
-               <th>Tipo</th>
+               <th style="text-align: center;">Preventivo<br>(Bs)</th>
+               <th style="text-align: center;">Devengado<br>(Bs)</th>
                <th>Progreso</th>
                <th>(%)</th>
                <th>Operaciones</th>
@@ -38,12 +38,13 @@
                <td>{{$row->preventivo}}</td>
                <td style="font-size: 70%;">{{$row->glosa}}</td>
                <td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
-               <td style="text-align: right;">{{number_format($row->importe, 2)}}</td>
-               @php $total += $row->importe; @endphp
+               
                <td>{{$row->fuente}}-{{$row->organismo}}</td>
                <td>{{$row->id_objeto}}</td>
                @php $label = (isset($row->label)) ? $row->label : 'default'; @endphp
-               <td><span class="label label-{{$label}}">{{$row->tipo}}</span></td>
+               <td style="text-align: right;">{{number_format($row->importe, 2)}}</td>
+               <td style="text-align: right;">{{number_format($row->pagado, 2)}}</td>
+               @php $total += $row->importe; @endphp
                <td>
                 <div class="progress progress-xs">
                   @php

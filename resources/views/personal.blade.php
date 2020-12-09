@@ -1,14 +1,14 @@
 @extends('layout')
 
-@section('title', 'ProgramaCovid | Preventivos')
+@section('title', 'ProgramaCovid | Personal')
 
 @section('content-header')
 <h1>
-  Compras directas
-  <small>Preventivos con importe mayor a Bs 50.000,00</small>
+  Lista de preventivos de personal
+  {{-- <small>Lista general de todos los preventivos</small> --}}
 </h1>
 <ol class="breadcrumb">
-  <li><a href=""><i class="fa fa-dashboard"></i> Inicio</a></li>
+  <li><a href="{{route('download')}}"><i class="fa fa-dashboard"></i> Inicio</a></li>
   <li class="active">Preventivos</li>
 </ol>
 @endsection
@@ -21,8 +21,8 @@
   <div class="row">
     <div class="col-xs-12">
         <a href="{{route('preventivos.create')}}" class="btn btn-success" style="margin-bottom: 10px;"><i class="fa fa-plus"></i> Nuevo </a>
-      <div class="pull-right form-group">
-        <form method="get" id="form-filter" action="{{ route('preventivos.dir') }}">
+      <div class="pull-right form-group filter">
+        <form id="form-filter" method="get" action="{{ route('preventivos.personal') }}">
           <select name="f" id="f" class="form-control" style="display: inline-block; width: 100px;">
             <option value='' disabled selected style='display:none;'>Fuente</option>
             <option {!!((request('f') == 20) ? "selected=\"selected\"" : "")!!}>20</option>
@@ -39,14 +39,14 @@
             <option {!!((request('o') == 119) ? "selected=\"selected\"" : "")!!}>119</option>
             @endif
           </select>
-          <input type="text" name="p" class="form-control" placeholder="Partida" style="display: inline-block; width: 120px;" value="{{request('p')}}">
-          <button type="submit" class="btn btn-info btn-flat btn-filter">Filtrar</button>
-          <a href="{{route('preventivos.dir')}}" class="btn btn-success btn-flat btn-filter">Borrar</a>
-          <a id="btn-downdir" class="btn btn-danger btn-filter" target="_blank" disabled><i class="fa fa-download"></i> Descargar</a>
+          <input type="text" name="p" id="partida" class="form-control" placeholder="Partida" style="display: inline-block; width: 120px;" value="{{request('p')}}">
+          <button id="btn-filter" type="submit" class="btn btn-info btn-flat btn-filter"><i class="fa fa-filter"></i> Filtrar</button>
+          <a href="{{route('preventivos.personal')}}" class="btn btn-success btn-flat btn-filter"><i class="fa fa-times"></i> Borrar</a>
+          <a id="btn-pdf" class="btn btn-danger btn-filter" disabled><i class="fa fa-download"></i> Descargar</a>
         </form>
       </div>
 
-      @include('_table_mayores')
+      @include('_personal')
 
     </div>
   </div>
@@ -74,18 +74,6 @@
       $('#btn-cancel').click();
       location.reload();
     });
-
-    $('#btn-downdir').removeAttr('disabled');
-
-    $('#btn-downdir').click(function(){
-      if ($(this).attr('disabled') != 'disabled') {
-        var form = $('#form-filter');
-        form.attr('action', "{{route('download.mayores')}}");
-        form.submit();
-        form.attr('action', "{{route('preventivos.dir')}}");
-      }
-    });
-
   });
 </script>
 @endsection

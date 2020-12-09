@@ -38,6 +38,7 @@
           case 'preventivos.men':
           case 'preventivos.dir':
           case 'preventivos.secretarias':
+          case 'preventivos.personal':
           case 'preventivos.liberados':
           $menu = 'menu-open';
           $view = 'display: block;';
@@ -57,8 +58,9 @@
           <ul class="treeview-menu" style="{{$view}}">
             <li class="{{!Route::is('preventivos.all') ?: 'active'}}"><a href="{{route('preventivos.all')}}"><i class="fa fa-circle-o"></i> Por Fuente y Organismo</a></li>
             <li class="{{!Route::is('preventivos.men') ?: 'active'}}"><a href="{{route('preventivos.men')}}"><i class="fa fa-circle-o"></i> Compras menores</a></li>
-            <li class="{{!Route::is('preventivos.dir') ?: 'active'}}"><a href="{{route('preventivos.dir')}}"><i class="fa fa-circle-o"></i> Compras mayores o directas</a></li>
+            <li class="{{!Route::is('preventivos.dir') ?: 'active'}}"><a href="{{route('preventivos.dir')}}"><i class="fa fa-circle-o"></i> Compras mayores</a></li>
             <li class="{{!Route::is('preventivos.secretarias') ?: 'active'}}"><a href="{{route('preventivos.secretarias')}}"><i class="fa fa-circle-o"></i> Por Secretarias</a></li>
+            <li class="{{!Route::is('preventivos.personal') ?: 'active'}}"><a href="{{route('preventivos.personal')}}"><i class="fa fa-circle-o"></i> Personal</a></li>
             <li class="{{!Route::is('preventivos.liberados') ?: 'active'}}"><a href="{{route('preventivos.liberados')}}"><i class="fa fa-circle-o"></i> Por liberar</a></li>
           </ul>
         </li>

@@ -61,6 +61,21 @@ class PreventivoController extends Controller
         return view('by_secretarias', compact('reg', 'secre', 'unidades', 'ubicaciones_men', 'ubicaciones_dir'));
     }
 
+    public function personal(Request $request){
+        $reg = Preventivo::selectRaw('*')
+        ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
+        ->where('preventivo.id_tipo', 3)
+        ->Fuente($request->get('f'))
+        ->Organismo($request->get('o'))
+        ->Partida($request->get('p'))
+        ->Preven($request->get('search'))
+        ->orderBy('preventivo')
+        ->orderBy('fecha_elab', 'desc')
+        ->paginate(25);
+
+        return view('personal', compact('reg'));
+    }
+
     // Listar todos preventivos por secretarias
     public function by_liberados(Request $request){
         $reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent, (importe - pagado) as liberado')

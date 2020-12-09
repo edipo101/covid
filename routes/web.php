@@ -13,6 +13,7 @@ Route::post('/preventivos', 'PreventivoController@store')->name('preventivos.sto
 Route::get('/preventivos/edit/{id}', 'PreventivoController@edit')->name('preventivos.edit');
 Route::patch('/preventivos/{id}', 'PreventivoController@update')->name('preventivos.update');
 Route::get('/preventivos/secretarias', 'PreventivoController@by_secretarias')->name('preventivos.secretarias');
+Route::get('/preventivos/personal', 'PreventivoController@personal')->name('preventivos.personal');
 Route::get('/preventivos/liberados', 'PreventivoController@by_liberados')->name('preventivos.liberados');
 Route::get('/preventivos/men', 'PreventivoController@show_menores')->name('preventivos.men');
 Route::get('/preventivos/dir', 'PreventivoController@show_mayores')->name('preventivos.dir');

@@ -25,11 +25,10 @@
                <th style="width: 40%;">Detalle (Glosa)</th>
                <th>Fecha elab</th>
                <th style="text-align: center;">Importe<br>(Bs)</th>
+               <th style="text-align: center;">Devengado<br>(Bs)</th>
                <th>Fte/Org</th>
                <th>Partida</th>
                <th>Tipo</th>
-               <th>Progreso</th>
-               <th>(%)</th>
                <th>Operaciones</th>
               </tr>
               @php $total = 0; @endphp
@@ -39,26 +38,12 @@
                <td style="font-size: 70%;">{{$row->glosa}}</td>
                <td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
                <td style="text-align: right;">{{number_format($row->importe, 2)}}</td>
+               <td style="text-align: right;">{{number_format($row->importe, 2)}}</td>
                @php $total += $row->importe; @endphp
                <td>{{$row->fuente}}-{{$row->organismo}}</td>
                <td>{{$row->id_objeto}}</td>
                @php $label = (isset($row->label)) ? $row->label : 'default'; @endphp
                <td><span class="label label-{{$label}}">{{$row->tipo}}</span></td>
-               <td>
-                <div class="progress progress-xs">
-                  @php
-                  $label = 'green';
-                  if ($row->porcent <= 25) $label = 'red';
-                  if ($row->porcent > 26 && $row->porcent <= 50) $label = 'yellow';
-                  if ($row->porcent > 51 && $row->porcent <= 75) $label = 'aqua';
-                  @endphp
-                  <div class="progress-bar progress-bar-{{$label}}" style="width: {{$row->porcent}}%"></div>
-                </div>
-                <td>
-                  @if (!is_null($row->porcent))
-                  <span class="badge bg-{{$label}}">{{$row->porcent}}%</span>
-                  @endif
-                </td>
               </td>
                <td>
                  <a href="#" class="btn btn-primary btn-xs btn-view" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i></a>
