@@ -35,6 +35,7 @@ Route::get('/pdf_menores', 'PDFController@pdf_menores')->name('download.menores'
 Route::get('/pdf_mayores', 'PDFController@pdf_mayores')->name('download.mayores');
 Route::get('/pdf_secretarias', 'PDFController@pdf_secretarias')->name('download.secretarias');
 Route::get('/pdf_presupuesto', 'PDFController@pdf_presupuesto')->name('download.presupuesto');
+Route::get('/pdf_liberados', 'PDFController@pdf_liberados')->name('download.liberados');
 
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login.show');
 Route::post('login', 'Auth\LoginController@login')->name('login');

@@ -34,7 +34,7 @@
               @foreach($reg as $row)
               <tr data-id="{{$row->id_preventivo}}">
                <td>{{$row->preventivo}}</td>
-               <td>{{substr($row->glosa, 0, 100)."..."}}</td>
+               <td style="font-size: 70%;">{{$row->glosa}}</td>
                <td title="{{$row->secretaria}}">{{$row->sigla}}</td>
                <td style="font-size: 75%">{{$row->unidad}}</td>
                @php $label = (isset($row->label)) ? $row->label : 'default'; @endphp
@@ -43,9 +43,9 @@
                <td class="right">{{number_format($row->pagado, 2)}}</td>
                <td class="right">{{number_format($row->liberado, 2)}}</td>
                <td>
-                 <a href="#" class="btn btn-primary btn-xs btn-view" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i> Ver </a>
-                 <a href="{{route('preventivos.edit', $row->id_preventivo)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Editar </a>
-                 {{-- <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Borrar </a> --}}
+                 <a href="#" class="btn btn-primary btn-xs btn-view" data-toggle="modal" data-target="#modal-default"><i class="fa fa-eye"></i></a>
+                 <a href="{{route('preventivos.edit', $row->id_preventivo)}}" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i></a>
+                 <a href="#" class="btn btn-danger btn-xs btn-delete" data-toggle="modal" data-target="#modal-delete"><i class="fa fa-trash-o"></i></a>
                </td>
               </tr>
               @endforeach

@@ -143,4 +143,36 @@ class PDFController extends Controller
         ->setPaper('letter', 'landscape');
         return $pdf->stream('presupuesto.pdf');
     }
+
+    public function pdf_liberados(Request $request){
+        $reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent, (importe - pagado) as liberado,
+            if(id_ubimen is not null, 
+                ubicacion_men.ubicacion, 
+                if(id_ubidir is not null, 
+                ubicacion_dir.ubicacion, null)) as ubicacion')
+        ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
+        ->leftJoin('secretaria', 'preventivo.id_secretaria', '=', 'secretaria.id_secretaria')
+        ->leftJoin('unidad', 'preventivo.id_unidad', '=', 'unidad.id_unidad') 
+        ->leftJoin('ubicacion_men', 'preventivo.id_ubimen', '=', 'ubicacion_men.id_ubicacion')
+        ->leftJoin('ubicacion_dir', 'preventivo.id_ubidir', '=', 'ubicacion_dir.id_ubicacion')
+        ->leftJoin('estado', 'preventivo.id_estado', '=', 'estado.id_estado')
+        ->MayorAConta($request->get('t'))       
+        ->Tipo($request->get('t'))
+        ->Fuente($request->get('f'))
+        ->Organismo($request->get('o'))
+        ->Partida($request->get('p'))
+        ->whereRaw('(importe - pagado) > 0')
+        ->orderBy('preventivo')
+        ->get();
+        $fuente = $request->get('f');
+        $organismo = $request->get('o');
+        $id_partida = $request->get('p');
+        $partida = Objeto::where('id_objeto', $id_partida)->pluck('descripcion')->first();
+        $tipo = Tipo::where('id_tipo', $request->get('t'))->pluck('tipo')->first();
+        // return $reg;
+        // return view('pdfs.pdf_liberados', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida', 'tipo'));
+        $pdf = \PDF::loadView('pdfs.pdf_liberados', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida', 'tipo'))
+        ->setPaper('letter', 'landscape');
+        return $pdf->stream('por_liberar.pdf');
+    }
 }

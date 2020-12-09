@@ -81,21 +81,17 @@ class PreventivoController extends Controller
         $reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent, (importe - pagado) as liberado')
         ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
         ->leftJoin('secretaria', 'preventivo.id_secretaria', '=', 'secretaria.id_secretaria')
-        ->leftJoin('unidad', 'preventivo.id_unidad', '=', 'unidad.id_unidad')
-        ->Secretaria($request->get('se'))
-        ->Unidad($request->get('un'))
+        ->leftJoin('unidad', 'preventivo.id_unidad', '=', 'unidad.id_unidad') 
+        ->MayorAConta($request->get('t'))       
         ->Tipo($request->get('t'))
+        ->Fuente($request->get('f'))
+        ->Organismo($request->get('o'))
+        ->Partida($request->get('p'))
         ->whereRaw('(importe - pagado) > 0')
         ->orderBy('preventivo')
         ->paginate(25);
-
-        $secre = Secretaria::all();
-        $unidades = null;
-        if ($request->get('se')){
-            $unidades = Unidad::where('id_secretaria', $request->get('se'))->get();
-        }
-
-        return view('by_liberados', compact('reg', 'secre', 'unidades'));
+        
+        return view('by_liberados', compact('reg'));
     }
 
     // Listar compras menores

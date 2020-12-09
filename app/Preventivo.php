@@ -63,4 +63,13 @@ class Preventivo extends Model
         if ($tipo != "")
             $query->where('preventivo.id_tipo', $tipo);       
     }
+
+    public function scopeMayorAConta($query, $tipo){
+        if ($tipo != ""){
+            if ($tipo == 1)
+                $query->where('preventivo.id_ubimen', '>', 3);       
+            if ($tipo == 2)
+                $query->where('preventivo.id_ubidir', '>', 6);       
+        }
+    }
 }
