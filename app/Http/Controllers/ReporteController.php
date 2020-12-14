@@ -31,6 +31,7 @@ class ReporteController extends Controller
             (select pa.monto_aprob from presup_aprob pa where pa.organismo = preventivo.organismo and pa.id_objeto = preventivo.id_objeto) monto_aprob,
             sum(importe) monto_preven, 
             sum(pagado) monto_pagado, 
+            sum(cancelado) monto_cancelado, 
             ((select pa.monto_aprob from presup_aprob pa where pa.organismo = preventivo.organismo and pa.id_objeto = preventivo.id_objeto) - sum(importe)) saldo_aprob,
             sum(importe)-sum(pagado) saldo_preven, 
             ((select pa.monto_aprob from presup_aprob pa where pa.organismo = preventivo.organismo and pa.id_objeto = preventivo.id_objeto) - sum(pagado)) saldo_deven
