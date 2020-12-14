@@ -1,6 +1,6 @@
   $(document).ready(function(){
     console.log(se, un, t, reg, ub);
-    if (fuente != "" && org != "" && partida != "" && reg > 0)
+    if (reg > 0)
       $('#btn-pdf').removeAttr('disabled');
 
     // if (fuente != "" && org != "" && partida != "" && ub != "" && reg > 0)
@@ -31,8 +31,10 @@
       if ($(this).attr('disabled') != 'disabled') {
         var form = $('#form-filter');
         form.attr('action', url_pdf);
+        form.attr('target', '_blank');
         form.submit();
         form.attr('action', url_preventivos);
+        form.removeAttr('target');
       }
 
     });

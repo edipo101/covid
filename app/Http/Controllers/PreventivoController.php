@@ -32,8 +32,21 @@ class PreventivoController extends Controller
         ->orderBy('fecha_elab', 'desc')
         ->paginate(25);
 
+        $totales = Preventivo::selectRaw('sum(importe) tot_prev, sum(pagado) tot_deven')
+        ->Tipo($request->get('t'))
+        ->Fuente($request->get('f'))
+        ->Organismo($request->get('o'))
+        ->Partida($request->get('p'))
+        ->Preven($request->get('search'))
+        ->get('total');
+
+        $tot_prev = $totales->pluck('tot_prev')->first(); 
+        $tot_deven = $totales->pluck('tot_deven')->first(); 
+        
+        // return $tot;
+
         $tipos = Tipo::all();
-        return view('preventivos', compact('reg', 'tipos'));
+        return view('preventivos', compact('reg', 'tipos', 'tot_prev', 'tot_deven'));
     }
 
     // Listar todos preventivos por secretarias
@@ -107,8 +120,21 @@ class PreventivoController extends Controller
         ->orderBy('preventivo')
         ->paginate(25);
 
+        $totales = Preventivo::selectRaw('sum(importe) tot_prev, sum(pagado) tot_deven')
+        ->where('preventivo.id_tipo', 1)
+        ->UbicacionMen($request->get('ub'))
+        ->Tipo($request->get('t'))
+        ->Fuente($request->get('f'))
+        ->Organismo($request->get('o'))
+        ->Partida($request->get('p'))
+        ->Preven($request->get('search'))
+        ->get('total');
+
+        $tot_prev = $totales->pluck('tot_prev')->first(); 
+        $tot_deven = $totales->pluck('tot_deven')->first(); 
+
         $ubicaciones = UbicacionMen::pluck('ubicacion', 'id_ubicacion');
-        return view('menores', compact('reg', 'ubicaciones'));
+        return view('menores', compact('reg', 'ubicaciones', 'tot_prev', 'tot_deven'));
     }
 
     // Listar compras mayores o directas
