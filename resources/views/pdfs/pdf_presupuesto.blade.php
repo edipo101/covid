@@ -16,12 +16,22 @@
 		<h5 class="title-pdf" style="margin-top: 3px;">(Montos expresados en Bolivianos)</h5>
 		<div class="params">
 			<table width="100%">
+				@isset($desembolso)
+				<tr>
+					<th style="width: 2cm;">Desembolso</th>
+					<td>{{$desembolso}} millones</td>
+					<th style="text-align: right;">Fecha y Hora</th>
+					<td style="text-align: right;  width: 4cm;">{{date('d/m/Y')}} {{date('h:i:s A', time())}}</td>
+				</tr>
+				@endisset
+				@isset($fuente)
 				<tr>
 					<th style="width: 2.5cm;">Fuente</th>
 					<td>{{$fuente." ".getFuentes()[$fuente]}}</td>
 					<th style="text-align: right;">Fecha y Hora</th>
 					<td style="text-align: right;  width: 4cm;">{{date('d/m/Y')}} {{date('h:i:s A', time())}}</td>
 				</tr>
+				@endisset
 				@isset($organismo)
 				<tr>
 					<th>Organismo</th>
@@ -39,12 +49,12 @@
 					<th>Organismo</th>
 					<th>Partida</th>
 					<th>Descripcion</th>
-					<th>Aprobado (A)</th>
-					<th>Preventivo (P)</th>
-					<th>Devengado (D)</th>
-					<th>Saldo aprobado (A-P)</th>
-               		<th>Saldo preventivo (P-D)</th>
-               		<th>Saldo devengado (A-D)</th>
+					<th>Aprobado <br>(A)</th>
+					<th>Preventivo <br>(P)</th>
+					<th>Devengado <br>(D)</th>
+					<th>Saldo aprobado <br>(A-P)</th>
+               		<th>Saldo preventivo <br>(P-D)</th>
+               		<th>Saldo devengado <br>(A-D)</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -52,7 +62,7 @@
 					$total_aprob = 0;
 					$total_preven = 0;
 					$total_pagado = 0;
-					$org = ($fuente == 20) ? 210 : 111;
+					// $org = ($fuente == 20) ? 210 : 111;
 					$tot_org_aprob = 0;
 					$tot_org_preven = 0;
 					$tot_org_pagado = 0;
@@ -60,6 +70,9 @@
                 	$total_org_saldo_aprob = 0; $total_org_saldo_preven = 0; $total_org_saldo_deven = 0;
 				@endphp
 				@foreach($reg as $row)
+					@if ($loop->first)
+						@php $org = $row->organismo; @endphp
+					@endif
 					@if ($row->organismo <> $org)
 						<tr class="total">
 							<td colspan="5" style="text-align: left;">TOTAL ORGANISMO: {{$org}}</td>

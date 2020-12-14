@@ -20,7 +20,7 @@ class DashboardController extends Controller
 		$sec_unid = Preventivo::selectRaw('sigla, secretaria, count(*) as cant, sum(importe) as total')
 		->leftJoin('secretaria', 'preventivo.id_secretaria', '=', 'secretaria.id_secretaria')
     	->groupBy('preventivo.id_secretaria')
-        ->having('total', '>', 0)
+        // ->having('total', '>', 0)
     	->get();
         // return $sec_unid;
     	return view('dashboard', compact('preven', 'sec_unid'));

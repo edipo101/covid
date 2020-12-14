@@ -65,8 +65,13 @@
           </ul>
         </li>
 
-        <li class="header">REPORTES</li>
-        <li class="{{!Route::is('partidas.presupuesto') ?: 'active'}}"><a href="{{route('partidas.presupuesto')}}"><i class="fa fa-pie-chart"></i> <span>Ejecucion Presupuestaria</span></a></li>
+        <li class="header">EJECUCIÓN PRESUPUESTARIA</li>
+        <li class="{{!Route::is('partidas.presupuesto') ?: 'active'}}">
+          <a href="{{route('partidas.presupuesto')}}"><i class="fa fa-pie-chart"></i> <span>Por fuente y organismo</span></a>
+        </li>
+        <li class="{{!Route::is('partidas.presup_bysecre') ?: 'active'}}">
+          <a href="{{route('partidas.presup_bysecre')}}"><i class="fa fa-pie-chart"></i> <span>Por secretarias</span></a>
+        </li>
         <li><a href="{{route('desembolsos')}}"><i class="fa fa-table"></i> <span>Desembolsos</span></a></li>
 
         <li class="header">USUARIO</li>

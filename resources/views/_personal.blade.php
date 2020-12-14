@@ -38,7 +38,7 @@
                <td style="font-size: 70%;">{{$row->glosa}}</td>
                <td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
                <td style="text-align: right;">{{number_format($row->importe, 2)}}</td>
-               <td style="text-align: right;">{{number_format($row->importe, 2)}}</td>
+               <td style="text-align: right;">{{number_format($row->pagado, 2)}}</td>
                @php $total += $row->importe; @endphp
                <td>{{$row->fuente}}-{{$row->organismo}}</td>
                <td>{{$row->id_objeto}}</td>

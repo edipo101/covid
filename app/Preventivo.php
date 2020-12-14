@@ -64,12 +64,17 @@ class Preventivo extends Model
             $query->where('preventivo.id_tipo', $tipo);       
     }
 
+    public function scopeDesembolso($query, $desem){
+        if ($desem != "")
+            $query->where('desembolso', $desem);        
+    }
+
     public function scopeMayorAConta($query, $tipo){
         if ($tipo != ""){
             if ($tipo == 1)
-                $query->where('preventivo.id_ubimen', '>', 3);       
+                $query->where('preventivo.id_ubimen', '>=', 3);       
             if ($tipo == 2)
-                $query->where('preventivo.id_ubidir', '>', 6);       
+                $query->where('preventivo.id_ubidir', '>=', 6);       
         }
     }
 }

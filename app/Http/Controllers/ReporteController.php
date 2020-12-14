@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Ejecpres_secre;
 use App\Organismo;
+use App\Preventivo;
 use App\Reporte_montos;
 use Illuminate\Http\Request;
 
@@ -23,15 +25,38 @@ class ReporteController extends Controller
     }
 
     public function show_presupuesto(Request $request){
-        $reg = Reporte_montos::
-            selectRaw('*, monto_aprob - monto_preven as saldo_aprob, monto_preven - monto_pagado as saldo_preven, monto_aprob - monto_pagado as saldo_deven')
+        $reg = Preventivo::
+            selectRaw('
+            fuente, organismo, preventivo.id_objeto, objeto.descripcion, count(*) cant,
+            (select pa.monto_aprob from presup_aprob pa where pa.organismo = preventivo.organismo and pa.id_objeto = preventivo.id_objeto) monto_aprob,
+            sum(importe) monto_preven, 
+            sum(pagado) monto_pagado, 
+            ((select pa.monto_aprob from presup_aprob pa where pa.organismo = preventivo.organismo and pa.id_objeto = preventivo.id_objeto) - sum(importe)) saldo_aprob,
+            sum(importe)-sum(pagado) saldo_preven, 
+            ((select pa.monto_aprob from presup_aprob pa where pa.organismo = preventivo.organismo and pa.id_objeto = preventivo.id_objeto) - sum(pagado)) saldo_deven
+                ')
+            ->leftJoin('objeto', 'preventivo.id_objeto', '=', 'objeto.id_objeto')
             ->Fuente($request->get('f'))
             ->Organismo($request->get('o'))
+            ->Desembolso($request->get('desem'))
             ->orderBy('fuente', 'asc')
             ->orderBy('organismo', 'asc')
-            ->orderBy('partida', 'asc')
+            ->orderBy('id_objeto', 'asc')
+            ->groupBy('fuente', 'organismo', 'id_objeto')
+            ->get();
+        // return $reg;
+        return view('partidas.presupuesto', compact('reg'));
+    }
+
+    public function presup_bysecre(Request $request){
+        $reg = Ejecpres_secre::
+            selectRaw('*')
+            ->Secretaria($request->get('secre'))
+            // ->orderBy('fuente', 'asc')
+            // ->orderBy('organismo', 'asc')
+            // ->orderBy('partida', 'asc')
             ->get();
 
-        return view('partidas.presupuesto', compact('reg'));
+        return view('partidas.presup_bysecre', compact('reg'));
     }
 }

@@ -105,6 +105,7 @@
         $('#preventivo').html(data.preventivo);
         $('#importe').html(data.importe);
         $('#pagado').html(data.pagado);
+        $('#cancelado').html(data.cancelado);
         if (data.secretaria)
           $('#secretaria').html(data.secretaria+' ('+data.sigla+')');
         else

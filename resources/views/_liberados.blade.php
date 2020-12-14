@@ -26,7 +26,7 @@
                <th>Secretaria</th>
                <th>Unidad</th>
                <th>Tipo</th>
-               <th style="text-align: center;">Importe (Bs)</th>
+               <th style="text-align: center;">Preventivo (Bs)</th>
                <th style="text-align: center;">Devengado (Bs)</th>
                <th style="text-align: center;">Por liberar (Bs)</th>
                <th>Operaciones</th>

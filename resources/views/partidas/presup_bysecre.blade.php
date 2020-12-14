@@ -4,7 +4,7 @@
 
 @section('content-header')
 <h1>
-  Ejecución presupuestaria
+  Ejecución presupuestaria por secretarias
   <small>(Montos expresados en Bolivianos) </small>
 </h1>
 <ol class="breadcrumb">
@@ -38,11 +38,6 @@
             <option {!!((request('o') == 119) ? "selected=\"selected\"" : "")!!}>119</option>
             @endif
           </select>
-          <select name="desem" id="desem" class="form-control" style="display: inline-block; width: 150px;">
-            <option value='' disabled selected style='display:none;'>Desembolso</option>
-            <option {!!((request('desem') == 24) ? "selected=\"selected\"" : "")!!} value="24">24 millones</option>
-            <option {!!((request('desem') == 23) ? "selected=\"selected\"" : "")!!} value="23">23 millones</option>
-          </select>
           
           <button id="btn-filter" type="submit" class="btn btn-info btn-flat btn-filter"><i class="fa fa-filter"></i> Filtrar</button>
           <a href="{{route('partidas.presupuesto')}}" class="btn btn-success btn-flat btn-filter"><i class="fa fa-times"></i> Borrar</a>
@@ -50,7 +45,7 @@
         </form>
       </div>
 
-      @include('partidas._table_partidas')
+      @include('partidas._table_secre')
 
     </div>
   </div>

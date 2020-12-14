@@ -254,6 +254,7 @@ class PreventivoController extends Controller
         $preven->glosa = request('glosa');
         $preven->importe = request('importe');
         $preven->pagado = (is_null(request('pagado'))) ? 0 : request('pagado');
+        $preven->cancelado = (is_null(request('cancelado'))) ? 0 : request('cancelado');
         $preven->fuente = request('fuente');
         $preven->organismo = request('organismo');
         $preven->id_objeto = request('id_objeto');
@@ -299,6 +300,7 @@ class PreventivoController extends Controller
         $preven->glosa = request('glosa');
         $preven->importe = request('importe');
         $preven->pagado = (is_null(request('pagado'))) ? 0 : request('pagado');
+        $preven->cancelado = (is_null(request('cancelado'))) ? 0 : request('cancelado');
         $preven->id_objeto = request('id_objeto');
         $preven->fuente = request('fuente');
         $preven->organismo = request('organismo');

@@ -18,6 +18,12 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="" class="col-sm-3 control-label">Pagado (Bs)</label>
+            <div class="col-sm-3">
+              <input type="text" class="form-control" id="cancelado" name="cancelado" value="{{old('cancelado', $preven->cancelado)}}" title="Monto cancelado">
+            </div>
+          </div>
+          <div class="form-group">
             <label for="" class="col-sm-3 control-label">Tipo</label>
             <div class="col-sm-9">
               @foreach($tipos as $key => $value)

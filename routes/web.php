@@ -20,6 +20,7 @@ Route::get('/preventivos/dir', 'PreventivoController@show_mayores')->name('preve
 Route::post('/preventivos/destroy', 'PreventivoController@destroy')->name('preventivos.destroy');
 
 Route::get('/partidas/presupuesto', 'ReporteController@show_presupuesto')->name('partidas.presupuesto');
+Route::get('/partidas/por_secretarias', 'ReporteController@presup_bysecre')->name('partidas.presup_bysecre');
 
 Route::get('/ejec_presup', 'PreventivoController@rep_ejec_presup')->name('ejec_presup');
 Route::get('/desembolsos', 'ReporteController@show_desembolsos')->name('desembolsos');

@@ -22,27 +22,37 @@
 
         <div class="box-body table-responsive no-padding">
           <table class="table table-hover table-striped table-bordered">
-            <tbody>
+            <thead>
               <tr>
                <th>Nro Prev</th>
                <th style="width: 40%;">Detalle (Glosa)</th>
                <th>Fecha elab</th>
-               <th style="text-align: center;">Preventivo</th>
+               <th style="text-align: center;">
+                <span style="color: blue; font-weight: bold;">Prev</span>/
+                <span style="color: red; font-weight: bold;">Dev</span>/
+                <span style="color: green; font-weight: bold;">Pag</span>
+               </th>
                <th>Fte/Org</th>
                <th>Partida</th>
                <th>Tipo</th>
                <th>Progreso</th>
                <th>Operaciones</th>
               </tr>
+            </thead>
+            <tbody style="font-size: 90%">
               @php $total = 0; @endphp
               @foreach($reg as $row)
               <tr data-id="{{$row->id_preventivo}}">
                <td>{{$row->preventivo}}</td>
-               <td style="font-size: 75%;">
+               <td style="font-size: 80%;">
                 {{$row->glosa}}
               </td>
                <td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
-               <td style="text-align: right;">{{number_format($row->importe, 2)}}</td>
+               <td style="text-align: right;">
+                <span style="color: blue; font-weight: bold; display: block;">{{number_format($row->importe, 2)}}</span>
+                <span style="color: red; font-weight: bold; display: block;">{{number_format($row->pagado, 2)}}</span>
+                <span style="color: green; font-weight: bold; display: block;">{{number_format($row->cancelado, 2)}}</span>
+               </td>
                @php $total += $row->importe; @endphp
                <td>{{$row->fuente}}-{{$row->organismo}}</td>
                <td>{{$row->id_objeto}}</td>

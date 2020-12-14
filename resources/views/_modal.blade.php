@@ -27,6 +27,10 @@
                 <td id="pagado"></td>
               </tr>
               <tr>
+                <th title="Monto cancelado">Pagado (Bs):</th>
+                <td id="cancelado"></td>
+              </tr>
+              <tr>
                 <th>Secretaria:</th>
                 <td id="secretaria"></td>
               </tr>
