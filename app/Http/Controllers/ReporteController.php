@@ -25,6 +25,22 @@ class ReporteController extends Controller
     }
 
     public function show_presupuesto(Request $request){
+        $reg = Reporte_montos::
+            selectRaw('*, 
+                (monto_aprob - monto_preven) as saldo_aprob, 
+                (monto_preven - monto_pagado) as saldo_preven, 
+                (monto_aprob - monto_pagado) as saldo_deven
+                ')
+            ->Fuente($request->get('f'))
+            ->Organismo($request->get('o'))
+            ->orderBy('fuente', 'asc')
+            ->orderBy('organismo', 'asc')
+            ->orderBy('partida', 'asc')
+            ->get();
+        return view('partidas.presupuesto', compact('reg'));
+    }
+
+    public function show_presupuesto_desem(Request $request){
         $reg = Preventivo::
             selectRaw('
             fuente, organismo, preventivo.id_objeto, objeto.descripcion, count(*) cant,

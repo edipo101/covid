@@ -89,7 +89,7 @@
             <tr>
                <td>{{$loop->iteration}}</td>
                {{-- <td>{{$row->fuente}}-{{$row->organismo}}</td> --}}
-               <td>{{$row->id_objeto}}</td>
+               <td>{{$row->partida}}</td>
                <td>{{ucfirst(mb_strtolower($row->descripcion))}}</td>
                <td style="text-align: right;">{{number_format($row->monto_aprob, 2)}}</td>
                <td style="text-align: right;">{{number_format($row->monto_preven, 2)}}</td>
