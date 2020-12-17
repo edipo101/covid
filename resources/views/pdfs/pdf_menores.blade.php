@@ -16,12 +16,15 @@
 		<h3 class="title-pdf">Compras menores</h3>
 		<div class="params">
 			<table width="100%">
+				@isset($fuente)
 				<tr>
 					<th style="width: 2.5cm;">Fuente</th>
 					<td>{{$fuente." ".getFuentes()[$fuente]}}</td>
 					<th style="text-align: right;">Fecha</th>
 					<td style="text-align: right;  width: 2cm;">{{date('d/m/Y')}}</td>
 				</tr>
+				@endisset
+				@isset($organismo)
 				<tr>
 					<th>Organismo</th>
 					<td>{{$organismo." ".getOrganismos()[$organismo]}}</td>
@@ -29,12 +32,15 @@
 					<td style="text-align: right;">{{date('h:i:s A', time())}}</td>
 					{{-- <td>{{localtime()}}</td> --}}
 				</tr>
+				@endisset
+				@isset($id_partida)
 				<tr>
 					<th>Partida</th>
 					<td>{{$id_partida}} {{$partida}}</td>
 				</tr>
+				@endisset
 				<tr>
-					<th>Ubicación</th>
+					<th style="width: 2.5cm;">Ubicación</th>
 					<td>{{$ubicacion}}</td>
 				</tr>
 			</table>

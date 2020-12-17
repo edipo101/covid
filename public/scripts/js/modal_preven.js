@@ -4,7 +4,8 @@
       $('#btn-pdf').removeAttr('disabled');
 
     // if (fuente != "" && org != "" && partida != "" && ub != "" && reg > 0)
-    if (fuente != "" && org != "" && ub != "" && reg > 0)
+    //if (fuente != "" && org != "" && ub != "" && reg > 0)
+    if (ub != "" && reg > 0)
       $('#btn-pdf2').removeAttr('disabled');
 
     // Por Secretarias
