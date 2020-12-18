@@ -28,25 +28,28 @@ class PreventivoController extends Controller
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
+        ->Desembolso($request->get('desem'))
         ->orderBy('preventivo')
         ->orderBy('fecha_elab', 'desc')
         ->paginate(25);
 
-        $totales = Preventivo::selectRaw('sum(importe) tot_prev, sum(pagado) tot_deven')
+        $totales = Preventivo::selectRaw('sum(importe) tot_prev, sum(pagado) tot_deven, sum(cancelado) tot_pag')
         ->Tipo($request->get('t'))
         ->Fuente($request->get('f'))
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
+        ->Desembolso($request->get('desem'))
         ->get('total');
 
         $tot_prev = $totales->pluck('tot_prev')->first(); 
         $tot_deven = $totales->pluck('tot_deven')->first(); 
+        $tot_pag = $totales->pluck('tot_pag')->first(); 
         
         // return $tot;
 
         $tipos = Tipo::all();
-        return view('preventivos', compact('reg', 'tipos', 'tot_prev', 'tot_deven'));
+        return view('preventivos', compact('reg', 'tipos', 'tot_prev', 'tot_deven', 'tot_pag'));
     }
 
     // Listar todos preventivos por secretarias

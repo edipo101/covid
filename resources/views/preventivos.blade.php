@@ -46,6 +46,11 @@
               @endif
             </select>
             <input type="text" name="p" id="partida" class="form-control" placeholder="Partida" style="display: inline-block; width: 120px;" value="{{request('p')}}">
+            <select name="desem" id="desem" class="form-control" style="display: inline-block; width: 150px;">
+              <option value='' disabled selected style='display:none;'>Desembolso</option>
+              <option {!!((request('desem') == 24) ? "selected=\"selected\"" : "")!!} value="24">24 millones</option>
+              <option {!!((request('desem') == 23) ? "selected=\"selected\"" : "")!!} value="23">23 millones</option>
+            </select>
             <button id="btn-filter" type="submit" class="btn btn-info btn-flat btn-filter"><i class="fa fa-filter"></i> Filtrar</button>
             <a href="{{route('preventivos.all')}}" class="btn btn-success btn-flat btn-filter"><i class="fa fa-times"></i> Borrar</a>
             <a id="btn-pdf" class="btn btn-danger btn-filter" disabled target="_blank"><i class="fa fa-download"></i> Descargar</a>

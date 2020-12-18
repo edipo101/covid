@@ -3,7 +3,8 @@
           {{-- Mostrando <span>{{$reg->count()}} de {{$reg->total()}}</span> registros --}}
           Cantidad de registros: <strong>{{$reg->total()}}</strong> | 
           Total Preventivo: <strong>{{number_format($tot_prev, 2)}}</strong> |
-          Total Devengado: <strong>{{number_format($tot_deven, 2)}}</strong>
+          Total Devengado: <strong>{{number_format($tot_deven, 2)}}</strong> |
+          Total Pagado: <strong>{{number_format($tot_pag, 2)}}</strong>
           <div class="box-tools">
             {{-- Filtro de busqueda --}}
             <div class="input-group input-group-sm hidden-xs">

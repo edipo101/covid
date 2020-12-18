@@ -27,7 +27,7 @@
 				@endisset
 				@isset ($organismo)
 				<tr>
-					<th>Organismo</th>
+					<th style="width: 2.5cm;">Organismo</th>
 					<td>{{$organismo." ".getOrganismos()[$organismo]}}</td>
 					<th style="text-align: right;">Hora</th>
 					<td style="text-align: right;">{{date('h:i:s A', time())}}</td>
@@ -35,13 +35,13 @@
 				@endisset
 				@isset ($id_partida)
 				<tr>
-					<th>Partida</th>
+					<th style="width: 2.5cm;">Partida</th>
 					<td>{{$id_partida}} {{$partida}}</td>
 				</tr>
 				@endisset
 				@isset ($tipo)
 				<tr>
-					<th>Tipo</th>
+					<th style="width: 2.5cm;">Tipo</th>
 					<td>{{$tipo}}</td>
 				</tr>
 				@endisset
@@ -54,17 +54,23 @@
 					<th>No.</th>
 					<th>Nro Prev</th>
 					<th>Detalle (Glosa)</th>
-					<th>Importe (Bs)</th>
 					<th>Fecha elab</th>
+					<th>Partida</th>
+					<th>Preventivo <br>(Bs)</th>
+					<th>Devengado <br>(Bs)</th>
+					<th>Pagado <br>(Bs)</th>
 					<th>Tipo</th>
 					{{-- <th>Partida</th> --}}
-					<th>Observaciones</th>
+					<th>Estado</th>
+					<th>Desembolso</th>
 					<th>Progreso</th>
 				</tr>
 			</thead>
 			<tbody>
-				@php $total = 0; $colspan = 8; 
+				@php $total = 0; $colspan = 12; $totdev = 0; $totpag = 0;
 					$total_fuente = 0; $total_organismo = 0;
+					$totdev_fuente = 0; $totdev_organismo = 0;
+					$totpag_fuente = 0; $totpag_organismo = 0;
 				@endphp
 				@foreach($reg as $row)
 					@if($loop->first)
@@ -86,23 +92,31 @@
 
 					@if(($row->organismo <> $reg_organismo))
 					<tr style="background-color: lightgray;">
-						<td colspan="3" style="text-align: left;"><strong>TOTAL ORGANISMO: {{$reg_organismo}}</strong></td>
+						<td colspan="5" style="text-align: left;"><strong>TOTAL ORGANISMO: {{$reg_organismo}}</strong></td>
 						<td style="text-align: right;"><strong>{{number_format($total_organismo, 2)}}</strong></td>
-						<td colspan="4"></td>
+						<td style="text-align: right;"><strong>{{number_format($totdev_organismo, 2)}}</strong></td>
+						<td style="text-align: right;"><strong>{{number_format($totpag_organismo, 2)}}</strong></td>
+						<td colspan="8"></td>
 					</tr>
 					@php 
 						$reg_organismo = $row->organismo;
 						$total_organismo = 0;
+						$totdev_organismo = 0;
+						$totpag_organismo = 0;
 					@endphp
 					@if($row->fuente <> $reg_fuente)
 					<tr style="background-color: lightgray;">
-						<td colspan="3" style="text-align: left;"><strong>TOTAL FUENTE: {{$reg_fuente}}</strong></td>
+						<td colspan="5" style="text-align: left;"><strong>TOTAL FUENTE: {{$reg_fuente}}</strong></td>
 						<td style="text-align: right;"><strong>{{number_format($total_fuente, 2)}}</strong></td>
-						<td colspan="4"></td>
+						<td style="text-align: right;"><strong>{{number_format($totdev_fuente, 2)}}</strong></td>
+						<td style="text-align: right;"><strong>{{number_format($totpag_fuente, 2)}}</strong></td>
+						<td colspan="8"></td>
 					</tr>
 					@php 
 						$reg_fuente = $row->fuente;
 						$total_fuente = 0;
+						$totdev_fuente = 0;
+						$totpag_fuente = 0;
 					@endphp
 					<tr>
 						<td  colspan="{{$colspan}}" style="text-align: left;">
@@ -120,16 +134,28 @@
 					<td>{{$loop->iteration}}</td>
 					<td>{{$row->preventivo}}</td>
 					<td style="text-align: left;" width="40%">{{$row->glosa}}</td>
+					<td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
+					<td>{{$row->id_objeto}}</td>
 					<td style="text-align: right;">{{number_format($row->importe, 2)}}</td>
+					<td style="text-align: right;">{{number_format($row->pagado, 2)}}</td>
+					<td style="text-align: right;">{{number_format($row->cancelado, 2)}}</td>
 					@php 
 						$total += $row->importe; 
+						$totdev += $row->pagado; 
+						$totpag += $row->cancelado; 
 						$total_fuente += $row->importe;
+						$totdev_fuente += $row->pagado;
+						$totpag_fuente += $row->cancelado;
 						$total_organismo += $row->importe;
+						$totdev_organismo += $row->pagado;
+						$totpag_organismo += $row->cancelado;
 					@endphp
-					<td>{{date('d/m/Y', strtotime($row->fecha_elab))}}</td>
+					
 					{{-- <td>{{$row->fuente}}-{{$row->organismo}}</td> --}}
 					<td>{{$row->tipo}}</td>
-					<td style="text-align: left;" width="20%">{{(is_null($row->observaciones)) ? 'NINGUNO': $row->observaciones}}</td>
+					{{-- <td style="text-align: left;" width="20%">{{(is_null($row->observaciones)) ? 'NINGUNO': $row->observaciones}}</td> --}}
+					<td>{{$row->estado}}</td>
+					<td>{{$row->desembolso}}</td>
 					<td>
 					@if (!is_null($row->porcent))
 					{{$row->porcent}}%
@@ -138,20 +164,26 @@
 				</tr>				
 				@endforeach
 				<tr style="background-color: lightgray;">
-					<td colspan="3" style="text-align: left;"><strong>TOTAL ORGANISMO: {{$reg_organismo}}</strong></td>
+					<td colspan="5" style="text-align: left;"><strong>TOTAL ORGANISMO: {{$reg_organismo}}</strong></td>
 					<td style="text-align: right;"><strong>{{number_format($total_organismo, 2)}}</strong></td>
-					<td colspan="4"></td>
+					<td style="text-align: right;"><strong>{{number_format($totdev_organismo, 2)}}</strong></td>
+					<td style="text-align: right;"><strong>{{number_format($totpag_organismo, 2)}}</strong></td>
+					<td colspan="8"></td>
 				</tr>
 				<tr style="background-color: lightgray;">
-					<td colspan="3" style="text-align: left;"><strong>TOTAL FUENTE: {{$reg_fuente}}</strong></td>
+					<td colspan="5" style="text-align: left;"><strong>TOTAL FUENTE: {{$reg_fuente}}</strong></td>
 					<td style="text-align: right;"><strong>{{number_format($total_fuente, 2)}}</strong></td>
-					<td colspan="4"></td>
+					<td style="text-align: right;"><strong>{{number_format($totdev_fuente, 2)}}</strong></td>
+					<td style="text-align: right;"><strong>{{number_format($totpag_fuente, 2)}}</strong></td>
+					<td colspan="8"></td>
 				</tr>
 
 				<tr style="background-color: lightgray;">
-					<td colspan="3" style="text-align: left;"><strong>TOTAL GENERAL</strong></td>
+					<td colspan="5" style="text-align: left;"><strong>TOTAL GENERAL</strong></td>
 					<td style="text-align: right;"><strong>{{number_format($total, 2)}}</strong></td>
-					<td colspan="4"></td>
+					<td style="text-align: right;"><strong>{{number_format($totdev, 2)}}</strong></td>
+					<td style="text-align: right;"><strong>{{number_format($totpag, 2)}}</strong></td>
+					<td colspan="8"></td>
 				</tr>
 			</tbody>
 		</table>

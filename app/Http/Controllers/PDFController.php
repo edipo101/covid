@@ -18,6 +18,7 @@ class PDFController extends Controller
     public function pdf(Request $request){
     	$reg = Preventivo::selectRaw('*, if(id_ubimen is not null, round(id_ubimen/7*100), if(id_ubidir is not null, round(id_ubidir/9*100), null)) as porcent')
         ->leftJoin('tipo', 'preventivo.id_tipo', '=', 'tipo.id_tipo')
+        ->leftJoin('estado', 'preventivo.id_estado', '=', 'estado.id_estado')
         ->Tipo($request->get('t'))
         ->Fuente($request->get('f'))
         ->Organismo($request->get('o'))
