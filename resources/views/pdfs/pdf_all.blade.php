@@ -45,6 +45,12 @@
 					<td>{{$tipo}}</td>
 				</tr>
 				@endisset
+				@isset ($desembolso)
+				<tr>
+					<th style="width: 2.5cm;">Desembolso</th>
+					<td>{{$desembolso}} millones</td>
+				</tr>
+				@endisset
 			</table>
 		</div>
 

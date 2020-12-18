@@ -24,6 +24,7 @@ class PDFController extends Controller
         ->Organismo($request->get('o'))
         ->Partida($request->get('p'))
         ->Preven($request->get('search'))
+        ->Desembolso($request->get('desem'))
         ->orderBy('fuente')
         ->orderBy('organismo')
         ->get();
@@ -32,8 +33,9 @@ class PDFController extends Controller
         $id_partida = $request->get('p');
         $partida = Objeto::where('id_objeto', $id_partida)->pluck('descripcion')->first();
         $tipo = Tipo::where('id_tipo', $request->get('t'))->pluck('tipo')->first();
+        $desembolso = $request->get('desem');
 
-        return view('pdfs.pdf_all', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida', 'tipo'));
+        return view('pdfs.pdf_all', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida', 'tipo', 'desembolso'));
     	$pdf = \PDF::loadView('pdfs.pdf_all', compact('reg', 'fuente', 'organismo', 'id_partida', 'partida', 'tipo'))
         ->setPaper('letter', 'landscape');
     	return $pdf->stream('preventivos.pdf');
