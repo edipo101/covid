@@ -73,6 +73,7 @@
           <a href="{{route('partidas.presup_bysecre')}}"><i class="fa fa-pie-chart"></i> <span>Por secretarias</span></a>
         </li>
         <li><a href="{{route('desembolsos')}}"><i class="fa fa-table"></i> <span>Desembolsos</span></a></li>
+        <li><a href="{{route('resumen')}}"><i class="fa fa-table"></i> <span>Cuadro resumen</span></a></li>
 
         <li class="header">USUARIO</li>
         <li class="{{!Route::is('usuarios.show') ?: 'active'}}"><a href="{{route('usuarios.show', auth()->user()->id)}}"><i class="fa fa-table"></i> <span>Ver perfil</span></a></li>

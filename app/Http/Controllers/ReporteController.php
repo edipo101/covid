@@ -6,10 +6,22 @@ use App\Ejecpres_secre;
 use App\Organismo;
 use App\Preventivo;
 use App\Reporte_montos;
+use App\ViewResumen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReporteController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+    public function show_resumen() {
+        $org = ViewResumen::get();
+        // return $org;
+        return view('resumen', compact('org'));
+    }
+
     public function show_desembolsos() {
     	$tot_1 = Organismo::
     	selectRaw('sum(desem_1) as tot')->pluck('tot')->first();

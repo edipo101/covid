@@ -24,6 +24,7 @@ Route::get('/partidas/por_secretarias', 'ReporteController@presup_bysecre')->nam
 
 Route::get('/ejec_presup', 'PreventivoController@rep_ejec_presup')->name('ejec_presup');
 Route::get('/desembolsos', 'ReporteController@show_desembolsos')->name('desembolsos');
+Route::get('/resumen', 'ReporteController@show_resumen')->name('resumen');
 
 Route::get('/ubicaciones_men', 'ComboDatos@getUbicacionesMen')->name('ubicaciones_men');
 Route::get('/ubicaciones_dir', 'ComboDatos@getUbicacionesDir')->name('ubicaciones_dir');

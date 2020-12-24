@@ -123,7 +123,7 @@ class PreventivoController extends Controller
         ->orderBy('preventivo')
         ->paginate(25);
 
-        $totales = Preventivo::selectRaw('sum(importe) tot_prev, sum(pagado) tot_deven')
+        $totales = Preventivo::selectRaw('sum(importe) tot_prev, sum(pagado) tot_deven, sum(cancelado) tot_pag')
         ->where('preventivo.id_tipo', 1)
         ->UbicacionMen($request->get('ub'))
         ->Tipo($request->get('t'))
@@ -135,9 +135,10 @@ class PreventivoController extends Controller
 
         $tot_prev = $totales->pluck('tot_prev')->first(); 
         $tot_deven = $totales->pluck('tot_deven')->first(); 
+        $tot_pag = $totales->pluck('tot_pag')->first();
 
         $ubicaciones = UbicacionMen::pluck('ubicacion', 'id_ubicacion');
-        return view('menores', compact('reg', 'ubicaciones', 'tot_prev', 'tot_deven'));
+        return view('menores', compact('reg', 'ubicaciones', 'tot_prev', 'tot_deven', 'tot_pag'));
     }
 
     // Listar compras mayores o directas
